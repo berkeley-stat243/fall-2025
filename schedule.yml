@@ -1,12 +1,12 @@
 - week: 1
   days:
-    - date: "Thu Aug 29"
+    - date: "Thu Aug 28"
       items:
         - type: "Event"
           id: "1"
           name: "(Optional) Library Introduction to LaTeX with Overleaf session"
-          href: "https://berkeley.libcal.com/event/12928377"
-    - date: "Fri Aug 30"
+          href: "https://berkeley.libcal.com/event/15006953"
+    - date: "Fri Aug 29"
       items:
         - type: "Lab"
           id: "0"
@@ -15,18 +15,18 @@
         - type: "Activity"
           id: "1"
           name: "Class Survey"
-          href: "https://forms.gle/W5jZ3nT4sqbj2PNBA"
+          href: "https://docs.google.com/forms/d/e/1FAIpQLSdy8pjlutdGFB4366qGmkp_39T1CX82sWudevXWKgdjY-YGIg/viewform?usp=dialog"
         - type: "Activity"
           id: "2"
           name: "Office hour time survey"
-          href: "http://whenisgood.net/gff9ndn"
+          href: "http://whenisgood.net/y2fndfk"
         - type: "Activity"
           id: "3"
           name: "Login to github.berkeley.edu with your CalNet credentials"
           href: "https://github.berkeley.edu"
 - week: 2
   days:
-    - date: "Wed Sep 4"
+    - date: "Wed Sep 3"
       items:
         - type: "Activity"
           id: "4"
@@ -35,8 +35,8 @@
         - type: "Activity"
           id: "5"
           name: "(Optional) work through the UNIX basics tutorial and answer (for yourself) the questions at the end"
-          href: "https://berkeley-scf.github.io/tutorial-unix-basics"
-    - date: "Fri Sep 6"
+          href: "https://computing.stat.berkeley.edu.github.io/tutorial-unix-basics"
+    - date: "Fri Sep 5"
       items:
         - type: "Lab"
           id: "1"
@@ -44,13 +44,13 @@
           href: labs/lab1-submission.html
 - week: 3
   days:
-    - date: "Mon Sep 9"
+    - date: "Mon Sep 8"
       items:
         - type: "Assignment"
           id: "1"
           name: "Bash shell tutorial and exercises (see details below)"
-          href: "https://berkeley-scf.github.io/tutorial-using-bash"
-    - date: "Wed Sep 11"
+          href: "https://computing.stat.berkeley.edu/tutorial-using-bash"
+    - date: "Wed Sep 10"
       items:
         - type: "Problem_Set"
           id: "1"
@@ -59,105 +59,10 @@
         - type: "Event"
           id: "2"
           name: "(Optional) Library Introduction to LaTeX with Overleaf session"
-          href: "https://berkeley.libcal.com/event/12927278"
-    - date: "Fri Sep 13"
+          href: "https://berkeley.libcal.com/event/15006897"
+    - date: "Fri Sep 12"
       items:
         - type: "Assignment"
           id: "2"
           name: "Regular expression tutorial and exercises (see Details below)"
-          href: "https://berkeley-scf.github.io/tutorial-using-bash/regex"
-- week: 4
-  days:
-    - date: "Fri Sep 20"
-      items:
-        - type: "Problem_Set"
-          id: "2"
-          name: "Problem Set 2"
-          href: "ps/ps2.html"
-- week: 6
-  days:
-    - date: "Wed Oct 2"
-      items:
-        - type: "Problem_Set"
-          id: "3"
-          name: "Problem Set 3"
-          href: "ps/ps3.html"
-- week: 7
-  days:
-    - date: "Mon Oct 7"
-      items:
-        - type: "Activity"
-          id: "6"
-          name: "Read first two (optionally three) sections of Unit 6"
-          href: "units/unit6-parallelization.html"
-- week: 8
-  days:
-    - date: "Mon Oct 14"
-      items:
-        - type: "Problem_Set"
-          id: "4"
-          name: "Problem Set 4"
-          href: "ps/ps4.html"
-- week: 9
-  days:
-    - date: "Wed Oct 23"
-      items:
-        - type: "Quiz"
-          id: "1"
-          name: "Quiz 1"
-- week: 10
-  days:
-    - date: "Mon Oct 28"
-      items:
-        - type: "Problem_Set"
-          id: "5"
-          name: "Problem Set 5"
-          href: "ps/ps5.html"
-- week: 11
-  days:
-    - date: "Mon Nov 4"
-      items:
-        - type: "Activity"
-          id: "7"
-          name: "Read Section 1 of Unit 10"
-          href: "units/unit10-linalg.html#1-preliminaries"
-    - date: "Wed Nov 6"
-      items:
-        - type: "Problem_Set"
-          id: "6"
-          name: "Problem Set 6"
-          href: "ps/ps6.html"
-- week: 13
-  days:
-    - date: "Mon Nov 18"
-      items:
-        - type: "Problem_Set"
-          id: "7"
-          name: "Problem Set 7"
-          href: "ps/ps7.html"
-- week: 14
-  days:
-    - date: "Mon Nov 25"
-      items:
-        - type: "Quiz"
-          id: "2"
-          name: "Quiz 2"
-- week: 15
-  days:
-    - date: "Fri Dec 6"
-      items:
-        - type: "Problem Set"
-          id: "8"
-          name: "Problem Set 8"
-          href: "ps/ps8.html"
-- week: 17
-  days:
-    - date: "Thu Dec 19"
-      items:
-        - type: "Problem_Set"
-          id: "9"
-          name: "Project"
-          href: "project/project.html"
-
-
-      
+          href: "https://computing.stat.berkeley.edu/tutorial-using-bash/regex"
