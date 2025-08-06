@@ -25,7 +25,7 @@ code-overflow: wrap
 ```{python}
 #| echo: false
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 ```
 
 [PDF](./unit9-sim.pdf){.btn .btn-dark}
@@ -360,16 +360,17 @@ pretty easy, as seen below. This helps to control for random differences
 between the datasets.
 
 ```{python}
+#| eval: false
 #| fig-alt: Scatterplot of aligned normal and t random variables
 from scipy.stats import t, norm
 
 devs = np.random.normal(size=100)
 tdevs = t.ppf(norm.cdf(devs), df=1)
 
-plt.scatter(devs, tdevs)
-plt.xlabel('devs'); plt.ylabel('tdevs')
-plt.plot([min(devs), max(devs)], [min(devs), max(devs)], color='red')
-plt.show()
+# plt.scatter(devs, tdevs)
+# plt.xlabel('devs'); plt.ylabel('tdevs')
+# plt.plot([min(devs), max(devs)], [min(devs), max(devs)], color='red')
+# plt.show()
 ```
 
 
@@ -545,6 +546,7 @@ prime for all $p$). Here's an example of a
 linear congruential sampler (with $c=0$):
 
 ```{python, fig.height=5}
+#| eval: false
 #| fig-alt: Time series and histograms of pseudo-random numbers
 n = 100
 a = 171

@@ -2,6 +2,10 @@
 title: "Syllabus"
 ---
 
+:::{.callout-warning title="UNDER CONSTRUCTION"}
+Do not rely on any details here for the course for 2025 as this is still being updated.
+:::
+
 ## Course description {#course-description .unnumbered}
 
 Statistics 243 is an introduction to statistical computing, taught using
@@ -32,12 +36,12 @@ probability and statistics is expected, as well as a basic ability to
 operate on a computer (but I do not assume familiarity with the
 UNIX-style command line/terminal/shell). Furthermore, I'm expecting you
 will know the basics of Python, at the level of the 
-[Python material in our computing skills workshop](https://berkeley-scf.github.io/compute-skills-2024/units/intro-python.html)
-offered Aug. 20-21, 2024. If you don't have that background
+[Python material in our computing skills workshop](https://computing.stat.berkeley.edu/compute-skills-2025/units/intro-python.html)
+offered Aug. 18-19, 2025. If you don't have that background
 you'll need to spend time in the initial couple weeks getting up to
 speed. The workshop materials are a good resource.
 
-In general, the [material in the workshop](https://berkeley-scf.github.io/compute-skills-2024) is a good reference for the course.
+In general, the [material in the workshop](https://computing.stat.berkeley.edu/compute-skills-2025) is a good reference for the course.
 While many of you will have attended, it's not required to take the course.
 But if you didn't attend, it's worthwhile to look through the materials
 in general and for additional information on various topics we'll see in
@@ -116,20 +120,20 @@ The 'days' here are (roughly) class sessions, as general guidance.
 Key websites for the course are:
 
 -   This course website, which is hosted on GitHub pages, and the GitHub repository containing the source materials:
-    <https://github.com/berkeley-stat243/fall-2024>
+    <https://github.com/berkeley-stat243/fall-2025>
 
 -   SCF tutorials for additional content:
     <https://statistics.berkeley.edu/computing/training/tutorials>
 
 -   Ed Discussion site for discussions/Q&A:
-    <https://edstem.org/us/courses/62469/discussion>
+    <https://edstem.org/us/courses/XYZ/discussion>
 
 -   bCourses site for course capture recordings (see Media Gallery) and possibly some other
     materials:
-    <https://bcourses.berkeley.edu/courses/1537551>
+    <https://bcourses.berkeley.edu/courses/XYZ>
 
 -   Gradescope for assignments (also linked from bCourses): 
-    <https://www.gradescope.com/courses/825461>
+    <https://www.gradescope.com/courses/XYZ>
 
 All course materials will be posted on here on the website (and on GitHub) except for video content, which will be in bCourses.
 
@@ -319,7 +323,7 @@ There are several rules for submitting your assignments.
 
 Note: Quarto Markdown is an extension to the Markdown
 markup language that allows one to embed Python and R code within an HTML document.
-Please see the SCF [dynamics document tutorial](https://berkeley-scf.github.io/tutorial-dynamic-docs); there will be additional information in the first section and on the first problem set.
+Please see the SCF [dynamics document tutorial](https://computing.stat.berkeley.edu/tutorial-dynamic-docs); there will be additional information in the first section and on the first problem set.
 
 ### Submitting assignments
 
