@@ -366,54 +366,6 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 1</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 2</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 3</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 4</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 5</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 6</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 7</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 8</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -626,7 +578,19 @@ E\hat{\beta} &amp; = &amp; \beta\\
 \hat{\sigma}^{2} &amp; = &amp; \frac{1}{m-1}\sum_{i=1}^{m}(h(Y_{i})-\hat{\phi})^{2}\end{aligned}\]</span> So our MC simulation error is based on <span class="math display">\[\widehat{\mbox{Var}}(\hat{\phi})=\frac{\hat{\sigma}^{2}}{m}=\frac{1}{m(m-1)}\sum_{i=1}^{m}(h(Y_{i})-\hat{\phi})^{2}.\]</span> Note that this is particularly confusing if we have <span class="math inline">\(\hat{\phi}=\widehat{\mbox{Var}}(\hat{\beta})\)</span> because then we have <span class="math inline">\(\widehat{\mbox{Var}}(\hat{\phi})=\widehat{\mbox{Var}}(\widehat{\mbox{Var}}(\hat{\beta}))\)</span>!</p>
 <p>The simulation variance is <span class="math inline">\(O(\frac{1}{m})\)</span> because we have <span class="math inline">\(m^{2}\)</span> in the denominator and a sum over <span class="math inline">\(m\)</span> terms in the numerator.</p>
 <p>Note that in the simulation setting, the randomness in the system is very well-defined (as it is in survey sampling, but unlike in most other applications of statistics), because it comes from the RNG that we perform as part of our attempt to estimate <span class="math inline">\(\phi\)</span>. Happily, we are in control of <span class="math inline">\(m\)</span>, so in principle we can reduce the simulation error to as little as we desire. Unhappily, as usual, the simulation standard error goes down with the square root of <span class="math inline">\(m\)</span>.</p>
-<p>:::{.callout-warning “Simulation (Monte Carlo) uncertainty is not statistical uncertainty”} This is the uncertainty in our simulation-based estimate of some quantity (expectation) of interest. It is NOT the statistical uncertainty in a problem. :::</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Simulation (Monte Carlo) uncertainty is not statistical uncertainty">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Simulation (Monte Carlo) uncertainty is not statistical uncertainty
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is the uncertainty in our simulation-based estimate of some quantity (expectation) of interest. It is NOT the statistical uncertainty in a problem.</p>
+</div>
+</div>
 <section id="back-to-the-regression-example-1" class="level4">
 <h4 class="anchored" data-anchor-id="back-to-the-regression-example-1">Back to the regression example</h4>
 <p>Some examples of simulation variances we might be interested in in the regression example include:</p>
@@ -684,17 +648,10 @@ E\hat{\beta} &amp; = &amp; \beta\\
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>devs <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">100</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tdevs <span class="op">=</span> t.ppf(norm.cdf(devs), df<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(devs, tdevs)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'devs'</span>)<span class="op">;</span> plt.ylabel(<span class="st">'tdevs'</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="bu">min</span>(devs), <span class="bu">max</span>(devs)], [<span class="bu">min</span>(devs), <span class="bu">max</span>(devs)], color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="unit9-sim_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" alt="Scatterplot of aligned normal and t random variables" width="672"></p>
-</figure>
-</div>
-</div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(devs, tdevs)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.xlabel('devs'); plt.ylabel('tdevs')</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot([min(devs), max(devs)], [min(devs), max(devs)], color='red')</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="experimental-design-optional" class="level2">
@@ -781,13 +738,6 @@ E\hat{\beta} &amp; = &amp; \beta\\
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="unit9-sim_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" alt="Time series and histograms of pseudo-random numbers" width="960"></p>
-</figure>
-</div>
-</div>
 </div>
 <p>A wide variety of different RNG have been proposed. Many have turned out to have substantial defects based on tests designed to assess if the behavior of the RNG mimics true randomness. Some of the behavior we want to ensure is uniformity of each individual random deviate, independence of sequences of deviates, and multivariate uniformity of subsequences. One test of a RNG that many RNGs don’t perform well on is to assess the properties of <span class="math inline">\(k\)</span>-tuples - subsequences of length <span class="math inline">\(k\)</span>, which should be independently distributed in the <span class="math inline">\(k\)</span>-dimensional unit hypercube. Unfortunately, linear congruential methods produce values that lie on a simple lattice in <span class="math inline">\(k\)</span>-space, i.e., the points are not selected from <span class="math inline">\(q^{k}\)</span> uniformly spaced points, where <span class="math inline">\(q\)</span> is the the number of unique values. Instead, points often lie on parallel lines in the hypercube.</p>
 <p>Combining generators can yield better generators. The Wichmann-Hill is an option in R and is a combination of three linear congruential generators with <span class="math inline">\(a=\{171,172,170\}\)</span>, <span class="math inline">\(m=\{30269,30307,30323\}\)</span>, and <span class="math inline">\(u_{i}=(x_{i}/30269+y_{i}/30307+z_{i}/30323)\mbox{mod}\,1\)</span> where <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> are generated from the three individual generators. Let’s mimic the Wichmann-Hill manually:</p>
