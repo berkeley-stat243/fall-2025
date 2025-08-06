@@ -194,7 +194,7 @@ control of $m$, so in principle we can reduce the simulation error to as
 little as we desire. Unhappily, as usual, the simulation standard error goes down
 with the square root of $m$.
 
-:::{.callout-warning "Simulation (Monte Carlo) uncertainty is not statistical uncertainty"}
+:::{.callout-warning title="Simulation (Monte Carlo) uncertainty is not statistical uncertainty"}
 This is the uncertainty in our simulation-based estimate
 of some quantity (expectation) of interest. It is NOT the statistical uncertainty in a problem.
 :::
