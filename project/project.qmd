@@ -1,0 +1,34 @@
+---
+title: "Final Project"
+subtitle: "Due Exam Week (TBD)"
+format:
+  pdf:
+    documentclass: article
+    margin-left: 30mm
+    margin-right: 30mm
+    toc: false
+  html:
+    theme: cosmo
+    css: ../styles.css
+    toc: false
+    code-copy: true
+    code-block-background: true
+execute:
+  freeze: auto
+---
+
+The project will be done in groups of three, with students assigned randomly.
+
+The project, when split amongst the group
+members, is not intended to be a huge undertaking. The goals of the
+project are to give you experience in working collaboratively and
+developing a well-designed, well-tested piece of software.
+
+The project will be graded as a letter grade and will count for about as
+much as two problem sets in your final grade.
+
+Please use standard citation practices to cite any papers/code/online resources/chatbots whose ideas you make use of. Please do not consult with any people (in particular class members) who are not in your group. You are of course welcome to ask Chris or João questions.
+
+# Problem
+
+TBD
