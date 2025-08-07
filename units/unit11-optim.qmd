@@ -20,7 +20,7 @@ from: markdown+tex_math_single_backslash
 ipynb-shell-interactivity: all
 ---
 
-[PDF](./unit11-optim.pdf){.btn .btn-dark}
+
 
 # Overview
 

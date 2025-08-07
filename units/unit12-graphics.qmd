@@ -19,7 +19,7 @@ execute:
 from: markdown+tex_math_single_backslash
 ---
 
-[PDF](./unit12-graphics.pdf){.btn .btn-dark}
+
 
 This unit discusses some general concepts and principles of
 graphics, illustrated in some cases with R code. 

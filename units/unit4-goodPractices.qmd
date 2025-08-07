@@ -19,7 +19,7 @@ execute:
 from: markdown+tex_math_single_backslash
 ---
 
-[PDF](./unit4-goodPractices.pdf){.btn .btn-dark}
+
 
 # Overview
 
