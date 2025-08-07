@@ -115,7 +115,7 @@ The 'days' here are (roughly) class sessions, as general guidance.
     something a few different ways and define/summarize for yourself what is going
     wrong or where you are getting stuck. 
 
-## Course websites: GitHub, Ed Discussion, Gradescope, and bCourses {#course-websites-github-piazza-gradescope-and-bcourses .unnumbered}
+## Course websites: GitHub, Ed Discussion, Gradescope, and bCourses {#course-websites-github-ed-gradescope-and-bcourses .unnumbered}
 
 Key websites for the course are:
 
@@ -126,14 +126,14 @@ Key websites for the course are:
     <https://statistics.berkeley.edu/computing/training/tutorials>
 
 -   Ed Discussion site for discussions/Q&A:
-    <https://edstem.org/us/courses/XYZ/discussion>
+    <https://edstem.org/us/courses/81308/discussion>
 
 -   bCourses site for course capture recordings (see Media Gallery) and possibly some other
     materials:
-    <https://bcourses.berkeley.edu/courses/XYZ>
+    <https://bcourses.berkeley.edu/courses/1546970>
 
 -   Gradescope for assignments (also linked from bCourses): 
-    <https://www.gradescope.com/courses/XYZ>
+    <https://www.gradescope.com/courses/1076535>
 
 All course materials will be posted on here on the website (and on GitHub) except for video content, which will be in bCourses.
 
@@ -163,10 +163,12 @@ In addition, we will use Gradescope for viewing grades.
 
 -   Back-up textbooks (generally available via UC Library via links below):
 
+    -   For Python, bash/shell, Git and computing/software skills: Damien Irving, Kate Hertweck, Luke Johnston, Joel Ostblom, Charlotte Wickham, and Greg Wilson. [Research Software Engineering with Python](https://third-bit.com/py-rse/)
+        
     -   For bash: Newham, Cameron and Rosenblatt, Bill. Learning the
         bash Shell [available electronically through UC Library](https://learning.oreilly.com/library/view/learning-the-bash/0596009658/?ar=)
-        
-    -   For Quarto: [The Quarto reference guide](https://quarto.org/docs/guide)
+
+-   For Quarto: [The Quarto reference guide](https://quarto.org/docs/guide)
 
     -   For statistical computing topics:
 
