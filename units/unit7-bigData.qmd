@@ -88,6 +88,12 @@ National Security Agency (NSA). Another definition of 'big data' has
 more to do with how pervasive data and empirical analyses backed by data
 are in society and not necessarily how large the actual dataset size is.
 
+TODO: link to these papers on bias in EHR analyses:
+https://doi.org/10.1093/jrsssa/qnae039
+https://doi.org/10.1093/jrsssa/qnae005
+
+
+
 ## Logistics and data size
 
 One of the main drawbacks with Python (and R) in working with big data is that all
