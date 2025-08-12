@@ -13,7 +13,8 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
 execute:
   freeze: auto
 from: markdown+tex_math_single_backslash
@@ -28,6 +29,7 @@ from: markdown+tex_math_single_backslash
 References:
 
 -   The Python [PEP8 Style Guide](https://peps.python.org/pep-0008)
+-   Irving et al. [Research Software Engineering with Python](https://third-bit.com/py-rse/)
 -   Murrell, Introduction to Data Technologies, Ch. 2
 -   [Journal of Statistical Software vol. 42: 19 Ways of Looking at
     Statistical Software](http://www.jstatsoft.org/v42/i02)
@@ -52,7 +54,7 @@ cases what the relevant context(s) is/are.
 
 ## Editors
 
-Use an editor that supports the language you are using (e.g., *Atom*, *Emacs*/*Aquamacs*, *Sublime*, *vim*, *VSCode*, *TextMate*, *WinEdt*, or the built-in editor in *RStudio* [you can use Python from within RStudio]). Some advantages of this can include:
+Use an editor (or integrated development environment) that supports the language you are using (e.g., *VS Code*, *Atom*, *Emacs*/*Aquamacs*, *Sublime*, *vim*, *TextMate*, *WinEdt*, or the built-in editor in *RStudio* [you can use Python from within RStudio]). Some advantages of this can include:
 
   1. helpful color coding of different types of syntax,
   2. automatic indentation and spacing,
@@ -554,6 +556,35 @@ can't use it with your class repositories for your problem set work.
     running notes documenting your projects.
 
 We'll be discussing Git a lot separately.
+
+## AI-assisted coding tools
+
+:::{.callout-warning title="UNDER CONSTRUCTION"}
+:::
+
+There is now a large variety of AI-assisted coding tools that available within integrated development environment and allow you to easily work with AI while you are coding. This makes for an easier workflow than copy-pasting from a ChatBot.
+
+:::{.callout-warning title="Moving fast!"}
+The arena of AI-assisted coding tools is evolving very quickly.
+:::
+
+Some common features of many tools include:
+
+- AI-assisted code completion (extended tab completion)
+- AI-assisted code suggestions (accept/reject like grammar suggestions in text editing)
+- Built-in Chat window
+- Editing/Agent capabilities where a user can ask the tool to change or add to their code based on a text prompt, or potentially generate a whole program/application.
+- Ability to give files/directories as context. 
+
+Many of the tools are built on top of, or integrated into, VS Code (e.g., Cursor, GitHub Copilot).
+
+Beware of generating large chunks of code that you don't understand. At least for now, this is prone to bugs/hallucinations and hard to maintain. Think of the tools as helping you brainstorm.
+
+A potential hierarchy of uses:
+
+ - For straightforward syntax where checking the outcome is sufficient (e.g., plot formatting code).
+ - For involved small pieces of code where extensive testing may be sufficient (e.g., regular expressions).
+ - For more extensive analysis or algorithm code, where you should check and understand the code fully.
 
 # 2. Debugging and recommendations for avoiding bugs
 
