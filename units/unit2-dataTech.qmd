@@ -1,7 +1,7 @@
 ---
 title: "Data technologies, formats, and structures"
 author: "Chris Paciorek"
-date: "2024-08-28"
+date: "2025-08-11"
 format:
   pdf:
     documentclass: article
@@ -13,11 +13,17 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9" 
 execute:
   freeze: auto
+engine: knitr
 ---
 
+```{r, setup-r}
+#| echo: false
+reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+```
 
 ```{python, setup}
 #| echo: false
@@ -734,8 +740,16 @@ list and then the better approach of using XPath.
 import xmltodict
 
 URL = "https://api.kivaws.org/v1/loans/newest.xml"
-response = requests.get(URL)
-data = xmltodict.parse(response.content)
+## This used to be accessible for automated download, but now gives a 403 error (access denied).
+## response = requests.get(URL)   # Now getting a 403 error.
+## data = xmltodict.parse(response.content)
+## Download to newest.xml file manually.
+with open('newest.xml', 'r') as file:
+    content = file.read()
+    
+content = content.replace("&", "and")
+data = xmltodict.parse(content)
+   
 data.keys()
 data['response'].keys()
 data['response']['loans'].keys()
@@ -745,9 +759,8 @@ data['response']['loans']['loan'][2]['activity']
 ```
 
 ```{python, lxml}
-
 from lxml import etree
-doc = etree.fromstring(response.content)
+doc = etree.fromstring(content)  # formerly etree.fromstring(response.content)
 
 loans = doc.xpath("//loan")
 [loan.xpath("activity/text()") for loan in loans]
@@ -803,11 +816,15 @@ Let's play again with the Kiva data. The same data that we had worked
 with in XML format is also available in JSON format: <https://api.kivaws.org/v1/loans/newest.json>.
 
 ```{python, json}
+#| eval: false
 URL = "https://api.kivaws.org/v1/loans/newest.json"
-response = requests.get(URL)
+## This used to be accessible for automated download, but now gives a 403 error (access denied).
+## response = requests.get(URL)   # Now getting a 403 error.
+with open('newest.json', 'r') as file:
+    content = file.read()
 
 import json
-data = json.loads(response.text)
+data = json.loads(content)
 type(data)
 data.keys()
 
@@ -948,6 +965,7 @@ Let's see an example of accessing economic data from the
 World Bank, using the [documentation for their API](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information). Following the [API call structure](https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures), we can download (for example), data on various countries. The documentation indicates that our REST-based query can use either a URL structure or an argument-based structure.
 
 ```{python, REST}
+import json
 ## Queries based on the documentation
 api_url = "https://api.worldbank.org/V2/incomeLevel/LIC/country"
 api_args = "https://api.worldbank.org/V2/country?incomeLevel=LIC"
