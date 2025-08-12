@@ -1115,35 +1115,43 @@ URL in a GET request. If it gets to be too long (e.g,, more than 2048
 characters) many web servers will reject the request. Instead we may
 need to use an HTTP POST request (POST requests are often used for
 submitting web forms). A typical request would have syntax like this
-search (using `requests`):
+search (using `requests`), where here we will create a GitHub issue
+in an automated fashion.
 
 ```{python, http-post}
 #| eval: false
-url = 'http://www.wormbase.org/db/searches/advanced/dumper'
+import requests
 
-data = {      "specipes":"briggsae",
-              "list": "",
-              "flank3": "0",
-              "flank5": "0",
-              "feature": "Gene Models",
-              "dump": "Plain TEXT",
-              "orientation": "Relative to feature",
-              "relative": "Chromsome",
-              "DNA":"flanking sequences only",
-              ".cgifields" :  "feature, orientation, DNA, dump, relative"
-}                                  
+with open(".github-access-token.txt", "r") as file:
+  ghtoken = file.read().strip()
 
-response = requests.post(url, data = data)
-if response.status_code == 200:
-    print("POST request successful")
+# Repository details
+owner = "paciorek"
+repo = "test"
+url = f"https://api.github.com/repos/{owner}/{repo}/issues"
+
+# Information about the issue in dict/json format.
+issue = {
+    "title": "This is an example issue",
+    "body": "This is the body of the issue created via API.",
+}
+
+# Set up authentication and headers
+headers = {
+    "Authorization": f"token {ghtoken}",
+    "Accept": "application/vnd.github+json"
+}
+
+response = requests.post(url, json=issue, headers=headers)
+
+if response.status_code == 201:
+    print(f"Successfully created Issue! {response.json()['html_url']}")
 else:
-    print(f"POST request failed with status code: {response.status_code}")
-
+    print("Could not create Issue")
+    print(response.status_code, response.text)
 ```
-
-Unfortunately that specific search doesn't work because the server URL
-and/or API seem to have changed. But it gives you an idea of what the
-format would look like.
+Note that for security, I created a [GitHub personal access token](https://github.com/settings/personal-access-tokens) that is limited in *scope* to
+only be able to handle issues in my test repository.
 
 `requests` can handle other kinds of HTTP requests such as PUT
 and DELETE. Finally, some websites use cookies to keep track of users,
