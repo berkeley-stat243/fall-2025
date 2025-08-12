@@ -1,7 +1,7 @@
 ---
 title: "Introduction to UNIX, computers, and key tools"
 author: "Chris Paciorek"
-date: "2024-08-28"
+date: "2025-08-11"
 format:
   pdf:
     documentclass: article
@@ -25,13 +25,13 @@ There are a [variety of ways to get access to a UNIX-style command line
 environment](../howtos/accessUnixCommandLine).
 
 Please see the material in [our tutorial on the basics of
-UNIX](https://berkeley-scf.github.io/tutorial-unix-basics) to get up
+UNIX](https://computing.stat.berkeley.edu/tutorial-unix-basics) to get up
 to speed on working in a UNIX-style command line environment and/or
-the material in last week's [Computing Skills Workshop](https://berkeley-scf.github.io/compute-skills-2024/units/intro-computing.html). We'll do a
+the material in last week's [Computing Skills Workshop](https://computing.stat.berkeley.edu/compute-skills-2025/units/intro-computing.html). We'll do a
 bit of demo in the first class. If what you see seems quite familiar,
 you can probably skip that tutorial. If what you see is not familiar,
-please work through the tutorial by Wednesday September 4 and (optionally) attend section on
-Friday August 30 to work on the problems at the end of the tutorial and
+please work through the tutorial by Wednesday September 3 and (optionally) attend section on
+Friday August 29 to work on the problems at the end of the tutorial and
 be able to ask questions of the GSI and other students.
 
 For an alternative introduction (which also includes some of the topics
@@ -57,29 +57,29 @@ Git](https://git-scm.com/downloads) that you can explore. I've heard good things
 Mac and Windows.
 
 1.  To clone (i.e., copy) a repository (in this case from GitHub)
-    (`berkeley-stat243` is the organization and `fall-2024` is the
+    (`berkeley-stat243` is the organization and `fall-2025` is the
     repository):
     
-    ```
-    git clone https://github.com/berkeley-stat243/fall-2024
+    ```bash
+    git clone https://github.com/berkeley-stat243/fall-2025
     ```
 
 2.  To update a repository to reflect changes made in a remote copy of
     the repository:
     
-    ```
-    cd /to/any/directory/within/the/local/repository  ## e.g., cd fall-2024
+    ```bash
+    cd /to/any/directory/within/the/local/repository  ## e.g., cd fall-2025
     git pull
     ```
 
-More information is available in the [Computing Skills Workshop](https://berkeley-scf.github.io/compute-skills-2024) as well as this [tutorial on the basics of using
+More information is available in the [Computing Skills Workshop](https://computing.stat.berkeley.edu/compute-skills-2025) as well as this [tutorial on the basics of using
 Git](https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html), as well as lots
 of information/tutorials online.
 We'll see a lot more about Git in Section/Lab sessions, where you'll learn to set up
 a repository, make changes to repositories and work with local and
 remote versons of the repository. In particular, you'll have a chance to
 work through the tutorial and practice with
-Git in the first section/lab (September 6). During the course, you'll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set
+Git in the first section/lab (September 5). During the course, you'll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set
 solutions, and you'll need to use it extensively for the final group project.
 
 # 3. Parts of a computer
@@ -119,7 +119,7 @@ example of connecting to one of the SCF machines (this assumes you have
 an SCF account, which you may, and that your user name is paciorek,
 which it is not).
 
-```
+```bash
 ssh paciorek@radagast.berkeley.edu
 ```
 
@@ -127,14 +127,14 @@ To copy files between machines, we can use *scp*, which has similar
 options to *cp*. Here's how we can copy a local file to a remote
 machine.
 
-```
+```bash
 scp file.txt paciorek@radagast.berkeley.edu:~/research/.
 ```
 
 And here's how we can copy from a remote machine to the machine you are
 on.
 
-```
+```bash
 scp paciorek@radagast.berkeley.edu:/data/file.txt \
   ~/research/renamed.txt
 ```
@@ -169,8 +169,10 @@ or Markdown/Quarto/R Markdown/LaTeX.**
     (Note: RStudio as a whole is an IDE (integrated development environment.
     The editor is just the editing window where you edit code (and
     Markdown) files.)
--   *VSCode* has a powerful code editor that is customized to work with
-    various languages, and it has a Quarto extension.
+-   *VS Code* is an integrated development environment (IDE) that has a powerful code editor that is customized to work with
+    various languages, Jupyter Notebooks, and Quarto documents. It also has built-in AI assistance via GitHub Copilot (available for free by signing up for GitHub Education).
+    - I will probably use/demo VS Code (+ GitHub Copilot) in class some.
+    - We will use VS Code in section some (e.g., for the debugging lab).
 
 As you get started it's ok to use a very simple text editor such as
 Notepad in Windows, but you should take the time in the next few weeks
