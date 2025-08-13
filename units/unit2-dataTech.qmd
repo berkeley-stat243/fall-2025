@@ -61,6 +61,11 @@ R, so there are some differences from the content in the current version of
 the unit that reflect translating between R and Python. I'm not sure how
 helpful they'll be, but they are available.
 
+:::{.callout-note title="Quarto configuration details for this document"}
+This document  uses the `knitr` engine and the Quarto configuration `ipynb-shell-interactivity: all`, so that output from all Python code in a chunk will print in the rendered document and the output will be interspersed with the code in the chunk rather than printed all at the end of the code chunk.
+:::
+
+
 # 1. Data storage and file formats on a computer
 
 This unit largely covers topics relevant for early on in the data analysis pipeline: getting data,

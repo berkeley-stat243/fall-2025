@@ -1,7 +1,7 @@
 ---
 title: "Parallel processing"
 author: "Chris Paciorek"
-date: "2024-10-04"
+date: "2025-08-12"
 format:
   pdf:
     documentclass: article
@@ -13,7 +13,8 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
 execute:
   freeze: auto
 from: markdown+tex_math_single_backslash
@@ -21,6 +22,10 @@ ipynb-shell-interactivity: all
 code-overflow: wrap
 ---
 
+```{r, setup-r}
+#| echo: false
+reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+```
 
 
 # Overview
@@ -856,13 +861,13 @@ for i in range(p):
 
 t0 = time.time()
 results = dask.compute(tasks)  # compute all in parallel
-print(time.time() - t0)   # 2.6 sec.
+print(time.time() - t0)   
 ```
 
 To force dynamic allocation, we can set `chunksize = 1` (as was shown in our original example of using the `processes` scheduler).
 
 ```{python}
-#| eval: false
+#| eval: true
 dask.config.set(scheduler='processes', num_workers = 4, chunksize = 1)
 
 tasks = []
@@ -872,7 +877,7 @@ for i in range(p):
 
 t0 = time.time()
 results = dask.compute(tasks)  # compute all in parallel
-print(time.time() - t0)   # 2.6 sec.
+print(time.time() - t0)   
 ```
 
 We haven't illustrated it here, but if each task is quick and we have a lot of tasks, we likely want static allocation to avoid the extra overhead of starting each task individually.

@@ -13,7 +13,8 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
 execute:
   freeze: auto
 engine: knitr
@@ -848,7 +849,7 @@ happen is that one sets things up in such a way that every process is
 using the same sequence of random numbers. This could happen if you
 mistakenly set the same seed in each process, e.g., using
 `np.random.seed(1)` on every process. Numpy now provides some nice functionality
-for parallel RNG, with more details given in the [SCF parallelization tutorial](https://berkeley-scf.github.io/tutorial-parallelization/parallel-python#5-random-number-generation-rng-in-parallel).
+for parallel RNG, with more details given in the [SCF parallelization tutorial](https://computing.stat.berkeley.edu/tutorial-parallelization/parallel-python#5-random-number-generation-rng-in-parallel).
 
 # 5. Generating random variables
 

@@ -1,7 +1,7 @@
 ---
 title: "The bash shell and UNIX commands"
 author: "Chris Paciorek"
-date: "2024-09-03"
+date: "2025-08-12"
 
 format:
   pdf:
@@ -14,7 +14,8 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9" 
 execute:
   freeze: auto
 engine: knitr
@@ -26,7 +27,10 @@ engine: knitr
 
 Reference:
 
-- Newham and Rosenblatt, Learning the bash Shell, 2nd ed.
+- Newham and Rosenblatt, [Learning the bash Shell](https://learning.oreilly.com/library/view/learning-the-bash/0596009658/?ar=), 2nd ed.
+- Damien Irving, Kate Hertweck, Luke Johnston, Joel Ostblom, Charlotte 
+Wickham, and Greg Wilson. [Research Software Engineering with Python](https://third-bit.com/py-rse/)
+- [SCF Bash tutorial](https://computing.stat.berkeley.edu/tutorial-using-bash)
 
 # 1. Shell basics
 
@@ -75,7 +79,7 @@ quickly and without a lot of typing.
 
 # 2. Using the bash shell
 
-For this Unit, we'll rely on [the bash shell tutorial](https://berkeley-scf.github.io/tutorial-using-bash)
+For this Unit, we'll rely on [the bash shell tutorial](https://computing.stat.berkeley.edu/tutorial-using-bash)
 for the details of how to use the shell. We won't cover the page on Managing Processes.
 For the moment, we won't cover the page on Regular Expressions, but when we talk about string processing and regular expressions in Unit 5, we'll come back to that material.
 
@@ -89,7 +93,7 @@ files we can do interesting things with.
 
 ```{bash}
 #| eval: false
-git clone https://github.com/berkeley-stat243/fall-2024
+git clone https://github.com/berkeley-stat243/fall-2025
 ```
 
 One important note is that most of the shell commands that work with
@@ -103,7 +107,7 @@ states using the *coop.txt* file.
 
 ```{bash}
 #| eval: false
-cd fall-2024/data
+cd fall-2025/data
 gzip -cd coop.txt.gz | less
 gunzip coop.txt.gz
 cut -b50-70 coop.txt | less 
@@ -411,12 +415,12 @@ Regular expressions are good for tasks such as:
  - cleaning and transforming text into a uniform format; and
  - mining text by treating documents as data.
 
-Please see the [bash shell tutorial](https://berkeley-scf.github.io/tutorial-using-bash/regex) for a description of regular expressions. I'll assign a small set of regex problems due as an [assignment](../schedule), and we'll talk through those problems in class to explore the regex syntax.
+Please see the [bash shell tutorial](https://computing.stat.berkeley.edu/tutorial-using-bash/regex) for a description of regular expressions. I'll assign a small set of regex problems due as an [assignment](../schedule), and we'll talk through those problems in class to explore the regex syntax.
 
 Other resources include:
 
   - Here's a [website where you can interactively test regular expressions on example strings](https://regex101.com).
-  - Duncan Temple Lang (UC Davis Statistics) has written a [nice tutorial](http://berkeley-scf.github.io/tutorial-string-processing/regexpr-Lang.pdf) covering regular expressions, illustrated in R. 
+  - Duncan Temple Lang (UC Davis Statistics) has written a [nice tutorial](http://computing.stat.berkeley.edu/tutorial-string-processing/regexpr-Lang.pdf) covering regular expressions, illustrated in R. 
   - Sections 9.9 and 11 of [Paul Murrell's book](http://www.stat.auckland.ac.nz/~paul/ItDT)
   - The back/second page of RStudio's `stringr` cheatsheet has a [cheatsheet on regular expressions](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf).
 
@@ -426,7 +430,7 @@ In addition to the regular expression functionality we'll cover, there is a lot 
 
 One thing that can cause headaches is differences in version of regular expression syntax used. As discussed in `man grep`, *extended regular expressions* are standard, with *basic regular expressions* providing less functionality and *Perl regular expressions* additional functionality.
 
-The [bash shell tutorial](https://berkeley-scf.github.io/tutorial-using-bash/regex) provides a full documentation of the *extended regular expressions* syntax, which we'll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.
+The [bash shell tutorial](https://computing.stat.berkeley.edu/tutorial-using-bash/regex) provides a full documentation of the *extended regular expressions* syntax, which we'll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.
 
   - In bash, `grep -E` (or `egrep`) enables use of the extended regular expressions, while `grep -P` enables Perl-style regular expressions.
   - In Python, the `re` package provides [syntax "similar to" Perl](https://docs.python.org/3/library/re.html). 

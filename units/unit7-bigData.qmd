@@ -1,7 +1,7 @@
 ---
 title: "Big data and databases"
 author: "Chris Paciorek"
-date: "2024-10-10"
+date: "2025-08-12"
 format:
   pdf:
     documentclass: article
@@ -13,12 +13,20 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
 execute:
   freeze: auto
+engine: knitr
 ipynb-shell-interactivity: all
 code-overflow: wrap
 ---
+
+```{r, setup-r}
+#| echo: false
+reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+```
+
 
 ```{python, setup}
 #| echo: false
@@ -31,7 +39,7 @@ import os, time
 
 References:
 
--   [Tutorial on parallel processing using Python's Dask and R's future packages](https://berkeley-scf.github.io/tutorial-dask-future)
+-   [Tutorial on parallel processing using Python's Dask and R's future packages](https://computing.stat.berkeley.edu/tutorial-dask-future)
 -   [Tutorial on working with large datasets in SQL, R, and Python](https://computing.stat.berkeley.edu/tutorial-databases)
 -   Murrell: Introduction to Data Technologies
 
@@ -430,7 +438,7 @@ Note that it is quite inefficient to do the `find()` (and implicitly
 read the data in) and then compute on top of that intermediate result
 in two separate calls to `compute()`. Rather, we should set up the code
 so that all the operations are set up before a single call to
-`compute()`. This is discussed in detail in the [Dask/future tutorial](https://berkeley-scf.github.io/tutorial-dask-future/python-dask#63-avoid-repeated-calculations-by-embedding-tasks-within-one-call-to-compute).
+`compute()`. This is discussed in detail in the [Dask/future tutorial](https://computing.stat.berkeley.edu/tutorial-dask-future/python-dask#63-avoid-repeated-calculations-by-embedding-tasks-within-one-call-to-compute).
 
 Since the data are just treated as raw strings, we might want to
 introduce structure by converting each line to a tuple and then
@@ -786,7 +794,7 @@ determine the class grade). More specifically we need a query that:
  rows in `Enrollment` where `Student.ID` is the same as `Enrollment.student_ID` and
  - filters the rows based on `Student.grade_level`:
 
-```{sql}
+```sql
 #| eval: false
 SELECT Student.ID, grade FROM Student, Enrollment WHERE 
   Student.ID = Enrollment.student_ID and Student.grade_level = 9;
@@ -886,7 +894,7 @@ You can access and navigate an SQLite database from Python as follows.
 
 ```{python}
 import sqlite3 as sq
-dir_path = '../data'  # Replace with the actual path
+dir_path = '/mirror/data/pub/users/paciorek/share'  # Replace with the actual path
 db_filename = 'stackoverflow-2021.db'
 ## Download from http://www.stat.berkeley.edu/share/paciorek/stackoverflow-2021.db.
 
@@ -1261,8 +1269,7 @@ a condition that enforces matching between the rows of the table. More
 broadly, here are four equivalent joins that all perform the equivalent
 of an inner join:
 
-```{sql}
-#| eval: false
+```sql
 ## explicit inner join:
 select * from table1 join table2 on table1.id = table2.id 
 ## non-explicit join without JOIN

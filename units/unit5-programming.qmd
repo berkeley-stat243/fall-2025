@@ -13,13 +13,19 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
 execute:
   freeze: auto
 engine: knitr
 ipynb-shell-interactivity: all
 code-overflow: wrap
 ---
+
+```{r, setup-r}
+#| echo: false
+reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+```
 
 ```{python, setup}
 #| echo: false
@@ -1224,7 +1230,6 @@ class tsSimClass:
 Now let's see how we would use the class.
 
 ```{python}
-#| eval: false
 #| fig-alt: Randomly-generated time series from our object
 myts = tsSimClass(np.arange(1, 101), 2, 1)
 print(myts)
@@ -1232,14 +1237,14 @@ np.random.seed(1)
 ## Here's a simulated time series.
 y1 = myts.simulate()
 
-# import matplotlib.pyplot as plt
-# plt.plot(myts.get_times(), y1, '-')
-# plt.xlabel('time')
-# plt.ylabel('process values')
-# ## Simulate a second series.
-# y2 = myts.simulate()
-# plt.plot(myts.get_times(), y2, '--')
-# plt.show()
+import matplotlib.pyplot as plt
+plt.plot(myts.get_times(), y1, '-')
+plt.xlabel('time')
+plt.ylabel('process values')
+## Simulate a second series.
+y2 = myts.simulate()
+plt.plot(myts.get_times(), y2, '--')
+plt.show()
 ```
 
 We could set up a different object that has different parameter values.
@@ -1248,7 +1253,6 @@ is larger than before.
 
 
 ```{python}
-#| eval: false
 #| fig-alt: Another randomly-generated time series
 myts2 = tsSimClass(np.arange(1, 101), 2, 4)
 np.random.seed(1)
@@ -1269,7 +1273,6 @@ in the sense that both names point to the same underlying object.
 But no data were copied when the assignment to `myts_ref` was done. 
 
 ```{python}
-#| eval: false
 myts_ref = myts
 ## 'myts_ref' and 'myts' are names for the same underlying object.
 import copy
@@ -2623,7 +2626,6 @@ is actively executing statements, you can use `top` from the UNIX shell.
 In Python, we can call out to the system to get the info we want:
 
 ```{python}
-#| eval: false
 import psutil
 
 # Get memory information
@@ -3478,7 +3480,6 @@ Second, is it faster to use `map` than to use a loop? In the example above it is
 Here's an example where the bulk of time is in the actual computation and not in the looping itself. We'll run a bunch of regressions on a matrix `X` (i.e., each column of `X` is a predictor) using each column of the matrix `mat` to do a separate regression. 
 
 ```{python, map-vs-for}
-#| eval: false
 import time
 import statsmodels.api as sm
 
@@ -3760,6 +3761,7 @@ When we define a numpy array, we can choose to use column-major order (i.e., "Fo
 Let's consider this (vectorized) code:
 
 ```{python}
+#| eval: false
 x = np.exp(x) + 3*np.sin(x)
 ```
 
@@ -3779,7 +3781,7 @@ end
 
 How does that affect the downsides mentioned above?
 
-Combining loops is called 'fusing' and is an [important optimization that Julia can do](https://docs.julialang.org/en/v1/manual/performance-tips/#More-dots:-Fuse-vectorized-operations), as shown in [this demo](https://berkeley-scf.github.io/tutorial-parallelization/parallel-julia#4-loops-and-fused-operations). It’s also a [key optimization done by XLA](https://www.tensorflow.org/xla), a compiler used with JAX and Tensorflow, so one approach to getting loop fusion in Python is to use JAX (or Tensorflow) for such calculations within Python rather than simply using numpy.
+Combining loops is called 'fusing' and is an [important optimization that Julia can do](https://docs.julialang.org/en/v1/manual/performance-tips/#More-dots:-Fuse-vectorized-operations), as shown in [this demo](https://computing.stat.berkeley.edu/tutorial-parallelization/parallel-julia#4-loops-and-fused-operations). It’s also a [key optimization done by XLA](https://www.tensorflow.org/xla), a compiler used with JAX and Tensorflow, so one approach to getting loop fusion in Python is to use JAX (or Tensorflow) for such calculations within Python rather than simply using numpy.
 
 ### JIT compilation (with JAX)
 

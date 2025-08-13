@@ -13,7 +13,7 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
 ---
 
 # 1. UNIX command line basics

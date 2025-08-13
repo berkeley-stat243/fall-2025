@@ -1,7 +1,7 @@
 ---
 title: "Numbers on a computer"
 author: "Chris Paciorek"
-date: "2024-10-17"
+date: "2025-08-12"
 format:
   pdf:
     documentclass: article
@@ -13,12 +13,17 @@ format:
     css: ../assets/styles.css
     toc: true
     code-copy: true
-    code-block-background: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
 execute:
   freeze: auto
 engine: knitr
 ---
 
+```{r, setup-r}
+#| echo: false
+reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+```
 
 
 ```{python, setup}
@@ -135,11 +140,12 @@ large to be stored as an integer of the particular length):
 
 
 ```{python}
+#| error: true
 a = np.int32(3423333)
 a * a       # overflows
 ```
 
-```{python}
+```{python, overflow}
 a = np.int64(3423333)
 a * a       # doesn't overflow if we use 64 bit int
 ```
@@ -162,7 +168,7 @@ we don't get overflow. But we do use more than 8 bytes that would be used
 by numpy. And if we use Python `int` or lists of such values, we're not
 set up for efficient array-based computation.
 
-```{python}
+```{python, overflow2}
 a = 34233332342343
 a * a
 sys.getsizeof(a)
@@ -203,7 +209,8 @@ numbers on the machine that Python is running.
 
 
 
-```{python}
+```{python, iinfo}
+#| error: true
 np.iinfo(np.int32)
 np.iinfo(np.int64)
 

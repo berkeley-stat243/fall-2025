@@ -1,7 +1,7 @@
 ---
 title: "Good practices: coding practices, debugging, and reproducible research"
 author: "Chris Paciorek"
-date: "2024-09-03"
+date: "2025-08-12"
 format:
   pdf:
     documentclass: article
@@ -351,7 +351,7 @@ myfun('missing_file.txt')
 
 ```
 [Errno 2] No such file or directory: 'missing_file.txt'
-Check that the file `missing_file.txt` can be found in the current path: `/accounts/vis/paciorek/teaching/243fall24/fall-2024/units`.
+Check that the file `missing_file.txt` can be found in the current path: `/accounts/vis/paciorek/teaching/243/fall-2025/units`.
 ```
 
 Finally let's see how we can intercept an error but then "re-raise" the error rather than
@@ -463,7 +463,7 @@ pytest mytestfile.py
 ```
 ====================================== test session starts ======================================
 platform linux -- Python 3.12.2, pytest-8.1.1, pluggy-1.4.0
-rootdir: /accounts/vis/paciorek/teaching/243fall24/fall-2024/units
+rootdir: /accounts/vis/paciorek/teaching/243/fall-2025/units
 plugins: anyio-4.3.0
 collected 4 items                                                                               
 
@@ -643,7 +643,7 @@ When I run this, I see this:
 
 ```
 >>> run.fit(data, n_cats)
-> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_with_break.py(10)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2025/units/run_with_break.py(10)fit()
 -> sub = data[data['cats'] == i]
 (Pdb) 
 ```
@@ -655,7 +655,7 @@ I can type `n` to run that line and go to the next one:
 
 ```
 (Pdb) n
-> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_with_break.py(11)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2025/units/run_with_break.py(11)fit()
 -> model = statsmodels.api.OLS(sub['y'], statsmodels.api.add_constant(sub['x']))
 ```
 
@@ -665,7 +665,7 @@ I can type `c` to continue until the next breakpoint:
 
 ```
 (Pdb) c
-> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_with_break.py(10)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2025/units/run_with_break.py(10)fit()
 -> sub = data[data['cats'] == i]
 ```
 
@@ -732,7 +732,7 @@ We can enter `u` multiple times (it's only shown once below) to go up in the sta
 
 ```
 (Pdb) u
-> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break.py(10)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break.py(10)fit()
 -> model = statsmodels.api.OLS(sub['y'], statsmodels.api.add_constant(sub['x']))
 ```
 
@@ -796,7 +796,7 @@ python -m pdb run_no_break2.py
 ```
 
 ```
-> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break2.py(1)<module>()
+> /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break2.py(1)<module>()
 -> import numpy as np
 (Pdb) 
 ```
@@ -805,13 +805,13 @@ Let's set a breakpoint at the same place we did with `breakpoint()` but using a 
 
 ```
 (Pdb) b 9
-Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break.py:9
+Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break.py:9
 ```
 
 ```{python}
 #| eval: false
 (Pdb) c
-> /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break2.py(9)fit()
+> /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break2.py(9)fit()
 -> model = statsmodels.api.OLS(sub['y'], statsmodels.api.add_constant(sub['x']))
 ```
 
@@ -821,9 +821,9 @@ Or we could have set a breakpoint at the start of the function:
 
 ```
 (Pdb) disable 1
-Disabled breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break2.py:9
+Disabled breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break2.py:9
 (Pdb) b fit
-Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2024/units/run_no_break.py:6
+Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break.py:6
 ```
 
 ## Some common causes of bugs 

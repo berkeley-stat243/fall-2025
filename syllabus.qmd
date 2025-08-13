@@ -300,7 +300,7 @@ The approach to problem sets given below is the first time I am doing this, in r
 #### AI and problem sets
 
 We are of course in the midst of huge changes from the rapid advances in AI, in particular
-large language model-enabled tools such as ChatBots and AI-assisted coding. The following
+generative AI, with large language model-enabled tools such as ChatBots and AI-assisted coding. The following
 approach to problem sets is intended to recognize that these tools are widely-used and
 can be very useful (both for day-to-day work and for learning),
 while still trying to make sure that we understand core computing and programming concepts
