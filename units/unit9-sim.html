@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris Paciorek">
-<meta name="dcterms.date" content="2024-10-18">
+<meta name="dcterms.date" content="2025-08-13">
 
 <title>Simulation</title>
 <style>
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e616b9d417007562690a0c3de8c633bc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ff803dae0bae9edb91fb3cd2582d8e33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -512,7 +512,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 18, 2024</p>
+      <p class="date">August 13, 2025</p>
     </div>
   </div>
   
@@ -647,10 +647,17 @@ Simulation (Monte Carlo) uncertainty is not statistical uncertainty
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>devs <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">100</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tdevs <span class="op">=</span> t.ppf(norm.cdf(devs), df<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(devs, tdevs)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.xlabel('devs'); plt.ylabel('tdevs')</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot([min(devs), max(devs)], [min(devs), max(devs)], color='red')</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(devs, tdevs)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'devs'</span>)<span class="op">;</span> plt.ylabel(<span class="st">'tdevs'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="bu">min</span>(devs), <span class="bu">max</span>(devs)], [<span class="bu">min</span>(devs), <span class="bu">max</span>(devs)], color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="unit9-sim_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" alt="Scatterplot of aligned normal and t random variables" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="experimental-design-optional" class="level2">
@@ -737,6 +744,13 @@ Simulation (Monte Carlo) uncertainty is not statistical uncertainty
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="unit9-sim_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" alt="Time series and histograms of pseudo-random numbers" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>A wide variety of different RNG have been proposed. Many have turned out to have substantial defects based on tests designed to assess if the behavior of the RNG mimics true randomness. Some of the behavior we want to ensure is uniformity of each individual random deviate, independence of sequences of deviates, and multivariate uniformity of subsequences. One test of a RNG that many RNGs don’t perform well on is to assess the properties of <span class="math inline">\(k\)</span>-tuples - subsequences of length <span class="math inline">\(k\)</span>, which should be independently distributed in the <span class="math inline">\(k\)</span>-dimensional unit hypercube. Unfortunately, linear congruential methods produce values that lie on a simple lattice in <span class="math inline">\(k\)</span>-space, i.e., the points are not selected from <span class="math inline">\(q^{k}\)</span> uniformly spaced points, where <span class="math inline">\(q\)</span> is the the number of unique values. Instead, points often lie on parallel lines in the hypercube.</p>
 <p>Combining generators can yield better generators. The Wichmann-Hill is an option in R and is a combination of three linear congruential generators with <span class="math inline">\(a=\{171,172,170\}\)</span>, <span class="math inline">\(m=\{30269,30307,30323\}\)</span>, and <span class="math inline">\(u_{i}=(x_{i}/30269+y_{i}/30307+z_{i}/30323)\mbox{mod}\,1\)</span> where <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> are generated from the three individual generators. Let’s mimic the Wichmann-Hill manually:</p>
@@ -928,7 +942,7 @@ Simulation (Monte Carlo) uncertainty is not statistical uncertainty
 </section>
 <section id="rng-in-parallel" class="level2">
 <h2 class="anchored" data-anchor-id="rng-in-parallel">RNG in parallel</h2>
-<p>We can generally rely on the RNG in Python and R to give reasonable set of pseudo-random values. One time when we want to think harder is when doing work with RNG in parallel on multiple processors. The worst thing that could happen is that one sets things up in such a way that every process is using the same sequence of random numbers. This could happen if you mistakenly set the same seed in each process, e.g., using <code>np.random.seed(1)</code> on every process. Numpy now provides some nice functionality for parallel RNG, with more details given in the <a href="https://berkeley-scf.github.io/tutorial-parallelization/parallel-python#5-random-number-generation-rng-in-parallel">SCF parallelization tutorial</a>.</p>
+<p>We can generally rely on the RNG in Python and R to give reasonable set of pseudo-random values. One time when we want to think harder is when doing work with RNG in parallel on multiple processors. The worst thing that could happen is that one sets things up in such a way that every process is using the same sequence of random numbers. This could happen if you mistakenly set the same seed in each process, e.g., using <code>np.random.seed(1)</code> on every process. Numpy now provides some nice functionality for parallel RNG, with more details given in the <a href="https://computing.stat.berkeley.edu/tutorial-parallelization/parallel-python#5-random-number-generation-rng-in-parallel">SCF parallelization tutorial</a>.</p>
 </section>
 </section>
 <section id="generating-random-variables" class="level1">

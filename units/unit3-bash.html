@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris Paciorek">
-<meta name="dcterms.date" content="2024-09-03">
+<meta name="dcterms.date" content="2025-08-12">
 
 <title>The bash shell and UNIX commands</title>
 <style>
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a9ac95982dfa497af26296eb1ce0c91d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3427fec09848f0ccae07eb9030af6bf1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -452,7 +452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 3, 2024</p>
+      <p class="date">August 12, 2025</p>
     </div>
   </div>
   
@@ -468,7 +468,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Overview</h1>
 <p>Reference:</p>
 <ul>
-<li>Newham and Rosenblatt, Learning the bash Shell, 2nd ed.</li>
+<li>Newham and Rosenblatt, <a href="https://learning.oreilly.com/library/view/learning-the-bash/0596009658/?ar=">Learning the bash Shell</a>, 2nd ed.</li>
+<li>Damien Irving, Kate Hertweck, Luke Johnston, Joel Ostblom, Charlotte Wickham, and Greg Wilson. <a href="https://third-bit.com/py-rse/">Research Software Engineering with Python</a></li>
+<li><a href="https://computing.stat.berkeley.edu/tutorial-using-bash">SCF Bash tutorial</a></li>
 </ul>
 </section>
 <section id="shell-basics" class="level1">
@@ -484,19 +486,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="using-the-bash-shell" class="level1">
 <h1>2. Using the bash shell</h1>
-<p>For this Unit, we’ll rely on <a href="https://berkeley-scf.github.io/tutorial-using-bash">the bash shell tutorial</a> for the details of how to use the shell. We won’t cover the page on Managing Processes. For the moment, we won’t cover the page on Regular Expressions, but when we talk about string processing and regular expressions in Unit 5, we’ll come back to that material.</p>
+<p>For this Unit, we’ll rely on <a href="https://computing.stat.berkeley.edu/tutorial-using-bash">the bash shell tutorial</a> for the details of how to use the shell. We won’t cover the page on Managing Processes. For the moment, we won’t cover the page on Regular Expressions, but when we talk about string processing and regular expressions in Unit 5, we’ll come back to that material.</p>
 </section>
 <section id="bash-shell-examples" class="level1">
 <h1>3. bash shell examples</h1>
 <p>Here we’ll work through a few examples to start to give you a feel for using the bash shell to manage your workflows and process data.</p>
 <p>First let’s get the files from GitHub to have a set of files we can do interesting things with.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/berkeley-stat243/fall-2024</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/berkeley-stat243/fall-2025</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>One important note is that most of the shell commands that work with data inside files (in contrast to commands like <code>ls</code> and <code>cd</code>) work only with text files and not binary files. Also the commands operate on a line-by-line basis.</p>
 <p><strong>Our first mission</strong> is some basic manipulation of a data file. Suppose we want to get a sense for the number of weather stations in different states using the <em>coop.txt</em> file.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fall-2024/data</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fall-2025/data</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="at">-cd</span> coop.txt.gz <span class="kw">|</span> <span class="fu">less</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> coop.txt.gz</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-b50-70</span> coop.txt <span class="kw">|</span> <span class="fu">less</span> </span>
@@ -700,11 +702,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>cleaning and transforming text into a uniform format; and</li>
 <li>mining text by treating documents as data.</li>
 </ul>
-<p>Please see the <a href="https://berkeley-scf.github.io/tutorial-using-bash/regex">bash shell tutorial</a> for a description of regular expressions. I’ll assign a small set of regex problems due as an <a href="../schedule">assignment</a>, and we’ll talk through those problems in class to explore the regex syntax.</p>
+<p>Please see the <a href="https://computing.stat.berkeley.edu/tutorial-using-bash/regex">bash shell tutorial</a> for a description of regular expressions. I’ll assign a small set of regex problems due as an <a href="../schedule">assignment</a>, and we’ll talk through those problems in class to explore the regex syntax.</p>
 <p>Other resources include:</p>
 <ul>
 <li>Here’s a <a href="https://regex101.com">website where you can interactively test regular expressions on example strings</a>.</li>
-<li>Duncan Temple Lang (UC Davis Statistics) has written a <a href="http://berkeley-scf.github.io/tutorial-string-processing/regexpr-Lang.pdf">nice tutorial</a> covering regular expressions, illustrated in R.</li>
+<li>Duncan Temple Lang (UC Davis Statistics) has written a <a href="http://computing.stat.berkeley.edu/tutorial-string-processing/regexpr-Lang.pdf">nice tutorial</a> covering regular expressions, illustrated in R.</li>
 <li>Sections 9.9 and 11 of <a href="http://www.stat.auckland.ac.nz/~paul/ItDT">Paul Murrell’s book</a></li>
 <li>The back/second page of RStudio’s <code>stringr</code> cheatsheet has a <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf">cheatsheet on regular expressions</a>.</li>
 </ul>
@@ -712,7 +714,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="versions-of-regular-expressions" class="level2">
 <h2 class="anchored" data-anchor-id="versions-of-regular-expressions">Versions of regular expressions</h2>
 <p>One thing that can cause headaches is differences in version of regular expression syntax used. As discussed in <code>man grep</code>, <em>extended regular expressions</em> are standard, with <em>basic regular expressions</em> providing less functionality and <em>Perl regular expressions</em> additional functionality.</p>
-<p>The <a href="https://berkeley-scf.github.io/tutorial-using-bash/regex">bash shell tutorial</a> provides a full documentation of the <em>extended regular expressions</em> syntax, which we’ll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.</p>
+<p>The <a href="https://computing.stat.berkeley.edu/tutorial-using-bash/regex">bash shell tutorial</a> provides a full documentation of the <em>extended regular expressions</em> syntax, which we’ll focus on here. This syntax should be sufficient for most usage and should be usable in Python and R, but if you notice something funny going on, it might be due to differences between the regular expressions versions.</p>
 <ul>
 <li>In bash, <code>grep -E</code> (or <code>egrep</code>) enables use of the extended regular expressions, while <code>grep -P</code> enables Perl-style regular expressions.</li>
 <li>In Python, the <code>re</code> package provides <a href="https://docs.python.org/3/library/re.html">syntax “similar to” Perl</a>.</li>

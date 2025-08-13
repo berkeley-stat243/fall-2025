@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris Paciorek">
-<meta name="dcterms.date" content="2024-08-28">
+<meta name="dcterms.date" content="2025-08-11">
 
 <title>Introduction to UNIX, computers, and key tools</title>
 <style>
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -411,7 +446,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 28, 2024</p>
+      <p class="date">August 11, 2025</p>
     </div>
   </div>
   
@@ -427,7 +462,7 @@ ul.task-list li input[type="checkbox"] {
 <h1>1. UNIX command line basics</h1>
 <p>By UNIX, I mean any UNIX-like operating system, including Linux and MacOS. Most modern scientific computing is done on UNIX-based machines, often by <a href="https://statistics.berkeley.edu/computing/ssh">remotely logging in to a UNIX-based server</a>.</p>
 <p>There are a <a href="../howtos/accessUnixCommandLine">variety of ways to get access to a UNIX-style command line environment</a>.</p>
-<p>Please see the material in <a href="https://berkeley-scf.github.io/tutorial-unix-basics">our tutorial on the basics of UNIX</a> to get up to speed on working in a UNIX-style command line environment and/or the material in last week’s <a href="https://berkeley-scf.github.io/compute-skills-2024/units/intro-computing.html">Computing Skills Workshop</a>. We’ll do a bit of demo in the first class. If what you see seems quite familiar, you can probably skip that tutorial. If what you see is not familiar, please work through the tutorial by Wednesday September 4 and (optionally) attend section on Friday August 30 to work on the problems at the end of the tutorial and be able to ask questions of the GSI and other students.</p>
+<p>Please see the material in <a href="https://computing.stat.berkeley.edu/tutorial-unix-basics">our tutorial on the basics of UNIX</a> to get up to speed on working in a UNIX-style command line environment and/or the material in last week’s <a href="https://computing.stat.berkeley.edu/compute-skills-2025/units/intro-computing.html">Computing Skills Workshop</a>. We’ll do a bit of demo in the first class. If what you see seems quite familiar, you can probably skip that tutorial. If what you see is not familiar, please work through the tutorial by Wednesday September 3 and (optionally) attend section on Friday August 29 to work on the problems at the end of the tutorial and be able to ask questions of the GSI and other students.</p>
 <p>For an alternative introduction (which also includes some of the topics we’ll discuss in Unit 3 on shell scripting), see <a href="https://swcarpentry.github.io/shell-novice">this Software Carpentry tutorial</a>.</p>
 </section>
 <section id="version-control" class="level1">
@@ -436,13 +471,13 @@ ul.task-list li input[type="checkbox"] {
 <p>A very popular and powerful tool for version control is Git. We’ll be using Git extensively for version control.</p>
 <p>Git stores the files for a project in a <em>repository</em>. Here are some basic Git commands you can use to access the class materials from the command line. There are also <a href="https://git-scm.com/downloads">graphical interfaces to Git</a> that you can explore. I’ve heard good things (albeit a few years ago) about <a href="https://desktop.github.com">GitHub Desktop</a>, available for Mac and Windows.</p>
 <ol type="1">
-<li><p>To clone (i.e., copy) a repository (in this case from GitHub) (<code>berkeley-stat243</code> is the organization and <code>fall-2024</code> is the repository):</p>
-<pre><code>git clone https://github.com/berkeley-stat243/fall-2024</code></pre></li>
+<li><p>To clone (i.e., copy) a repository (in this case from GitHub) (<code>berkeley-stat243</code> is the organization and <code>fall-2025</code> is the repository):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/berkeley-stat243/fall-2025</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>To update a repository to reflect changes made in a remote copy of the repository:</p>
-<pre><code>cd /to/any/directory/within/the/local/repository  ## e.g., cd fall-2024
-git pull</code></pre></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /to/any/directory/within/the/local/repository  <span class="co">## e.g., cd fall-2025</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
-<p>More information is available in the <a href="https://berkeley-scf.github.io/compute-skills-2024">Computing Skills Workshop</a> as well as this <a href="https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html">tutorial on the basics of using Git</a>, as well as lots of information/tutorials online. We’ll see a lot more about Git in Section/Lab sessions, where you’ll learn to set up a repository, make changes to repositories and work with local and remote versons of the repository. In particular, you’ll have a chance to work through the tutorial and practice with Git in the first section/lab (September 6). During the course, you’ll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set solutions, and you’ll need to use it extensively for the final group project.</p>
+<p>More information is available in the <a href="https://computing.stat.berkeley.edu/compute-skills-2025">Computing Skills Workshop</a> as well as this <a href="https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-git-basics/blob/master/git-intro.html">tutorial on the basics of using Git</a>, as well as lots of information/tutorials online. We’ll see a lot more about Git in Section/Lab sessions, where you’ll learn to set up a repository, make changes to repositories and work with local and remote versons of the repository. In particular, you’ll have a chance to work through the tutorial and practice with Git in the first section/lab (September 5). During the course, you’ll make use of Git for submitting problem sets and for doing the final project. You should practice using it more generally while preparing your problem set solutions, and you’ll need to use it extensively for the final group project.</p>
 </section>
 <section id="parts-of-a-computer" class="level1">
 <h1>3. Parts of a computer</h1>
@@ -467,12 +502,12 @@ git pull</code></pre></li>
 <section id="connecting-to-other-machines" class="level1">
 <h1>4. Connecting to other machines</h1>
 <p>To connect to a remote machine, you generally need to use SSH. SSH is available as <code>ssh</code> when you are on the UNIX command line. There are also SSH clients for Windows. The SCF has <a href="http://statistics.berkeley.edu/computing/ssh">more information on SSH client programs and on using SSH</a>, including <a href="https://statistics.berkeley.edu/computing/ssh-keys">connecting without entering your password</a>. Here’s an example of connecting to one of the SCF machines (this assumes you have an SCF account, which you may, and that your user name is paciorek, which it is not).</p>
-<pre><code>ssh paciorek@radagast.berkeley.edu</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> paciorek@radagast.berkeley.edu</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To copy files between machines, we can use <em>scp</em>, which has similar options to <em>cp</em>. Here’s how we can copy a local file to a remote machine.</p>
-<pre><code>scp file.txt paciorek@radagast.berkeley.edu:~/research/.</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> file.txt paciorek@radagast.berkeley.edu:~/research/.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And here’s how we can copy from a remote machine to the machine you are on.</p>
-<pre><code>scp paciorek@radagast.berkeley.edu:/data/file.txt \
-  ~/research/renamed.txt</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> paciorek@radagast.berkeley.edu:/data/file.txt <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  ~/research/renamed.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can use relative paths to refer to locations on the local machine. On the remote machine all paths need to be absolute or to be relative to your home directory on that machine.</p>
 <p>There are also client programs for file transfer; see <a href="http://statistics.berkeley.edu/computing/copying-files">this webpage</a>.</p>
 </section>
@@ -490,7 +525,11 @@ git pull</code></pre></li>
 <li>Windows-specific: <em>WinEdt</em></li>
 <li>Mac-specific: <em>Aquamacs Emacs</em>, <em>TextMate</em>, <em>TextEdit</em></li>
 <li>RStudio provides a built-in editor for R code and Quarto/R Markdown files. One can actually edit and run Python code chunks quite nicely in RStudio. (Note: RStudio as a whole is an IDE (integrated development environment. The editor is just the editing window where you edit code (and Markdown) files.)</li>
-<li><em>VSCode</em> has a powerful code editor that is customized to work with various languages, and it has a Quarto extension.</li>
+<li><em>VS Code</em> is an integrated development environment (IDE) that has a powerful code editor that is customized to work with various languages, Jupyter Notebooks, and Quarto documents. It also has built-in AI assistance via GitHub Copilot (available for free by signing up for GitHub Education).
+<ul>
+<li>I will probably use/demo VS Code (+ GitHub Copilot) in class some.</li>
+<li>We will use VS Code in section some (e.g., for the debugging lab).</li>
+</ul></li>
 </ul>
 <p>As you get started it’s ok to use a very simple text editor such as Notepad in Windows, but you should take the time in the next few weeks to try out more powerful editors such as one of those listed above. It will be well worth your time over the course of your graduate work and then your career.</p>
 <p>Be careful in Windows - file suffixes are often hidden.</p>
