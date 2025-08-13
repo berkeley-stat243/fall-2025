@@ -1,7 +1,7 @@
 ---
 title: "Optimization"
 author: "Chris Paciorek"
-date: "2024-11-13"
+date: "2025-08-13"
 format:
   pdf:
     documentclass: article
@@ -17,12 +17,16 @@ format:
     code-block-border-left: "#31BAE9"
 execute:
   freeze: auto
-  eval: false
+engine: knitr
 from: markdown+tex_math_single_backslash
 ipynb-shell-interactivity: all
 ---
 
 
+```{r, setup-r}
+#| echo: false
+reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+```
 
 # Overview
 

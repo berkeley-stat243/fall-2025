@@ -1,7 +1,7 @@
 ---
 title: "Graphics"
 author: "Chris Paciorek"
-date: "2024-12-03"
+date: "2025-08-13"
 format:
   pdf:
     documentclass: article
