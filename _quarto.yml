@@ -87,6 +87,7 @@ website:
           - howtos/accessUnixCommandLine.md
           - howtos/installGit.md
           - howtos/installQuarto.md
+          - howtos/vscode.md
           - howtos/submitPS.md
           - howtos/windowsAndLinux.md
       - href: license.qmd
