@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Installing and Using Quarto</title>
+<title>Using VS Code</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/installQuarto.html">Installing and Using Quarto</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/vscode.html">Using VS Code</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -337,13 +337,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howtos/installQuarto.html" class="sidebar-item-text sidebar-link active">
+  <a href="../howtos/installQuarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing and Using Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howtos/vscode.html" class="sidebar-item-text sidebar-link">
+  <a href="../howtos/vscode.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Using VS Code</span></a>
   </div>
 </li>
@@ -372,15 +372,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#using-vs-code" id="toc-using-vs-code" class="nav-link active" data-scroll-target="#using-vs-code">Using VS Code</a></li>
+  <li><a href="#using-vs-code-with-linux" id="toc-using-vs-code-with-linux" class="nav-link" data-scroll-target="#using-vs-code-with-linux">Using VS Code with Linux</a></li>
+  <li><a href="#github-copilot" id="toc-github-copilot" class="nav-link" data-scroll-target="#github-copilot">GitHub Copilot</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions?</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/installQuarto.html">Installing and Using Quarto</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howtos/accessPython.html">How tos</a></li><li class="breadcrumb-item"><a href="../howtos/vscode.html">Using VS Code</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Installing and Using Quarto</h1>
+<h1 class="title">Using VS Code</h1>
 </div>
 
 
@@ -397,16 +406,42 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Unless you plan to generate your problem set solutions on the SCF, you’ll need to <a href="https://quarto.org/docs/get-started/">install Quarto</a>.</p>
-<p>Once installed, you should be able to run commands such as <code>quarto render FILE</code> and <code>quarto preview FILE</code> from the command line.</p>
-<p>To render to PDF, you’ll need a LaTeX engine installed. A good minimal solution if don’t already have LaTeX installed (e.g., via MicTeX in Windows or MacTeX on MacOS) is to install <code>tinytex</code>: <code>quarto install tinytex</code>.</p>
-<p>Quarto also runs from the Windows Command shell or PowerShell. We’ll add details/troubleshooting tips here (or in the <a href="../labs/lab1.html">lab 1</a> materials) as needed.</p>
-<p><code>quarto convert</code> converts back and forth between the Jupyter notebook (.ipynb) and Quarto Markdown (.qmd) formats.</p>
-<p>By default, quarto uses Jupyter to process code chunks. This works well generally, but you can’t have different chunks that use different languages in the same document (e.g., some chunks in Python and some in bash or R). In that case, you can use the R-based <code>knitr</code> package to do the processing. To do so, add <code>engine: knitr</code> to the YAML metadata at the top of the file (if you happen to have an <code>execute</code> stanza, you’ll need to have <code>engine: knitr</code> nested within that stanza). For the <code>knitr</code> engine, you’ll need to have R installed on your computer, with the <code>rmarkdown</code> R package installed. And if you have Python chunks, you’ll also need the <code>reticulate</code> R package.</p>
-<p>For Python chunks when using the default <code>jupyter</code> engine, if you want all output from multiple commands in a chunk to be printed (without explicitly using <code>print()</code>), you can add the following syntax to the YAML metadata at the top of the file. (Note that, unfortunately, the output will be printed out below the code chunk rather than interspersed with the code, as that is how Jupyter notebooks chunks work.)</p>
-<pre><code>ipynb-shell-interactivity: all</code></pre>
+<div class="callout-info">
+<p>I’m not sure yet how much we’ll use VS Code.</p>
+</div>
+<p>VS Code is powerful integrated development environment (IDE), with GitHub Copilot AI assistance built in, so it’s useful to have some familiarity with it. We may use it in the lab on testing and possibly other labs.</p>
+<p>VS Code provides a huge number of extensions for working with various languages and tools, including Python, R, Jupyter Notebooks, Quarto, etc., and including integrated debugging.</p>
+<p>I will probably do some of my demonstrations in class with VS Code, as it allows one to easily run code in the terminal or a Python session from the built-in editor.</p>
+<section id="using-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="using-vs-code">Using VS Code</h2>
+<p>Here are just a few initial tips on making use of VS Code.</p>
+<ul>
+<li><p>To easily run Python code in a Python session from the VS Code editor, you can start a Python session in the VS Code terminal and then use <code>Shift + Enter</code> to run the current line of code from the editor. You can also right-click and select <code>Run Python -&gt; Run Selection/Line in Python Terminal</code>.</p></li>
+<li><p>To easily run bash code in a terminal from the editor, you can add <code>Cmd + Enter</code> (on a Mac) or <code>Alt + Enter</code> (on Windows) to your <em>Keyboard Shortcuts</em>. (You can choose some other keystrokes of your choice, though I recommend not using <code>Shift + Enter</code> as that affects the behavior for running Python code). In the Keyboard Shortcuts area, Select “Terminal: Run Selected Text in Active Terminal” (<code>workbench.action.terminal.runSelectedText</code>) and specify <code>Cmd + Enter</code>.</p></li>
+</ul>
+</section>
+<section id="using-vs-code-with-linux" class="level2">
+<h2 class="anchored" data-anchor-id="using-vs-code-with-linux">Using VS Code with Linux</h2>
+<p>You can use the <em>Remote SSH</em> extension to connect to another machine (e.g., an SCF machine) and access your files and run code on that other machine.</p>
+<ul>
+<li>Click on the Extensions icon in the left sidebar and search for “Remote - SSH” and install it.</li>
+<li>Then to connect to another machine, click on the <code>&gt;&lt;</code> (<code>Open a Remote Window</code>) icon in the buttom left, select <code>Connect to Host</code> and follow the prompts.</li>
+</ul>
+</section>
+<section id="github-copilot" class="level2">
+<h2 class="anchored" data-anchor-id="github-copilot">GitHub Copilot</h2>
+<p>You can use GitHub Copilot for AI assistance (including code completion, edit mode (for small guided help), agent mode (for more autonomous code generation and manipulation), and built-in Chat. That said, you shouldn’t use Agent mode for our work in class as it’s likely to reduce your learning.</p>
+<p><a href="github.com/education/students">GitHub Education</a> provides free access to GitHub Copilot Pro.</p>
+<p>You should see the GitHub Copilot icon in top, just to the right of the search bar. Click it to open the Copilot interface as a window on the right.</p>
+<p>Or in a code file, click on <code>Cmd + I</code> (on a Mac, probably <code>Ctrl + I</code> on Windows) to open an interface within your code file. When using AI edit mode, it’s often important to highlight the code you want it to work on.</p>
+<p>It’s important to provide context for AI code assistance. In general if you open a folder in VS Code, that will set up the folder as a project, and the contents will be treated as context. You can also add files as context with <code>Add Context</code> in the AI window. And you can drag files/folders from the VS Code <code>File Explorer</code> window.</p>
+</section>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions?</h2>
+<p>Questions (and even better, tips) on using VS Code are very welcome in the Ed Discussion.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
