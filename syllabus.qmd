@@ -3,13 +3,14 @@ title: "Syllabus"
 ---
 
 :::{.callout-warning title="UNDER CONSTRUCTION"}
-Do not rely on any details here for the course for 2025 as this is still being updated.
+2025-08-22: Do not rely on any details here for the course for 2025 as this is still being updated.
 :::
 
 ## Course description {#course-description .unnumbered}
 
 Statistics 243 is an introduction to statistical computing, taught using
-Python. The course will cover both programming concepts and statistical
+Python, with 'statistical' defined broadly to include data science and machine learning.
+The course will cover both programming concepts and statistical
 computing concepts. Programming concepts will include data and text
 manipulation, regular expressions, data structures, functions and variable scope, 
 memory use, efficiency, debugging, testing, and parallel processing. Statistical
@@ -109,12 +110,6 @@ The 'days' here are (roughly) class sessions, as general guidance.
 
 -   Office hours can be found [here](office_hours).
 
--   **When to see us about an assignment**: We're here to help,
-    including providing guidance on assignments. You don't want to be
-    futilely going around in circles for a long time getting nowhere. That
-    said, before coming to see us about a difficulty, you should try
-    something a few different ways and define/summarize for yourself what is going
-    wrong or where you are getting stuck. 
 
 ## Course websites: GitHub, Ed Discussion, Gradescope, and bCourses {#course-websites-github-ed-gradescope-and-bcourses .unnumbered}
 
@@ -136,7 +131,7 @@ Key websites for the course are:
 -   Gradescope for assignments (also linked from bCourses): 
     <https://www.gradescope.com/courses/1076535>
 
-All course materials will be posted on here on the website (and on GitHub) except for video content, which will be in bCourses.
+All course materials will be posted here on the website (and on GitHub) except for video content, which will be in bCourses.
 
 ### Course discussion
 
@@ -154,19 +149,28 @@ administrative question you need to direct just to me, it's fine to
 email me directly or post privately on the Discussion site. But if you simply want to privately ask a question
 about content, then just come to an office hour or see me after class or João during/after section.
 
+:::{.callout-tip title="Ed Discussion settings"}
+You are responsible for
+keeping track of all course announcements and discussions, which we'll do on the Discussion forum.
+
+I suggest you to modify your settings
+on Ed Discussion so you are informed by email of postings. 
+:::
+
+
 If you're enrolled in the class you should be a member of the Ed Discussion group and be able to access it. If you're auditing or not yet enrolled and would like access, make sure to fill out the [course survey](https://forms.gle/MxPviTJ2Lw1iJvn66) and I will add you. 
-In addition, we will use Gradescope for viewing grades.
+
 
 ## Course material  {#course-material .unnumbered}
 
--   Primary materials: Course notes on course webpage/GitHub and SCF tutorials.
+-   Primary materials: Course notes on this course webpage/GitHub and [SCF tutorials](https://statistics.berkeley.edu/computing/training/tutorials).
 
 -   Back-up textbooks (generally available via UC Library via links below):
 
     -   For Python, bash/shell, Git and computing/software skills: Damien Irving, Kate Hertweck, Luke Johnston, Joel Ostblom, Charlotte Wickham, and Greg Wilson. [Research Software Engineering with Python](https://third-bit.com/py-rse/)
         
-    -   For bash: Newham, Cameron and Rosenblatt, Bill. Learning the
-        bash Shell [available electronically through UC Library](https://learning.oreilly.com/library/view/learning-the-bash/0596009658/?ar=)
+    -   For bash: Newham, Cameron and Rosenblatt, Bill. [Learning the
+        bash Shell](https://learning.oreilly.com/library/view/learning-the-bash/0596009658/?ar=)
 
 -   For Quarto: [The Quarto reference guide](https://quarto.org/docs/guide)
 
@@ -198,16 +202,25 @@ The
 discussion sections will vary in format and topic, but material will
 include demonstrations on various topics (version control, debugging,
 testing, etc.), group work on these topics, discussion of relevant
-papers, and discussion of problem set solutions. **The first section (12-2 pm)
+papers, and discussion of problem set solutions. 
+
+::: {.callout-warning title="Attend the section you are assigned to"}
+The first section (12-2 pm)
 generally has more demand, so to avoid having too many people in the
 room, you should go to your assigned section unless you talk to me
-first.**
+first (e.g., if you have a one-time conflict.
+:::
 
 ## Computing Resources {#computing-resources .unnumbered}
 
 Most work for the course can be done on your laptop. Later in the course
 we'll also use the Statistics Department Linux cluster. You can also use the
-SCF JupyterHub or the campus DataHub to access a bash shell or run an IPython notebook. **(The campus DataHub is limited in terms of number of CPU cores and memory so won't be suitable for more computationally-intensive work later in the semester, including problem sets and labs.)**
+SCF JupyterHub or the campus DataHub to access a bash shell or run an IPython notebook.
+
+
+::: {.callout-warning title="DataHub limitations"}
+The campus DataHub is limited in terms of number of CPU cores and memory so won't be suitable for more computationally-intensive work later in the semester, including problem sets and labs. But you're welcome to use it otherwise.
+:::
 
 The software needed for the course is as follows:
 
@@ -218,6 +231,8 @@ The software needed for the course is as follows:
 -   Python (the Miniforge installation of Conda is recommended but by no means required)
 
 -   Quarto
+
+-   VS Code -- this is not required, but we'll be using it to a greater or lesser extent (still to-be-determined)
 
 See the "how tos" in the left sidebar for tips on software installation and access to a UNIX shell, which you'll need to be able to do by the second week of class.
 
@@ -274,7 +289,7 @@ accommodations I will make are for illness or serious personal issues.
 The grade for this course is primarily based on assignments due every
 1-2 weeks, in-section quizzes on the assignments, two mini-exams (likely in early-mid October and mid-late
 November), and a final group
-project. I will also provide extra credit questions on some problem
+project. I may also provide extra credit questions on some problem
 sets. There is no final exam.
 
  - 45% of the grade is based on the problem sets, in these two components:
@@ -305,22 +320,23 @@ approach to problem sets is intended to recognize that these tools are widely-us
 can be very useful (both for day-to-day work and for learning),
 while still trying to make sure that we understand core computing and programming concepts
 and that we can build upon, critique, and debug what AI agents produce. A key challenge for you (and for me as an instructor)
-is thinking about how to use AI to develop the skills and expertise you will need without fooling yourself into thinking you understand more than you do. We are all still trying to figure this out!
+is thinking about how to use AI to develop the skills and expertise you will need without fooling yourself into thinking you understand more than you do. We are all still trying to figure this out! 
 
-I am not going to police your use of AI. You are welcome to use ChatBots and AI-assisted coding tools. You are also welcome to collaborate with others in the class. However, if you simply turn in answers that are mainly copies of what an AI tool or your classmate told you, you are probably not learning the material, and this is likely to be reflected in your performance on the problem set quizzes (and less directly on the mini-exams). 
+I am not going to police your use of AI. You are welcome to use ChatBots and AI-assisted coding tools. You are also welcome to collaborate with others in the class. However, if you simply turn in answers that are mainly copies of what an AI tool (or your classmate) told you, you are probably not learning the material, and this is likely to be reflected in your performance on the problem set quizzes (and on the mini-exams, albeit less directly).  
 
 Think of the problem sets in combination with the quizzes (see below) as a train-test split. You have freedom in working with the training set,
 but some strategies could result in poor performance on the test set. In data analysis, this involves overfitting. In our class context, this involves relying too heavily on AI or your classmates and not doing the work to really understand the material.
 
-How much to make use of AI is for you to consider carefully. My current suggestion (which is also how I suggest working with classmates) is that you initially try seriously to figure out a given problem on your own (without substantial input from AI or others). By substantial, I mean getting input on an entire solution. If you want to ask an AI for input on small portions of a problem (such as code syntax) that you then check and understand the result of, that seems to me to be a good use of the tools. After that, if you're stuck or want to explore alternative approaches or check what you've done by using AI more fully, consulting with your fellow students, and talking with the GSI and with me are all recommended. You should be sure you understand (and could explain to someone else) in detail what the code does and how/why it works. I.e., these tools help us brainstorm and do our work more efficiently; they don't replace us thinking.
+How much to make use of AI is for you to consider carefully. My current suggestion (which is also how I suggest working with classmates) is that you initially try seriously to figure out a given problem on your own (without substantial input from AI or others). By substantial, I mean getting input on an entire solution or blocks of a solution. If you want to ask an AI for input on small portions of a problem (such as code syntax) that you then check and understand the result of, that seems to me to be a good use of the tools. After that, if you're stuck or want to explore alternative approaches or check what you've done, then using AI more fully, consulting with your fellow students, and talking with the GSI and with me are all recommended. I.e., these tools help us brainstorm and do our work more efficiently; they don't replace us thinking (at least not yet...).
+You should be sure you understand (and could explain to someone else) in detail what the code does and how/why it works. On that note, the problem set quizzes are intended to assess that. 
 
 #### Problem set quizzes
 
-For each problem set, there will be a short quiz on paper in section very soon after the problem set is due. The quiz will check your understanding of the material and will involve questions **directly** related to a subset of the problems. If you understood the material covered in the problems, you should do well on the quizzes without "studying" for the quiz.
+For each problem set, there will be a short quiz on paper in section very soon after the problem set is due (possibly the same day). The quiz will check your understanding of the material and will involve questions **directly** related to a subset of the problems. If you understood the material covered in the problems, you should do well on the quizzes without "studying" for the quiz.
 
 At the moment I anticipate that the quizzes will be "closed book" -- you won't be able to refer to any materials during the quizzes. However, I may make some modifications to this as we go along. (This is the first time I am trying the approach of problem set quizzes.)
 
-The quizzes will be intended to be fairly short and without time pressure. That said, for practical reasons, the time limit will be determined by the length of section, but my hope is that that is long enough that it is equivalent to not having a time limit.
+The quizzes will be intended to be fairly short and without time pressure. That said, for practical reasons, the time limit will be determined by the length of section, but my hope is that that is long enough that it is equivalent to not having a time limit. 
 
 #### Quiz retakes
 
@@ -336,11 +352,16 @@ We will be less willing to help you if you come to our office hours or
 post a question online at the last minute. Working with computers can be
 unpredictable, so give yourself plenty of time for the assignments.
 
-In the first section (September 1), we'll discuss [how to submit your problem sets](howtos/submitPS) both on Gradescope and via your class GitHub repository, located at `https://github.berkeley.edu/<your_calnet_username>`.
+In the first section (September 5), we'll discuss [how to submit your problem sets](howtos/submitPS) both on Gradescope and via your class GitHub repository, located at `https://github.berkeley.edu/<your_calnet_username>`.
 
 There are several rules for submitting your assignments.
 
 1.  You should prepare your assignments using Quarto.
+
+    Quarto Markdown is an extension to the Markdown
+markup language that allows one to embed Python and R code within an HTML document.
+Please see the SCF [dynamics document tutorial](https://computing.stat.berkeley.edu/tutorial-dynamic-docs); there will be additional information in the first section and on the first problem set.
+
 
 2.  Problem set submission consists of **both** of the following:
 
@@ -351,8 +372,8 @@ There are several rules for submitting your assignments.
         document pushed to your class GitHub repository, following the
         instructions to be provided by the GSI.
 
-    **On-time submission will be determined based on the time stamp of
-    when the PDF is submitted to Gradescope.**
+    On-time submission will be determined based on the time stamp of
+    when the PDF is submitted to Gradescope.
 
 3.  Answers should consist of textual response or mathematical
     expressions as appropriate, with key chunks of code embedded within
@@ -371,9 +392,6 @@ There are several rules for submitting your assignments.
 5.  You must provide attribution for ideas obtained elsewhere, including other students, ChatBots, and AI coding assistants. If you got a specific idea for how to do part of a problem from AI or a fellow student, you should note that in your solution in the appropriate place (for specific syntax ideas, note this in a code comment), just as you would cite a book or URL (but you don't need a formal citation). The reason for this is two-fold: first to reinforce standard scientific citation practices and second so that you are clear with yourself how much and in what way you are relying on AI (or other people).
  
 
-Note: Quarto Markdown is an extension to the Markdown
-markup language that allows one to embed Python and R code within an HTML document.
-Please see the SCF [dynamics document tutorial](https://computing.stat.berkeley.edu/tutorial-dynamic-docs); there will be additional information in the first section and on the first problem set.
 
 #### Problem set grading {#problem-set-grading .unnumbered}
 
@@ -392,8 +410,8 @@ possible scores are:
 Again, the [qualitative grading rubric](rubric) provides guidance
 on what we want to see for full credit.
 
-For components #1 and #3, many of you will get a score of 1 for some
-problem sets as you develop good presentation and coding practices.
+For components #1 and #3, some of you will probably get a score of 1 for some
+problem sets as you develop good presentation and coding practices (hopefully only for the initial problem sets).
 
 This grading scheme is intended to essentially be a complete-incomplete scheme,
 but with the ability for us to give you feedback on your presentation
@@ -419,6 +437,9 @@ the Git version control system for working in your group.
 
 I welcome comments and suggestions and concerns. Particularly good
 suggestions will count towards your class participation grade.
+
+As we navigate the impact of AI together, I particularly welcome your
+thoughts on how to incorporate the AI tools in my presentations, problem sets, and labs and in your classwork.
 
 ## Accomodations for Students with Disabilities {#accomodations-for-students-with-disabilities .unnumbered}
 
