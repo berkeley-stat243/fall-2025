@@ -12,6 +12,12 @@ VS Code provides a huge number of extensions for working with various languages 
 
 I will probably do some of my demonstrations in class with VS Code, as it allows one to easily run code in the terminal or a Python session from the built-in editor.
 
+## Installing VS Code
+
+See [here](https://code.visualstudio.com/download) to install VS Code.
+
+A browser-based version of VS Code is available through both the [DataHub]((https://datahub.berkeley.edu) and the [SCF JupyterHub](https://jupyter.stat.berkeley.edu). 
+
 ## Using VS Code
 
 Here are just a few initial tips on making use of VS Code.
@@ -20,7 +26,7 @@ Here are just a few initial tips on making use of VS Code.
 
 - To easily run bash code in a terminal from the editor, you can add `Cmd + Enter` (on a Mac) or `Alt + Enter` (on Windows) to your *Keyboard Shortcuts*. (You can choose some other keystrokes of your choice, though I recommend not using `Shift + Enter` as that affects the behavior for running Python code). In the Keyboard Shortcuts area, Select "Terminal: Run Selected Text in Active Terminal" (`workbench.action.terminal.runSelectedText`) and specify `Cmd + Enter`.
 
-## Using VS Code with Linux
+## Using VS Code with Linux and on remote machines
 
 You can use the *Remote SSH* extension to connect to another machine (e.g., an SCF machine) and access your files and run code on that other machine.
 

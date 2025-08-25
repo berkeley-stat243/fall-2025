@@ -244,8 +244,12 @@ that you read material or work through tutorials in advance of class.
 Occasionally, I will ask you to submit answers to questions in advance
 of class as well.
 
-Please do not use phones during class and limit laptop use to the
+::: {.callout-important title="Phone/Laptop use in class"}
+
+Please do not use phones during class (except if using to respond to surveys/in-class questions)  and limit laptop use to the
 material being covered.
+
+:::
 
 Student backgrounds with computing will vary. For those of you with
 limited background on a topic, I encourage you to ask questions during

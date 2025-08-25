@@ -159,20 +159,21 @@ or Markdown/Quarto/R Markdown/LaTeX.**
 
 -   various editors available on all operating systems:
     -   traditional editors born in UNIX: *emacs*, *vim*
-    -   some newer editors: *Atom*, *Sublime Text* (Sublime is
+    -   some newer editors: *Sublime Text* (Sublime is
         proprietary/not free)
--   Windows-specific: *WinEdt*
+-   Windows-specific: *WinEdt*, *Notepad++*
 -   Mac-specific: *Aquamacs Emacs*, *TextMate*, *TextEdit*
+-   *VS Code* is an integrated development environment (IDE) that has a powerful code editor that is customized to work with
+    various languages, Jupyter Notebooks, and Quarto documents.
+    - It also has built-in AI assistance via GitHub Copilot (available for free by signing up for GitHub Education).
+    - I will probably use/demo VS Code (+ GitHub Copilot) in class some.
+    - We will use VS Code in section some (e.g., for the debugging lab).
 -   RStudio provides a built-in editor for R code and Quarto/R Markdown files.
     One can actually edit and run Python code chunks quite nicely in 
     RStudio.
     (Note: RStudio as a whole is an IDE (integrated development environment.
     The editor is just the editing window where you edit code (and
     Markdown) files.)
--   *VS Code* is an integrated development environment (IDE) that has a powerful code editor that is customized to work with
-    various languages, Jupyter Notebooks, and Quarto documents. It also has built-in AI assistance via GitHub Copilot (available for free by signing up for GitHub Education).
-    - I will probably use/demo VS Code (+ GitHub Copilot) in class some.
-    - We will use VS Code in section some (e.g., for the debugging lab).
 
 As you get started it's ok to use a very simple text editor such as
 Notepad in Windows, but you should take the time in the next few weeks
