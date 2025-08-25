@@ -54,15 +54,10 @@
       items:
         - type: "Problem_Set"
           id: "1"
-          name: "Problem Set 1"
+          name: "(tentative due date) Problem Set 1"
           href: "ps/ps1.html"
         - type: "Event"
           id: "2"
           name: "(Optional) Library Introduction to LaTeX with Overleaf session"
           href: "https://berkeley.libcal.com/event/15006897"
-    - date: "Fri Sep 12"
-      items:
-        - type: "Assignment"
-          id: "2"
-          name: "Regular expression tutorial and exercises (see Details below)"
-          href: "https://computing.stat.berkeley.edu/tutorial-using-bash/regex"
+
