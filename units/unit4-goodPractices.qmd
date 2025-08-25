@@ -1061,6 +1061,7 @@ about replicable? What are the challenges in doing so?
     - `pip list` and `conda list` will show you version numbers for installed packages.
     - `pip freeze > requirements.txt` and `conda env export > env.yml` will create a recipe file for your environment.
     - `pip install -r requirements.txt` and `conda env create -f env.yml` will build that environment on your machine.
+    - Note that if you want to give the environment to someone use a different operating system, you can run into problems because these  commands can embed operating system-specific versions, but recording the package versions is nonetheless important for reproducibility.
 
 ## Formal tools
 
