@@ -2,10 +2,6 @@
 title: "Syllabus"
 ---
 
-:::{.callout-warning title="UNDER CONSTRUCTION"}
-2025-08-22: Do not rely on any details here for the course for 2025 as this is still being updated.
-:::
-
 ## Course description {#course-description .unnumbered}
 
 Statistics 243 is an introduction to statistical computing, taught using
