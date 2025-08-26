@@ -1,7 +1,7 @@
 ---
 title: "Data technologies, formats, and structures"
 author: "Chris Paciorek"
-date: "2025-08-11"
+date: "2025-08-26"
 format:
   pdf:
     documentclass: article
@@ -30,6 +30,7 @@ reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
 import os, io
 import numpy as np
 import pandas as pd
+import subprocess
 
 ## So that all objects are printed without explicit `print`.
 from IPython.core.interactiveshell import InteractiveShell
@@ -44,7 +45,7 @@ References (see [syllabus](../syllabus.html) for links):
 -   Adler
 -   Nolan and Temple Lang, XML and Web Technologies for Data Sciences with R.
 -   Murrell, Introduction to Data Technologies.
--   SCF tutorial: [Working with large datasets in SQL, R, and Python](https://berkeley-scf.github.io/tutorial-databases/)
+-   SCF tutorial: [Working with large datasets in SQL, R, and Python](https://computing.stat.berkeley.edu/tutorial-databases/)
 
 (Optional) Videos:
 
@@ -92,11 +93,12 @@ include CSV, XML, HTML, and JSON.
 
 Text files may be simple ASCII files (i.e., files encoded using ASCII)
 or files in other encodings such as UTF-8, both covered in Section 5.
-[ASCII](http://en.wikipedia.org/wiki/ASCII) files have 8 bits (1 byte)
+
+ - [ASCII](http://en.wikipedia.org/wiki/ASCII) files have 8 bits (1 byte)
 per character and can represent 128 characters (the 52 lower and upper
 case letters in English, 10 digits, punctuation and a few other things
--- basically what you see on a standard US keyboard). UTF-8 files have
-between 1 and 4 bytes per character.
+-- basically what you see on a standard US keyboard).
+ - UTF-8 files have between 1 and 4 bytes per character.
 
 Some text file formats, such as JSON or HTML, are not easily interpretable/manipulable
 on a line-by-line basis (unlike, e.g., CSV), so they are not as amenable
@@ -139,7 +141,7 @@ Here are some of the common file types, some of which are text formats and some 
         differently than in UNIX. Windows uses a newline
         (the ASCII character `\n`)
         and a carriage return (the ASCII character `\r`) whereas
-        UNIX uses onlyl a  newline in UNIX). There are
+        UNIX uses only a  newline in UNIX). There are
         UNIX utilities (`fromdos` in
         Ubuntu, including the SCF Linux machines and `dos2unix` in other
         Linux distributions) that can do the necessary conversion. If
@@ -187,10 +189,10 @@ Here are some of the common file types, some of which are text formats and some 
     files often have more than one sheet, graphs, macros, etc., so
     they're not a data storage format per se.
 
-8.  Python can easily interact with databases (SQLite, PostgreSQL, MySQL,
+8.  Python can easily interact with databases (SQLite, DuckDB, PostgreSQL, MySQL,
     Oracle, etc.), querying the database using SQL and returning results
-    to Python. More in the big data unit and in the large datasets tutorial
-    mentioned above.
+    to Python. More in Unit 7 and in the [large datasets tutorial](https://computing.stat.berkeley.edu/tutorial-databases/).
+  
 
 ## CSV vs. specialized formats such as Parquet
 
@@ -226,10 +228,9 @@ print(time.time() - t0)
 
 The CSV file is 51 MB while the Parquet file is 8 MB.
 
-```{python}
-import subprocess
-subprocess.run(["ls", "-l", os.path.join("..", "data", "airline.csv")])
-subprocess.run(["ls", "-l", os.path.join("..", "data", "airline.parquet")])
+```{bash}
+ls -l ../data/airline.csv
+ls -l ../data/airline.parquet
 ```
 
 
@@ -273,6 +274,7 @@ dat2.loc[:,1].unique()
 ```
 
 Using `dtype` is a good way to control how data are read in.
+Here's an example with a CSV file containing some HIV genome sequence information.
 
 ```{python, dtype}
 dat = pd.read_table(os.path.join('..', 'data', 'hivSequ.csv'),
@@ -322,12 +324,13 @@ nvalues = [int(line[27:30]) for line in lines]
 year[0:5]
 ```
 
-
-Actually, that file, `precip.txt`, is in a fixed-width format (i.e.,
+Actually, that file, `precip.txt`, is in a "fixed-width" format (i.e.,
 every element in a given column has the exact same number of
 characters),so reading in using `pandas.read_fwf()` would be a good strategy.
 
-
+::: {.callout-tip title="Using `with`"}
+The use of `with` above is the standard Python way to open files. It automatically closes the file after the body of the `with` statement finishes.
+:::
 
 ## Connections and streaming
 
@@ -370,7 +373,7 @@ chunksize = 50 # Obviously this would be much larger in any real application.
 
 with pd.read_csv(file_path, chunksize = chunksize) as reader:
      for chunk in reader:
-         # manipulate the lines and store the key stuff
+         # Manipulate the lines and store the key stuff.
          print(f'Read {len(chunk)} rows.')
 
 ```
@@ -412,7 +415,7 @@ A few notes on file paths, related to ideas of reproducibility.
     ```    
 
 2.  Using UNIX style directory separators will work in Windows, Mac or
-    Linux, but using Windows style separators is not portable across
+    Linux, but using Windows-style separators is not portable across
     operating systems.
 
     ```{python, path-separators}
@@ -487,6 +490,8 @@ We can use [string formatting](https://docs.python.org/3/library/string.html#for
 
 The mini-language involved in the format specification can get fairly involved,
 but a few basic pieces of syntax can do most of what one generally needs to do.
+This also feels like something an AI coding assistant could do well, though
+I haven't specifically tried.
 
 We can format numbers to chosen number of digits and decimal places
 and handle alignment, using the `format` method of the string class.
@@ -503,15 +508,9 @@ format(1/3, '15.10f') # alternative using a function
 We can also "interpolate" variables into strings.
 
 ```{python}
-"The number pi is {}.".format(np.pi)
-"The number pi is {:.5f}.".format(np.pi)
-"The number pi is {:.12f}.".format(np.pi)
-```
-
-```{python}
 val1 = 1.5
 val2 = 2.5
-# As of Python 3.6, put the variable names in directly.
+# This works as of Python 3.6.
 print(f"Let's add {val1} and {val2}.")  
 num1 = 1/3
 print("Let's add the %s numbers %.5f and %15.7f."
@@ -531,30 +530,22 @@ with open(file_path, 'a') as file:
 `round` is another option, but it's often better to directly control the printing format.
 
 
-# 4. Webscraping and working with HTML, XML, JSON, and YAML
+# 4. Working with information on the web
 
-The book *XML and Web Technologies for Data Sciences with R* by Deb
-Nolan (UCB Stats faculty) and Duncan Temple Lang (UCB Stats PhD alumnus
-and UC Davis Stats faculty) provides extensive information about getting
-and processing data off of the web, including interacting with web
-services such as REST and SOAP and programmatically handling
-authentication. That said, it's now fairly old.
+In this section, we'll see some ways to programmatically interact
+with information on the web, focusing on downloading information, but also showing how we can upload as well. As part of this we'll see some details about file formats commonly used in this
+context.
 
-Here are some UNIX command-line tools to help in webscraping and working
-with files in formats such as JSON, XML, and HTML:
-<http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html>.
+The main theme of this section is using tools to make it easy to interact with the web
+and with information in formats such as HTML, XML, JSON, and YAML.
+
+## Reading HTML
 
 We'll cover a few basic examples in this section, but HTML and XML
 formatting and navigating the structure of such pages in great detail is
 beyond the scope of what we can cover. The key thing is to see the main
 concepts and know that the tools exist so that you can learn how to use
 them if faced with such formats.
-
-The main theme of this section is that we can use tools that understand the structure
-of formats such as HTML, XML, JSON, and YAML to make it easy to extract the information
-we want from a file or webpage.
-
-## Reading HTML
 
 HTML (Hypertext Markup Language) is the standard markup language used
 for displaying content in a web browser. In simple webpages (ignoring
@@ -585,7 +576,11 @@ import requests
 from bs4 import BeautifulSoup as bs
 
 URL = "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population"
-response = requests.get(URL)
+
+## Wikipedia requires information about the bot/program making an automated request.
+user_agent = "stat243_educational_bot/0.1 (paciorek@berkeley.edu)"
+headers = {'User-Agent': user_agent}
+response = requests.get(URL, headers=headers)
 html = response.content
 
 # Create a BeautifulSoup object to parse the HTML
@@ -746,9 +741,10 @@ import xmltodict
 
 URL = "https://api.kivaws.org/v1/loans/newest.xml"
 ## This used to be accessible for automated download, but now gives a 403 error (access denied).
-## response = requests.get(URL)   # Now getting a 403 error.
+## response = requests.get(URL)   
 ## data = xmltodict.parse(response.content)
-## Download to newest.xml file manually.
+
+## Instead, download to `newest.xml` file manually.
 with open('newest.xml', 'r') as file:
     content = file.read()
     
@@ -824,7 +820,8 @@ with in XML format is also available in JSON format: <https://api.kivaws.org/v1/
 #| eval: false
 URL = "https://api.kivaws.org/v1/loans/newest.json"
 ## This used to be accessible for automated download, but now gives a 403 error (access denied).
-## response = requests.get(URL)   # Now getting a 403 error.
+## response = requests.get(URL)   
+## Instead download manually to `newest.json`.
 with open('newest.json', 'r') as file:
     content = file.read()
 
@@ -849,7 +846,7 @@ YAML is a similar format commonly used for configuration files that control how 
 
 Here's an example of the [YAML file specifying a GitHub Actions workflow](https://github.com/UCB-stat-159-s23/site/blob/main/.github/workflows/book.yml).
 
-Note the use of indentation (similar to Python) for nesting/hierarchy and the lack of quotation with the strings. This makes it lightweight and readable. Also note the use of arrays/lists and sets of key-value pairs.
+Note the use of indentation (similar to Python) for nesting/hierarchy and the lack of quotation with the strings. This makes it lightweight and readable. However, the use of indentation makes it fragile (easy to have errors). Also note the use of arrays/lists and sets of key-value pairs.
 
 ```{python, yaml}
 import yaml
@@ -864,7 +861,7 @@ len(config['jobs']['deploy-book']['steps'])
 
 Note that (unfortunately) `on` is treated as a boolean, as [discussed in this GitHub issue](https://github.com/yaml/pyyaml/issues/376) for the PyYAML package.
 
-## Webscraping and web APIs
+## Web APIs and webscraping
 
 Here we'll see some examples of making requests over the Web to get
 data. We'll use APIs to systematically query a website for information.
@@ -876,48 +873,6 @@ The `requests` package is  useful for a wide variety of such
 functionality. Note that much of the functionality I describe below is
 also possible within the shell using either `wget` or `curl`.
 
-### Webscraping ethics and best practices
-
-Webscraping is the process of extracting data from the web, either
-directly from a website or using a web API (application programming
-interface).
-
-1.  **Should you webscrape?** In general, if we can avoid webscraping
-    (particularly if there is not an API) and instead directly download
-    a data file from a website, that is greatly preferred.
-
-2.  **May you webscrape?** Before you set up any automated downloading
-    of materials/data from the web you should make sure that what you
-    are about to do is consistent with the rules provided by the
-    website.
-
-Some places to look for information on what the website allows are:
-
--   legal pages such as Terms of Service or Terms and Conditions on the
-    website.
-
--   check the robots.txt file (e.g.,
-    <https://scholar.google.com/robots.txt>) to see what a web crawler
-    is allowed to do, and whether the site requires a particular delay
-    between requests to the sites
-
--   potentially contact the site owner if you plan to scrape a large
-    amount of data
-
-Here are some links with useful information:
-
--   [Blog post on webscraping
-    ethics](https://towardsdatascience.com/ethics-in-web-scraping-b96b18136f01)
-
--   [Some information on how to understand a robots.txt
-    file](https://www.promptcloud.com/blog/how-to-read-and-respect-robots-file)
-
-Tips for when you make automated requests:
-
-- When debugging code that processes the result of such a request, just run the request once, save (i.e., cache) the result, and then work on the processing code applied to the result. Don't make the same request over and over again.
-- In many cases you will want to include a time delay between your
-automated requests to a site, including if you are not actually crawling
-a site but just want to automate a small number of queries.
 
 ### What is HTTP?
 
@@ -940,12 +895,11 @@ information](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 The response will generally contain content in the form of text (e.g.,
 HTML, XML, JSON) or raw bytes.
 
-### APIs: REST- and SOAP-based web services
+### APIs: REST-based web services
 
 Ideally a web service documents their API (Applications Programming
-Interface) that serves data or allows other interactions. REST and SOAP
-are popular API standards/styles. Both REST and SOAP use HTTP requests;
-we'll focus on REST as it is more common and simpler. When using REST, we access *resources*, which might be a Facebook
+Interface) that serves data or allows other interactions. REST is a
+ popular API standard/style. REST uses HTTP requests. When using REST, we access *resources*, which might be a Facebook
 account or a database of stock quotes. The API will
 (hopefully) document what information it expects from the user and will
 return the result in a standard format (often a particular file format
@@ -967,7 +921,7 @@ Berkeley, and we'll see the GET request, in the form:
 
 
 Let's see an example of accessing economic data from the
-World Bank, using the [documentation for their API](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information). Following the [API call structure](https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures), we can download (for example), data on various countries. The documentation indicates that our REST-based query can use either a URL structure or an argument-based structure.
+World Bank, using the [documentation for their API](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information). Following the [API call structure](https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures) for their "Country" API, we can download (for example), data on various countries. The documentation indicates that our REST-based query can use either a URL structure or an argument-based structure.
 
 ```{python, REST}
 import json
@@ -1005,12 +959,12 @@ data[1][5]
 
 APIs can change and disappear. A few years ago, the example above involved the World Bank's Climate Data API, which I can no longer find!
 
-
 As another example, here we can see the [US Treasury Department API](https://fiscaldata.treasury.gov/api-documentation/), which allows us to construct queries for federal financial data.
 
-The Nolan and Temple Lang book provides a number of examples of
-different ways of authenticating with web services that control access
-to the service.
+In many cases you'll need to authenticate with web services that control access
+to the service. This can involve sending an access token with the request or going
+through an initial authorization procedure in your browser (e.g., logging into a Google account
+so that one can then interact with Google Drive via its API).
 
 Finally, some web services allow us to pass information to the service
 in addition to just getting data or information. E.g., you can
@@ -1080,9 +1034,9 @@ url = baseURL + filter + args1 + args2
 response = requests.get(url)
 
 with io.BytesIO(response.content) as stream:  # create a file-like object
-     with zipfile.ZipFile(stream, 'r') as archive:   # treat the object as a zip file
-          with archive.open(archive.filelist[0].filename, 'r') as file:  # get a pointer to the embedded file
-              dat = pd.read_csv(file)
+    with zipfile.ZipFile(stream, 'r') as archive:   # treat the object as a zip file
+        with archive.open(archive.filelist[0].filename, 'r') as file:  # get a pointer to the embedded file
+            dat = pd.read_csv(file)
 
 dat.head()
 ```
@@ -1093,6 +1047,51 @@ So, what have we achieved?
 
 2. We can automate the process of downloading many such files.
 
+### Webscraping ethics and best practices
+
+Webscraping is the process of extracting data from the web, either
+directly from a website or using a web API (application programming
+interface).
+
+1.  **Should you webscrape?** In general, if we can avoid webscraping
+    (particularly if there is not an API) and instead directly download
+    a data file from a website, that is greatly preferred.
+
+2.  **May you webscrape?** Before you set up any automated downloading
+    of materials/data from the web you should make sure that what you
+    are about to do is consistent with the rules provided by the
+    website.
+
+Some places to look for information on what the website allows are:
+
+-   legal pages such as Terms of Service or Terms and Conditions on the
+    website.
+
+-   check the `robots.txt` file to see what a web crawler/automated request
+    is allowed to do, and whether the site requires a particular delay
+    between requests to the sites. Here are a couple examples:
+
+    - [Wikipedia](https://wikitech.wikimedia.org/wiki/Robot_policy)
+    - [Google Scholar](https://scholar.google.com/robots.txt)
+
+-   potentially contact the site owner if you plan to scrape a large
+    amount of data
+
+Here are some links with useful information:
+
+-   [Blog post on webscraping
+    ethics](https://towardsdatascience.com/ethics-in-web-scraping-b96b18136f01)
+
+-   [Some information on how to understand a robots.txt
+    file](https://www.promptcloud.com/blog/how-to-read-and-respect-robots-file)
+
+Tips for when you make automated requests:
+
+- When debugging code that processes the result of such a request, just run the request once, save (i.e., cache) the result, and then work on the processing code applied to the result. Don't make the same request over and over again.
+- In many cases you will want to include a time delay between your
+automated requests to a site, including if you are not actually crawling
+a site but just want to automate a small number of queries.
+- API documentation often includes information about any limits on the rate of requests that can be made.
 
 ### More details on HTTP requests
 
@@ -1109,18 +1108,19 @@ data = {"DataFilter": f"itemCode:{itemCode};year:{yrs}",
 response = requests.get(baseURL, params = data)
 
 with io.BytesIO(response.content) as stream:  
-     with zipfile.ZipFile(stream, 'r') as archive:
-          with archive.open(archive.filelist[0].filename, 'r') as file:  
-              dat = pd.read_csv(file)
+    with zipfile.ZipFile(stream, 'r') as archive:
+        with archive.open(archive.filelist[0].filename, 'r') as file:  
+            dat = pd.read_csv(file)
                
 ```
 
 In some cases we may need to send a lot of information as part of the
 URL in a GET request. If it gets to be too long (e.g,, more than 2048
 characters) many web servers will reject the request. Instead we may
-need to use an HTTP POST request (POST requests are often used for
-submitting web forms). A typical request would have syntax like this
-search (using `requests`), where here we will create a GitHub issue
+need to use an HTTP POST request.
+
+POST requests are also often used for
+submitting web forms. Here's an example POST request in which we will create a GitHub issue
 in an automated fashion.
 
 ```{python, http-post}
@@ -1155,8 +1155,25 @@ else:
     print("Could not create Issue")
     print(response.status_code, response.text)
 ```
-Note that for security, I created a [GitHub personal access token](https://github.com/settings/personal-access-tokens) that is limited in *scope* to
-only be able to handle issues in my test repository.
+
+I could also have done this from the command line with `curl`, along the following lines:
+
+```{bash}
+#| eval: false
+curl -L \
+  -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer ${GH_PERSONAL_ACCESS_TOKEN}" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  -H "User-Agent: My-Issue-Creator" \
+  https://api.github.com/repos/paciorek/test/issues \
+  -d '{"title":"New issue from API","body":"This issue was created using the GitHub API.","labels":["bug"]}'
+```
+
+where `${GH_PERSONAL_ACCESS_TOKEN}` is an environment variable containing the token.
+
+Note that for security, I created a [GitHub fine-grained personal access token](https://github.com/settings/personal-access-tokens) that is limited in *scope* to
+only be able to handle issues in my test repository. And I've put the token into a file that is not committed to the GitHub repository containing these materials. (When doing this sort of thing with GitHub Actions, one would generally [store the token as a "secret" in the repository](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
 
 `requests` can handle other kinds of HTTP requests such as PUT
 and DELETE. Finally, some websites use cookies to keep track of users,
@@ -1168,57 +1185,41 @@ details are available in the Nolan and Temple Lang book.
 
 For popular websites/data sources, a developer may have packaged up the
 API calls in a user-friendly fashion as functions for use from Python, R, or other
-software. For example there are Python (twitter) and R (twitteR)
-packages for interfacing with Twitter via its API. (Actually, with the change to
-X, I don't know if this API is still available.)
+software.
 
-Here's some example code for Python. This looks up the US senators'
-Twitter names and then downloads a portion of each of their timelines,
-i.e., the time series of their tweets. Note that Twitter has limits on
-how much one can download at once.
+For example there are various Python and R packages for interacting with GitHub
+via its API.
 
-```{python, twitter-python}
-#| eval: false
-import json
-import twitter
+Here's some example code for the `PyGitHub` package. We'll repeat the exercise of
+programmatically creating a GitHub issue in my `paciorek/test` repository.
 
-# You will need to set the following variables with your
-# personal information.  To do this you will need to create
-# a personal account on Twitter (if you don't already have
-# one).  Once you've created an account, create a new
-# application here:
-#    https://dev.twitter.com/apps
-#
-# You can manage your applications here:
-#    https://apps.twitter.com/
-#
-# Select your application and then under the section labeled
-# "Key and Access Tokens", you will find the information needed
-# below.  Keep this information private.
-CONSUMER_KEY       = ""
-CONSUMER_SECRET    = ""
-OAUTH_TOKEN        = ""
-OAUTH_TOKEN_SECRET = ""
+```{python}
+#| eval: true
+from github import Github
 
-auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
-                           CONSUMER_KEY, CONSUMER_SECRET)
-api = twitter.Twitter(auth=auth)
+with open(".github-access-token.txt", "r") as file:
+  ghtoken = file.read().strip()
 
-# get the list of senators
-senators = api.lists.members(owner_screen_name="gov",
-                             slug="us-senate", count=100)
+g = Github(ghtoken)
+repo_name = "paciorek/test"
+repo = g.get_repo(repo_name)
+        
+# Issue details
+issue_title = "Test Issue Created Programmatically"
+issue_body = "This is an issue filed programmatically using PyGitHub."
 
-# get all the senators' timelines
-names = [d["screen_name"] for d in senators["users"]]
-timelines = [api.statuses.user_timeline(screen_name=name, count = 500) 
-             for name in names]
+# Create the issue
+issue = repo.create_issue(
+    title=issue_title,
+    body=issue_body
+)
 
-# save information out to JSON
-with open("senators-list.json", "w") as f:
-    json.dump(senators, f, indent=4, sort_keys=True)
-with open("timelines.json", "w") as f:
-    json.dump(timelines, f, indent=4, sort_keys=True)
+# Check the results.
+print(f"Successfully created issue #{issue.number}")
+print(f"URL: {issue.html_url}")
+g.close()
 ```
+
 
 
 ### Accessing dynamic pages
@@ -1248,7 +1249,6 @@ written as two base-16 numbers (i.e., hexadecimal), where "0100"="4" and
 "1101"="d", hence we have "4d" in hexadecimal.
 
 ```{python, ascii}
-
 ## 4d in hexadecimal is 'M'
 ## 0a is a newline (at least in Linux/Mac)
 hexvals = b'\x4d\x6f\x6d\x0a'  # "Mom\n" in ASCII as hexadecimal
@@ -1257,7 +1257,8 @@ with open('tmp.txt', 'wb') as textfile:
      nbytes = textfile.write(hexvals)
 
 nbytes
-subprocess.run(["ls", "-l", "tmp.txt"])
+
+subprocess.run(["ls", "-l", "tmp.txt"], capture_output=True).stdout
 
 with open('tmp.txt', 'r') as textfile:
      line = textfile.readlines()
@@ -1271,20 +1272,22 @@ with the text encoding (the mapping of individual characters (including
 tabs, returns, etc.) to a set of numeric codes). There are a variety of
 different encodings for text files, with different ones common on
 different operating systems.
-[UTF-8](https://en.wikipedia.org/wiki/UTF-8) is an encoding for the
-Unicode characters that includes more than 110,000 characters from 100
-different alphabets/scripts. It's widely used on the web. Latin-1
-encodes a small subset of Unicode and contains the characters used in
+
+We'll focus on the most common and universal approach, using [Unicode](https://en.wikipedia.org/wiki/UTF-8) as the
+numeric codes for characters/symbols and [UTF-8](https://en.wikipedia.org/wiki/UTF-8) as the encoding to bytes.
+
+Unicode includes includes more than 110,000 characters from 100
+different alphabets/scripts. It's widely used on the web. One alternative that is sometimes seen is Latin-1,
+which encodes a small subset of Unicode and contains the characters used in
 many European languages (e.g., letters with accents).
 
 Unicode characters have unique integer identifiers (the unicode *code
 point*), which is given by `ord` in Python. UTF-8 is the encoding
-that represents the character in bytes.
+that represents the each character in bytes.
 
 Here's an example of using non-ASCII Unicode characters:
 
 ```{python, unicode-example}
-
 ## Python `str` type stores Unicode characters.
 x2_unicode = 'Pe\u00f1a 3\u00f72'
 x2_unicode
@@ -1303,12 +1306,18 @@ x2_utf8
 
 with open('tmp2.txt', 'wb') as textfile:
      nbytes = textfile.write(x2_utf8)
+```
 
+Now in the shell, let's check it.
+
+```{bash}
 ## Here n-tilde and division symbol take up two bytes
-subprocess.run(["ls", "-l", "tmp2.txt"])
+ls -l tmp2.txt
+```
+```{bash}
 ## The shell knows how to interpret the UTF-8 encoded file
 ## and represent the Unicode character on the screen:
-subprocess.run(["cat", "tmp2.txt"])
+cat tmp2.txt
 ```
 
 UTF-8 is cleverly designed in terms of the bit-wise representation of
@@ -1384,11 +1393,9 @@ we used a few years ago in class in a problem set and which caused some
 problems.
 
 ```{python, encoding-error}
-try:
-    with open('file_nonascii.txt', 'r') as textfile:
-        lines = textfile.readlines()
-except Exception as error:
-    print(error)
+#| error: true
+with open('file_nonascii.txt', 'r') as textfile:
+    lines = textfile.readlines()
 ```
 
 If we specify the file is encoded with Latin1, it works.
@@ -1429,15 +1436,15 @@ You may have heard of various other kinds of data structures, such as linked lis
 
 With a *linked list*, with each element (or node) has a value and a pointer (reference) to the location of the next element. (With a doubly-linked list, there is also a pointer back to the previous element.) One big advantage of this is that one can insert an element by simply modifying the pointers involved at the site of the insertion, without copying any of the other elements in the list. A big disadvantage is that to get to an element you have to navigate through the list. 
 
-![Linked list (courtesy of computersciencewiki.org)](linked-list.png){fig-alt:"Drawing of linked list"}
+![Linked list (courtesy of computersciencewiki.org)](linked-list.png){fig-alt="Drawing of linked list"}
 
 
 Both *trees* and *graphs* are collections of nodes (vertices) and links (edges). A tree involves a set of nodes and links to child nodes (also possibly containing information linking the child nodes to their parent nodes). With a graph, the links might not be directional, and there can be cycles.
 
-![Tree (courtesy of computersciencewiki.org)](tree.png){fig-alt:"Drawing of tree"}
+![Tree (courtesy of computersciencewiki.org)](tree.png){fig-alt="Drawing of tree"}
 
 
-![Graph (courtesy of computersciencewiki.org)](graph.png){fig-alt:"Drawing of graph"}
+![Graph (courtesy of computersciencewiki.org)](graph.png){fig-alt="Drawing of graph"}
 
 
 A *stack* is a collection of elements that behave like a stack of lunch trays. You can only access the top element directly("last in, first out"), so the operations are that you can push a new element onto the stack or pop the top element off the stack. In fact, nested function calls behave as stacks, and the memory used in the process of evaluating the function calls is called the 'stack'.

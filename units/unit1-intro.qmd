@@ -1,7 +1,7 @@
 ---
 title: "Introduction to UNIX, computers, and key tools"
 author: "Chris Paciorek"
-date: "2025-08-11"
+date: "2025-08-25"
 format:
   pdf:
     documentclass: article
