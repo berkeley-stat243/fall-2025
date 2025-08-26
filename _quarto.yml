@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  site-url: https://stat243.berkeley.edu/fall-2024
+  site-url: https://stat243.berkeley.edu/fall-2025
   sidebar:
     style: docked
     title: "Stat 243"
@@ -10,7 +10,7 @@ website:
     logo-alt: "UC Berkeley Statistics logo"
     tools:
       - icon: github
-        href: https://github.com/berkeley-stat243/fall-2024
+        href: https://github.com/berkeley-stat243/fall-2025
         aria-label: GitHub
     contents:
       - href: index.qmd
