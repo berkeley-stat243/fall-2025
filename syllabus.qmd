@@ -135,9 +135,7 @@ We will use the course Ed Discussion site for communication (announcements,
 questions, and discussion). You should ask questions about class
 material and problem sets through the site. Please use this site for your
 questions so that either João or I can respond and so that everyone
-can benefit from the discussion. **I suggest you to modify your settings
-on Ed Discussion so you are informed by email of postings. In particular you are responsible for
-keeping track of all course announcements, which we'll make on the Discussion forum.** I strongly encourage
+can benefit from the discussion. I strongly encourage
 you to respond to or comment on each other's questions as well (this
 will help your class participation grade), although of course you should
 not provide a solution to a problem set problem. If you have a specific
@@ -168,7 +166,7 @@ If you're enrolled in the class you should be a member of the Ed Discussion grou
     -   For bash: Newham, Cameron and Rosenblatt, Bill. [Learning the
         bash Shell](https://learning.oreilly.com/library/view/learning-the-bash/0596009658/?ar=)
 
--   For Quarto: [The Quarto reference guide](https://quarto.org/docs/guide)
+    -   For Quarto: [The Quarto reference guide](https://quarto.org/docs/guide)
 
     -   For statistical computing topics:
 

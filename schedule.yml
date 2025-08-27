@@ -30,7 +30,7 @@
       items:
         - type: "Activity"
           id: "4"
-          name: "Read first three sections of Unit 2 (sections before 'Webscraping')"
+          name: "Read first three sections of Unit 2 (sections before 'Web APIs')"
           href: "units/unit2-dataTech.html"
         - type: "Activity"
           id: "5"
