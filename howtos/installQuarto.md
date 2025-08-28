@@ -8,7 +8,7 @@ Once installed, you should be able to run commands such as `quarto render FILE` 
 
 To render to PDF, you'll need a LaTeX engine installed. A good minimal solution if don't already have LaTeX installed (e.g., via MicTeX in Windows or MacTeX on MacOS) is to install `tinytex`: `quarto install tinytex`.
 
-Quarto also runs from the Windows Command shell or PowerShell. We'll add details/troubleshooting tips here (or in the [lab 1](../labs/lab1.html)  materials) as needed.
+Quarto also runs from the Windows Command shell or PowerShell. We'll add details/troubleshooting tips here (or in the [lab 1](../labs/lab1-submission.html)  materials) as needed.
 
 `quarto convert` converts back and forth between the Jupyter notebook (.ipynb) and Quarto Markdown (.qmd) formats.
 

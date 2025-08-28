@@ -3,7 +3,7 @@ title: "Windows 10 and the Ubuntu Subsystem"
 author: "Jared Bennett"
 ---
 
-Windows 10 has a powerful new feature that allows a full Linux system to be installed and run from within Windows. This is incredibly useful for building/testing code in Linux, without having a dedicated Linux machine, but it poses strange new behaviors as two very different operating systems coexist in one place. Initially, this document mirrors the [Windows Install](./windowsInstall.Rmd) tutorial, showing you how to install Ubuntu and setting up R, RStudio, and LaTex. Then, we cover some of the issues of running two systems together, starting with finding files, finding the Ubuntu subsystem, and file modifications.  
+Windows 10 has a powerful new feature that allows a full Linux system to be installed and run from within Windows. This is incredibly useful for building/testing code in Linux, without having a dedicated Linux machine, but it poses strange new behaviors as two very different operating systems coexist in one place. Initially, this document mirrors the [Windows Install](./windowsInstall.html) tutorial, showing you how to install Ubuntu and setting up R, RStudio, and LaTex. Then, we cover some of the issues of running two systems together, starting with finding files, finding the Ubuntu subsystem, and file modifications.  
 
 ## Installing Ubuntu
 
@@ -48,7 +48,7 @@ Ubuntu is generally the easiest to learn and the most well supported.
 
 1. Open the **Microsoft Store** 
 2. Search for **Ubuntu**
-    * You're looking for the highest number followed by LTS, currently **20.04 LTS** (or 18.04 LTS is fine too). 
+    * You're looking for the highest number followed by LTS, currently **24.04 LTS** (or 22.04 LTS is fine too). 
     This is the current long-term-release, meaning it will be supported for the next 5 years.
 3. Click on the tile, then click **Get**, and this should start the installation.
 4. Follow the prompts to install Ubuntu.
