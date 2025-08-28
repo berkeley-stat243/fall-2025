@@ -51,24 +51,24 @@ website:
         contents:
           - href: labs/lab0-setup.html
             text: "Lab 0 (Optional setup)"
-          - href: labs/lab1-submission.html
-            text: "Lab 1 (Quarto/Git/Submission)"
-          - href: labs/lab2-testing.html
-            text: "Lab 2 (Exceptions/Testing)"
-          - href: labs/lab3-debugging.html
-            text: "Lab 3 (Debugging)"
-          - href: labs/lab4-reproducibility.html
-            text: "Lab 4 (Reproducibility)"
-          - href: labs/lab5-codereview.html
-            text: "Lab 5 (Code review)"
-          - href: labs/lab6-scfparallel.html
-            text: "Lab 6 (SCF and parallelization)"
-          - href: labs/lab7-pythonvsr.html
-            text: "Lab 7 (Python vs. R)"
-          - href: labs/lab8-simulation.html
-            text: "Lab 8 (Simulation)"
-          - href: labs/lab9-git.html
-            text: "Lab 9 (Collaboration with Git)"
+          # - href: labs/lab1-submission.html
+          #   text: "Lab 1 (Quarto/Git/Submission)"
+          # - href: labs/lab2-testing.html
+          #   text: "Lab 2 (Exceptions/Testing)"
+          # - href: labs/lab3-debugging.html
+          #   text: "Lab 3 (Debugging)"
+          # - href: labs/lab4-reproducibility.html
+          #   text: "Lab 4 (Reproducibility)"
+          # - href: labs/lab5-codereview.html
+          #   text: "Lab 5 (Code review)"
+          # - href: labs/lab6-scfparallel.html
+          #   text: "Lab 6 (SCF and parallelization)"
+          # - href: labs/lab7-pythonvsr.html
+          #   text: "Lab 7 (Python vs. R)"
+          # - href: labs/lab8-simulation.html
+          #   text: "Lab 8 (Simulation)"
+          # - href: labs/lab9-git.html
+          #   text: "Lab 9 (Collaboration with Git)"
       - section: "Problem Sets"
         contents:
           - href: ps/ps1.qmd
