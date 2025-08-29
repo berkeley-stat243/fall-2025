@@ -897,9 +897,11 @@ HTML, XML, JSON) or raw bytes.
 
 ### APIs: REST-based web services
 
-Ideally a web service documents their API (Applications Programming
+Ideally, a web service documents their API (Application Programming
 Interface) that serves data or allows other interactions. REST is a
- popular API standard/style. REST uses HTTP requests. When using REST, we access *resources*, which might be a Facebook
+ popular API standard/style that we'll focus on here.
+
+REST uses HTTP requests. When using REST, we access *resources*, which might be a Facebook
 account or a database of stock quotes. The API will
 (hopefully) document what information it expects from the user and will
 return the result in a standard format (often a particular file format
@@ -1283,9 +1285,10 @@ many European languages (e.g., letters with accents).
 
 Unicode characters have unique integer identifiers (the unicode *code
 point*), which is given by `ord` in Python. UTF-8 is the encoding
-that represents the each character in bytes.
+that represents each Unicode character in actual bytes (in memory or on disk).
 
-Here's an example of using non-ASCII Unicode characters:
+Here's an example of using non-ASCII Unicode characters.
+We can verify [online the representation of ñ](https://www.ascii-code.com/character/%C3%B1).
 
 ```{python, unicode-example}
 ## Python `str` type stores Unicode characters.
@@ -1355,7 +1358,7 @@ can use Unicode characters as part of variable names:
 ```{python}
 peña = 7
 print(peña)
-σ = 4
+σ = 4   # \sigma = 4 (the sigma doesn't show up in the PDF version of this document)
 σ * peña
 ```
      
