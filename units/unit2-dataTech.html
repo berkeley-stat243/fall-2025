@@ -301,60 +301,6 @@ window.Quarto = {
  <span class="menu-text">Lab 0 (Optional setup)</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab1-submission.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 1 (Quarto/Git/Submission)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab2-testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 2 (Exceptions/Testing)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab3-debugging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 3 (Debugging)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab4-reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 4 (Reproducibility)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab5-codereview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 5 (Code review)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab6-scfparallel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 6 (SCF and parallelization)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab7-pythonvsr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 7 (Python vs.&nbsp;R)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab8-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 8 (Simulation)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab9-git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 9 (Collaboration with Git)</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -608,7 +554,7 @@ Quarto configuration details for this document
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_from_csv <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'airline.csv'</span>))</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.time() <span class="op">-</span> t0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1.2156634330749512</code></pre>
+<pre><code>1.0136752128601074</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -621,7 +567,7 @@ Quarto configuration details for this document
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'airline.parquet'</span>))</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.time() <span class="op">-</span> t0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.15041851997375488</code></pre>
+<pre><code>0.19519829750061035</code></pre>
 </div>
 </div>
 <p>The CSV file is 51 MB while the Parquet file is 8 MB.</p>
@@ -630,7 +576,7 @@ Quarto configuration details for this document
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> ../data/airline.parquet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-rw-r--r-- 1 paciorek scfstaff 51480244 Aug 11 12:15 ../data/airline.csv
--rw-r--r-- 1 paciorek scfstaff 8132907 Aug 26 12:27 ../data/airline.parquet</code></pre>
+-rw-r--r-- 1 paciorek scfstaff 8132907 Aug 29 08:17 ../data/airline.parquet</code></pre>
 </div>
 </div>
 </section>
@@ -866,11 +812,11 @@ Using <code>with</code>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> time.time()</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Timing for Pandas: </span><span class="sc">{</span>t1<span class="op">-</span>t0<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Timing for Pandas: 1.0404596328735352.</code></pre>
+<pre><code>Timing for Pandas: 1.0514764785766602.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Timing for Polars: </span><span class="sc">{</span>t2<span class="op">-</span>t1<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Timing for Polars: 0.2624499797821045.</code></pre>
+<pre><code>Timing for Polars: 0.7218351364135742.</code></pre>
 </div>
 </div>
 </section>
@@ -1237,7 +1183,8 @@ Using <code>with</code>
 </section>
 <section id="apis-rest-based-web-services" class="level3">
 <h3 class="anchored" data-anchor-id="apis-rest-based-web-services">APIs: REST-based web services</h3>
-<p>Ideally a web service documents their API (Applications Programming Interface) that serves data or allows other interactions. REST is a popular API standard/style. REST uses HTTP requests. When using REST, we access <em>resources</em>, which might be a Facebook account or a database of stock quotes. The API will (hopefully) document what information it expects from the user and will return the result in a standard format (often a particular file format rather than producing a webpage).</p>
+<p>Ideally, a web service documents their API (Application Programming Interface) that serves data or allows other interactions. REST is a popular API standard/style that we’ll focus on here.</p>
+<p>REST uses HTTP requests. When using REST, we access <em>resources</em>, which might be a Facebook account or a database of stock quotes. The API will (hopefully) document what information it expects from the user and will return the result in a standard format (often a particular file format rather than producing a webpage).</p>
 <p>Often the format of the request is a URL (aka an endpoint) plus a query string, passed as a GET request. Let’s search for plumbers near Berkeley, and we’ll see the GET request, in the form:</p>
 <p><a href="https://www.yelp.com/search?find_desc=plumbers&amp;find_loc=Berkeley+CA&amp;ns=1" class="uri">https://www.yelp.com/search?find_desc=plumbers&amp;find_loc=Berkeley+CA&amp;ns=1</a></p>
 <ul>
@@ -1471,11 +1418,11 @@ Using <code>with</code>
 <span id="cb101-20"><a href="#cb101-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the results.</span></span>
 <span id="cb101-21"><a href="#cb101-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Successfully created issue #</span><span class="sc">{</span>issue<span class="sc">.</span>number<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Successfully created issue #14</code></pre>
+<pre><code>Successfully created issue #17</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"URL: </span><span class="sc">{</span>issue<span class="sc">.</span>html_url<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>URL: https://github.com/paciorek/test/issues/14</code></pre>
+<pre><code>URL: https://github.com/paciorek/test/issues/17</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>g.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1508,7 +1455,7 @@ Using <code>with</code>
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>subprocess.run([<span class="st">"ls"</span>, <span class="st">"-l"</span>, <span class="st">"tmp.txt"</span>], capture_output<span class="op">=</span><span class="va">True</span>).stdout</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>b'-rw-r--r-- 1 paciorek scfstaff 4 Aug 26  2025 tmp.txt\n'</code></pre>
+<pre><code>b'-rw-r--r-- 1 paciorek scfstaff 4 Aug 29 08:17 tmp.txt\n'</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'tmp.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> textfile:</span>
 <span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>     line <span class="op">=</span> textfile.readlines()</span>
@@ -1521,8 +1468,8 @@ Using <code>with</code>
 <p>When encountering non-ASCII files, in some cases you may need to deal with the text encoding (the mapping of individual characters (including tabs, returns, etc.) to a set of numeric codes). There are a variety of different encodings for text files, with different ones common on different operating systems.</p>
 <p>We’ll focus on the most common and universal approach, using <a href="https://en.wikipedia.org/wiki/UTF-8">Unicode</a> as the numeric codes for characters/symbols and <a href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a> as the encoding to bytes.</p>
 <p>Unicode includes includes more than 110,000 characters from 100 different alphabets/scripts. It’s widely used on the web. One alternative that is sometimes seen is Latin-1, which encodes a small subset of Unicode and contains the characters used in many European languages (e.g., letters with accents).</p>
-<p>Unicode characters have unique integer identifiers (the unicode <em>code point</em>), which is given by <code>ord</code> in Python. UTF-8 is the encoding that represents the each character in bytes.</p>
-<p>Here’s an example of using non-ASCII Unicode characters:</p>
+<p>Unicode characters have unique integer identifiers (the unicode <em>code point</em>), which is given by <code>ord</code> in Python. UTF-8 is the encoding that represents each Unicode character in actual bytes (in memory or on disk).</p>
+<p>Here’s an example of using non-ASCII Unicode characters. We can verify <a href="https://www.ascii-code.com/character/%C3%B1">online the representation of ñ</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Python `str` type stores Unicode characters.</span></span>
 <span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>x2_unicode <span class="op">=</span> <span class="st">'Pe</span><span class="ch">\u00f1</span><span class="st">a 3</span><span class="ch">\u00f7</span><span class="st">2'</span></span>
@@ -1567,7 +1514,7 @@ Using <code>with</code>
 <div class="sourceCode cell-code" id="cb127"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Here n-tilde and division symbol take up two bytes</span></span>
 <span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> tmp2.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-rw-r--r-- 1 paciorek scfstaff 10 Aug 26  2025 tmp2.txt</code></pre>
+<pre><code>-rw-r--r-- 1 paciorek scfstaff 10 Aug 29 08:17 tmp2.txt</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1596,7 +1543,7 @@ Using <code>with</code>
 <div class="cell-output cell-output-stdout">
 <pre><code>7</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>σ <span class="op">=</span> <span class="dv">4</span></span>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>σ <span class="op">=</span> <span class="dv">4</span>   <span class="co"># \sigma = 4 (the sigma doesn't show up in the PDF version of this document)</span></span>
 <span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>σ <span class="op">*</span> peña</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>28</code></pre>
