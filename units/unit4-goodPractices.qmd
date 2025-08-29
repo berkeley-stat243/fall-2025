@@ -54,13 +54,14 @@ cases what the relevant context(s) is/are.
 
 ## Editors
 
-Use an editor (or integrated development environment) that supports the language you are using (e.g., *VS Code*, *Atom*, *Emacs*/*Aquamacs*, *Sublime*, *vim*, *TextMate*, *WinEdt*, or the built-in editor in *RStudio* [you can use Python from within RStudio]). Some advantages of this can include:
+Use an editor (or integrated development environment) that supports the language you are using (e.g., *VS Code*, *Emacs*/*Aquamacs*, *Sublime*, *vim*, *TextMate*, *WinEdt*, or the built-in editor in *RStudio* [you can use Python from within RStudio]). Some advantages of this can include:
 
   1. helpful color coding of different types of syntax,
   2. automatic indentation and spacing,
   3. parenthesis matching,
-  4. line numbering (good for finding bugs), and
-  5. code can often be run (or compiled) and debugged from within the editor.
+  4. line numbering (good for finding bugs), 
+  5. code can often be run (or compiled) and debugged from within the editor, and
+  6. integrated AI coding assistants for some IDEs (in particular in VS Code).
 
 See the [problem set submission how-to](../howtos/submitPS.html) for more information about editors that interact nicely with Quarto documents.
 
@@ -559,10 +560,7 @@ We'll be discussing Git a lot separately.
 
 ## AI-assisted coding tools
 
-:::{.callout-warning title="UNDER CONSTRUCTION"}
-:::
-
-There is now a large variety of AI-assisted coding tools that available within integrated development environment and allow you to easily work with AI while you are coding. This makes for an easier workflow than copy-pasting from a ChatBot.
+There is now a large variety of AI-assisted coding tools that are available within integrated development environments (IDEs) and allow you to easily work with AI while you are coding. This makes for an easier workflow than copy-pasting from a ChatBot.
 
 :::{.callout-warning title="Moving fast!"}
 The arena of AI-assisted coding tools is evolving very quickly.
@@ -571,19 +569,19 @@ The arena of AI-assisted coding tools is evolving very quickly.
 Some common features of many tools include:
 
 - AI-assisted code completion (extended tab completion)
-- AI-assisted code suggestions (accept/reject like grammar suggestions in text editing)
-- Built-in Chat window
-- Editing/Agent capabilities where a user can ask the tool to change or add to their code based on a text prompt, or potentially generate a whole program/application.
+- AI-assisted code suggestions (accept/reject, similar to grammar suggestions in text editing)
+- Built-in Chat window providing Chat/Edit/Agent modes.
+  - Edit/Agent capabilities where a user can ask the tool to change or add to their code based on a text prompt, or potentially generate a whole program/application.
 - Ability to give files/directories as context. 
 
-Many of the tools are built on top of, or integrated into, VS Code (e.g., Cursor, GitHub Copilot).
+Many of the tools are available through VS Code (as extensions, such as GitHub Copilot and Gemini Code Assist) or built on top of VS Code (e.g., Cursor).
 
 Beware of generating large chunks of code that you don't understand. At least for now, this is prone to bugs/hallucinations and hard to maintain. Think of the tools as helping you brainstorm.
 
 A potential hierarchy of uses:
 
- - For straightforward syntax where checking the outcome is sufficient (e.g., plot formatting code).
- - For involved small pieces of code where extensive testing may be sufficient (e.g., regular expressions).
+ - For straightforward syntax where checking the outcome is sufficient (e.g., code for formatting plots).
+ - For (possibly complicated) small pieces of code where extensive testing may be sufficient (e.g., regular expressions).
  - For more extensive analysis or algorithm code, where you should check and understand the code fully.
 
 # 2. Debugging and recommendations for avoiding bugs
