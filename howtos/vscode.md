@@ -16,7 +16,7 @@ I will probably do some of my demonstrations in class with VS Code, as it allows
 
 See [here](https://code.visualstudio.com/download) to install VS Code.
 
-A browser-based version of VS Code is available through both the [DataHub]((https://datahub.berkeley.edu) and the [SCF JupyterHub](https://jupyter.stat.berkeley.edu). 
+A browser-based version of VS Code is available through both the [DataHub](https://datahub.berkeley.edu) and the [SCF JupyterHub](https://jupyter.stat.berkeley.edu). It should behave very similarly but the extensions availalbe for VS Code on your own machine versus in the browser/JupyterHub can have differences.
 
 ## Using VS Code
 
