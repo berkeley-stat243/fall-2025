@@ -54,7 +54,7 @@
       items:
         - type: "Problem_Set"
           id: "1"
-          name: "(tentative due date) Problem Set 1"
+          name: "Problem Set 1"
           href: "ps/ps1.html"
         - type: "Event"
           id: "2"
