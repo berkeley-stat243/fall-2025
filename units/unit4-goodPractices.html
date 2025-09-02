@@ -511,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Comments should generally be complete sentences.</li>
 </ul></li>
 <li><p>You can use parentheses to group operations such that they can be split up into lines and easily commented, e.g.,</p>
-<div id="5c5460a9" class="cell" data-execution_count="1">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>newdf <span class="op">=</span> (</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        pd.read_csv(<span class="st">'file.csv'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        .rename(columns <span class="op">=</span> {<span class="st">'STATE'</span>: <span class="st">'us_state'</span>})  <span class="co"># adjust column names</span></span>
@@ -573,27 +573,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Linting is the process of applying a tool to your code to enforce style.</p>
 <p>Here we’ll see how to use <code>ruff</code>. You might also consider <code>black</code>.</p>
 <p>We’ll practice with ruff with a small module we’ll use next also for debugging.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Installing ruff">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Installing ruff
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can install <code>ruff</code> via pip (<code>pip install ruff</code>), either inside a Conda environment or outside (in which case it will likely be installed at <code>~/.local/bin/ruff</code>).</p>
+</div>
+</div>
 <p>First, we check for and fix syntax errors.</p>
-<pre class="{bash}"><code>ruff check test.py</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check test.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>All checks passed!</code></pre>
+</div>
+</div>
 <p>Then we ask ruff to reformat to conform to standard style.</p>
-<pre class="{bash}"><code>cp test.py test-save.py   # Not required, just so we can see what `ruff` did.
-ruff format test.py</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> test.py test-save.py   <span class="co"># Not required, just so we can see what `ruff` did.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> format test.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>1 file reformatted</code></pre>
+</div>
+</div>
 <p>Let’s see what changed:</p>
-<pre class="{bash}"><code>diff test-save.py test.py</code></pre>
-<pre><code>1c1
-&lt; x=  7
----
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span> test-save.py test.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0a1
 &gt; x = 7
-3,5d2
+3,9c4,6
+&lt; 
+&lt; x=  7
+&lt; 
 &lt; def myfun(x, y =0):
 &lt; # This is a toy function.
 &lt;       return x*y
-6a4,6
+&lt; 
+---
 &gt; def myfun(x, y=0):
 &gt;     # This is a toy function.
 &gt;     return x * y</code></pre>
+</div>
+</div>
 <p>So we see that <code>ruff</code> fixed spacing and properly indented the comment line.</p>
 </section>
 </section>
@@ -605,87 +632,88 @@ ruff format test.py</code></pre>
 <p>You’ve probably already seen exceptions in action whenever you’ve done something in Python that causes an error to occur and an error message to be printed. Syntax errors are different from exceptions in that exceptions occur when the syntax is correct, but the execution of the code results in some sort of error (i.e., a <em>run-time error</em>).</p>
 <p>Exceptions can be a valuable tool for making your code handle different modes of failure (missing file, URL unreachable, permission denied, invalid inputs, etc.). You use them when you are writing code that is supposed to perform a task (e.g., a function that does something with an input file) to indicate that the task failed and the reason for that failure (e.g., the file was not there in the first place). In such a case, you want your code to raise an exception and make the error message informative as possible, typically by handling the exception thrown by another function you call and augmenting the message. Another possibility is that your code detects a situation where you need to throw an exception (e.g., an invalid input to a function).</p>
 <p>The other side of the coin happens when you want to write a piece of code that handles failure in a specific way, instead of simply giving up. For example, if you are writing a script that reads and downloads hundreds of URLs, you don’t want your program to stop when any of them fails to respond (or do you?). You might want to continue with the rest of the URLs, and write out the failed URLs in a secondary output file.</p>
-<section id="using-try-except-to-continue-execution" class="level4">
-<h4 class="anchored" data-anchor-id="using-try-except-to-continue-execution">Using <code>try-except</code> to continue execution</h4>
-<p>If you want some code to continue running even when it encounters an error, you can use <code>try-except</code>. This would often be done in code where you were running some workflow, but can also be useful in functions that you write for general purpose use (e.g., code in a package you are writing).</p>
-<p>Suppose we have a loop and we want to run all the iterations even if the code for some iterations fail. We can embed the code that might fail in a <code>try</code> block and then in the <code>except</code> block, run code that will handle the situation when the error occurs.</p>
-<div id="e89a52a0" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>some code that might fail<span class="op">&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        result[i] <span class="op">=</span> <span class="op">&lt;</span>actual result<span class="op">&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">&lt;</span>what to do <span class="cf">if</span> the code fails<span class="op">&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        result[i] <span class="op">=</span> <span class="va">None</span>   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
 <section id="strategies-for-invoking-and-handling-errors" class="level4">
 <h4 class="anchored" data-anchor-id="strategies-for-invoking-and-handling-errors">Strategies for invoking and handling errors</h4>
 <p>Here we’ll address situations that might arise when you are developing code for general purpose use (e.g., writing functions in a package) and need that code to invoke an error under certain circumstances or deal gracefully with an error occurring in some code that you are calling.</p>
 <p>A basic situation is when you want to detect a situation where you need to invoke an error (i.e., “throw an exception”).</p>
 <p>With <code>raise</code> you can invoke an exception. Suppose we need an input to be a positive number. We’ll use Python’s built-in <code>ValueError</code>, one of the various <a href="https://docs.python.org/3/library/exceptions.html#concrete-exceptions">exception types that Python provides</a> and that you could use. You can also create your own exceptions by subclassing one of Python’s existing exception classes. (We haven’t yet discussed classes and object-oriented programming, so don’t worry if you’re not sure about what that means.)</p>
-<div id="d34cde97" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(val):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> val <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"`val` should be positive"</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>myfun(<span class="op">-</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(val):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> val <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"`val` should be positive"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>myfun(<span class="op">-</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>ValueError: `val` should be positive</code></pre>
-<p>Next let’s consider cases where your function runs some code that might return an error.</p>
+</div>
+</div>
+<p>Next let’s consider cases where your function runs some code that might result in an error (or might not).</p>
 <p>We’d often want to catch the error using <code>try-except</code>. In some cases we would want to notify the user and then continue (perhaps falling back to a different way to do things or returning <code>None</code> from our function) while in others we might want to provide a more informative error message than if we had just let the error occur, but still have the exception be raised.</p>
+<p>We can embed the code that might fail in a <code>try</code> block and then in the <code>except</code> block, run code that will handle the situation when the error occurs.</p>
 <p>First let’s see the case of continuing execution.</p>
-<div id="92cc35c7" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(filename):</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            text <span class="op">=</span> <span class="bu">file</span>.read()</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> err:</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>err<span class="sc">}</span><span class="ch">\n</span><span class="ss">Check that the file `</span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">` can be found "</span><span class="op">\</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"in the current path: `</span><span class="sc">{</span>os<span class="sc">.</span>getcwd()<span class="sc">}</span><span class="ss">`."</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(text.lower())</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>myfun(<span class="st">'missing_file.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(filename):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>            text <span class="op">=</span> <span class="bu">file</span>.read()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> err:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>err<span class="sc">}</span><span class="ch">\n</span><span class="ss">Check that the file `</span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">` can be found "</span><span class="op">\</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"in the current path: `</span><span class="sc">{</span>os<span class="sc">.</span>getcwd()<span class="sc">}</span><span class="ss">`."</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(text.lower())</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>myfun(<span class="st">'missing_file.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[Errno 2] No such file or directory: 'missing_file.txt'
-Check that the file `missing_file.txt` can be found in the current path: `/accounts/vis/paciorek/teaching/243/fall-2025/units`.</code></pre>
-<p>Finally let’s see how we can intercept an error but then “re-raise” the error rather than continuing execution.</p>
-<div id="47cbcda7" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(url):</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        requests.get(url)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> err:</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"There was a problem accessing </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss">. "</span><span class="op">\</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"Perhaps it doesn't exist or the URL has a typo?"</span>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>myfun(<span class="st">"http://missingurl.com"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+Check that the file `missing_file.txt` can be found in the current path: `/accounts/vis/paciorek/teaching/243fall25/fall-2025/units`.</code></pre>
 </div>
-<pre><code>There was a problem accessing http://missingurl.com. Perhaps it doesn't exist or the URL has a typo?
+</div>
+<p>Finally let’s see how we can intercept an error but then “re-raise” the error rather than continuing execution. This isn’t printing out nicely in the rendered document if I actually run this code during rendering, so I’ll just insert some of the output that should be produced.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfun(url):</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        requests.get(url)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> err:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"There was a problem accessing </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss">. "</span><span class="op">\</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"Perhaps it doesn't exist or the URL has a typo?"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>myfun(<span class="st">"http://missingurl_forsure.com"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>There was a problem accessing http://missingurl_forsure.com. Perhaps it doesn't exist or the URL has a typo?
+Traceback (most recent call last):
+  File "/usr/local/linux/miniforge-3.13/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...&lt;2 lines&gt;...
+        socket_options=self.socket_options,
+    )
 
-ConnectionError: HTTPConnectionPool(host='missingurl.com', port=80): Max retries exceeded with url: / (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x7f348db44590&gt;: Failed to establish a new connection: [Errno -2] Name or service not known'))</code></pre>
+&lt;snip&gt;
+
+  File "/usr/local/linux/miniforge-3.13/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='missingurl_forsure.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError("&lt;urllib3.connection.HTTPConnection object at 0x7ca7d8e13e00&gt;: Failed to resolve 'missingurl_forsure.com' ([Errno -2] Name or service not known)"))</code></pre>
 </section>
 </section>
 <section id="assertions" class="level3">
 <h3 class="anchored" data-anchor-id="assertions">Assertions</h3>
 <p>Assertions are a quick way to raise a specific type of Exception (AssertionError). Assertions are useful for performing quick checks in your code that the state of the program is as you expect. They’re primarily intended for use during the development process to provide “sanity checks” that specific conditions are true, and there are ways to disable them when you are running your code for production purposes (to improve performance). A common use is for verifying preconditions and postconditions (especially preconditions). One would generally only expect such conditions not to be true if there is a bug in the code. Here’s an example of using the <code>assert</code> statement in Python, with a clear assertion message telling the developer what the problem is.</p>
-<div id="08169dbb" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>number <span class="op">=</span> <span class="op">-</span><span class="dv">42</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> number <span class="op">&gt;</span> <span class="dv">0</span>, <span class="ss">f"number greater than 0 expected, got: </span><span class="sc">{</span>number<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Produces this error:</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Traceback (most recent call last):</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">##   File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">## AssertionError: number greater than 0 expected, got: -42</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>number <span class="op">=</span> <span class="op">-</span><span class="dv">42</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> number <span class="op">&gt;</span> <span class="dv">0</span>, <span class="ss">f"number greater than 0 expected, got: </span><span class="sc">{</span>number<span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AssertionError: number greater than 0 expected, got: -42</code></pre>
+</div>
 </div>
 <p>Various operators/functions are commonly used in assertions, including</p>
-<div id="e92cc0dd" class="cell" data-execution_count="8">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> x <span class="kw">in</span> y</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> x <span class="kw">not</span> <span class="kw">in</span> y</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> x <span class="kw">is</span> y</span>
@@ -702,7 +730,7 @@ ConnectionError: HTTPConnectionPool(host='missingurl.com', port=80): Max retries
 <p>Testing is informally what you do after you write some code and want to check that it actually works. But when you are developing important code (e.g.&nbsp;functions that are going to be used by others) you typically want to encode your tests in code. There are many reasons to do that, including making sure that if anyone changes the code later on and breaks something, the test suite should immediately indicate that.</p>
 <p>Some people even advocate for writing a preliminary test suite before writing the code itself(!) as it can be a good way to organize work and track progress, as well as act as a secondary form of documentation for clarity. This can include tests that your code provides correct and useful errors when something goes wrong (so that means that a test might be to see if problematic input correctly produces an error). <em>Unit tests</em> are intended to test the behavior of small pieces (units) of code, generally individual functions. Unit tests naturally work well with the ideas above of writing small, modular functions. I recommend the <code>pytest</code> package, which is designed to make it easier to write sets of good tests.</p>
 <p>Here is an example of the contents of a test file, called <code>test_dummy.py</code>.</p>
-<div id="ee7c919f" class="cell" data-execution_count="9">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -724,23 +752,30 @@ ConnectionError: HTTPConnectionPool(host='missingurl.com', port=80): Max retries
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        dummy.add_one(<span class="dv">1</span><span class="op">+</span><span class="ot">3j</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can then run the tests via <code>pytest</code> like this:</p>
-<pre class="{bash}"><code>pytest mytestfile.py</code></pre>
-<pre><code>====================================== test session starts ======================================
-platform linux -- Python 3.12.2, pytest-8.1.1, pluggy-1.4.0
-rootdir: /accounts/vis/paciorek/teaching/243/fall-2025/units
-plugins: anyio-4.3.0
-collected 4 items                                                                               
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pytest</span> test_dummy.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/system/linux/miniforge-3.13/lib/python3.13/site-packages/pytest_asyncio/plugin.py:211: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
 
-test_dummy.py .F..                                                                        [100%]
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0
+rootdir: /accounts/vis/paciorek/teaching/243fall25/fall-2025/units
+plugins: asyncio-1.1.0, cov-6.2.1, anyio-4.8.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 4 items
 
-=========================================== FAILURES ============================================
-_______________________________________ test_numpy_array ________________________________________
+test_dummy.py .F..                                                       [100%]
+
+=================================== FAILURES ===================================
+_______________________________ test_numpy_array _______________________________
 
     def test_numpy_array():
 &gt;       assert np.all(np.equal(dummy.add_one(np.array([3,4])), np.array([4,5])))
 
 test_dummy.py:11: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 x = array([3, 4])
 
@@ -750,9 +785,12 @@ x = array([3, 4])
 E           TypeError: `[3 4]` should be numeric
 
 dummy.py:5: TypeError
-==================================== short test summary info ====================================
+=========================== short test summary info ============================
 FAILED test_dummy.py::test_numpy_array - TypeError: `[3 4]` should be numeric
-================================== 1 failed, 3 passed in 0.84s ==================================</code></pre>
+========================= 1 failed, 3 passed in 0.19s ==========================</code></pre>
+</div>
+</div>
+<p>You can run <code>pytest</code> on individual files or on directories or simply in the current working directory. In the latter cases, it will look for test files (those with the letters “test” in the file name) in the directory and all subdirectories.</p>
 <p>In lab, we’ll go over assertions, exceptions, and testing in detail.</p>
 </section>
 <section id="automated-testing" class="level3">
@@ -879,7 +917,7 @@ Moving fast!
 <h3 class="anchored" data-anchor-id="using-breakpoint">Using <code>breakpoint</code></h3>
 <p>Let’s define a function that will run a stratified analysis, in this case fitting a regression to each of the strata (groups/clusters) in some data. Our function is in <code>run_with_break.py</code>, and it contains <code>breakpoint</code> at the point where we want to invoke the debugger.</p>
 <p>Now I can call the function and will be put into debugging mode just before the next line is called:</p>
-<div id="b607a5a5" class="cell" data-execution_count="10">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> run_with_break <span class="im">as</span> run</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>run.fit(run.data, run.n_cats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -901,17 +939,17 @@ Moving fast!
 <p>Now if I print <code>i</code>, I see that it has incremented to <code>1</code>.</p>
 <pre><code>(Pdb) p i
 1</code></pre>
-<p>We could keep hitting <code>n</code> or <code>c</code> until hitting the stratum where an error occurs, but that would be tedious.</p>
+<p>Note that all of these commands have graphical-based equivalents in VS Code.</p>
+<p>To debug the example, we could keep hitting <code>n</code> or <code>c</code> until hitting the stratum where an error occurs, but that would be tedious. So we’ll exit out of the debugger and use post-mortem debugging.</p>
 <p>Let’s hit <code>q</code> to quit out of the debugger.</p>
 <pre><code>(Pdb) q
 &gt;&gt;&gt;</code></pre>
-<p>Note that all of these commands have graphical-based equivalents in VS Code.</p>
 <p>Next let’s see how we can enter debugging mode only at point an error occurs.</p>
 </section>
 <section id="post-mortem-debugging" class="level3">
 <h3 class="anchored" data-anchor-id="post-mortem-debugging">Post-mortem debugging</h3>
 <p>We’ll use a version of the module without the <code>breakpoint()</code> command.</p>
-<div id="33da04c6" class="cell" data-execution_count="11">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pdb</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> run_no_break <span class="im">as</span> run </span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -971,7 +1009,7 @@ Index: []</code></pre>
 <section id="invoking-pdb-on-a-function-or-block-of-code" class="level3">
 <h3 class="anchored" data-anchor-id="invoking-pdb-on-a-function-or-block-of-code">Invoking pdb on a function or block of code</h3>
 <p>We can use <code>pdb.run()</code> to run a function under the debugger. We need to make sure to use <code>s</code> as the first pdb command in order to actually step into the function. From there, we can debug as normal as if we had set a breakpoint at the start of the function.</p>
-<div id="3142f7ba" class="cell" data-execution_count="12">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> run_with_break <span class="im">as</span> run</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pdb</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>pdb.run(<span class="st">"run.fit(run.data, run.n_cats)"</span>)</span>
@@ -981,15 +1019,16 @@ Index: []</code></pre>
 <section id="invoking-pdb-on-a-module" class="level3">
 <h3 class="anchored" data-anchor-id="invoking-pdb-on-a-module">Invoking pdb on a module</h3>
 <p>We can also invoke pdb when we start Python, executing a file (module). Here we’ve added <code>fit(data, n_cats)</code> at the end of <code>run_no_break2.py</code> so that we can have that run under the debugger.</p>
-<pre class="{bash}"><code>#| eval: false
-python -m pdb run_no_break2.py</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pdb run_no_break2.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <pre><code>&gt; /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break2.py(1)&lt;module&gt;()
 -&gt; import numpy as np
 (Pdb) </code></pre>
 <p>Let’s set a breakpoint at the same place we did with <code>breakpoint()</code> but using a line number (this avoids having to actually modify our code):</p>
 <pre><code>(Pdb) b 9
 Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break.py:9</code></pre>
-<div id="8fd77fee" class="cell" data-execution_count="13">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>(Pdb) c</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="op">/</span>accounts<span class="op">/</span>vis<span class="op">/</span>paciorek<span class="op">/</span>teaching<span class="op">/</span><span class="dv">243</span><span class="op">/</span>fall<span class="op">-</span><span class="dv">2025</span><span class="op">/</span>units<span class="op">/</span>run_no_break2.py(<span class="dv">9</span>)fit()</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="op">-&gt;</span> model <span class="op">=</span> statsmodels.api.OLS(sub[<span class="st">'y'</span>], statsmodels.api.add_constant(sub[<span class="st">'x'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1009,9 +1048,9 @@ Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break
 <li><p>Parenthesis mis-matches</p></li>
 <li><p><code>==</code> vs.&nbsp;<code>=</code></p></li>
 <li><p>Comparing real numbers exactly using <code>==</code> is dangerous because numbers on a computer are only represented to limited numerical precision. For example,</p>
-<div id="5d9e7fbb" class="cell" data-execution_count="14">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">/</span><span class="dv">3</span> <span class="op">==</span> <span class="dv">4</span><span class="op">*</span>(<span class="dv">4</span><span class="op">/</span><span class="dv">12</span><span class="op">-</span><span class="dv">3</span><span class="op">/</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-stdout">
 <pre><code>False</code></pre>
 </div>
 </div>
@@ -1038,7 +1077,7 @@ Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break
 <li>stop execution based on assertions, <code>try</code> or <code>raise</code> with an informative error message.</li>
 </ul>
 <p>Here’s an example of building a robust square root function:</p>
-<div id="0289ec07" class="cell" data-execution_count="15">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mysqrt(x):</span>
@@ -1054,60 +1093,58 @@ Breakpoint 1 at /accounts/vis/paciorek/teaching/243/fall-2025/units/run_no_break
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Cannot take the square root of </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>mysqrt(<span class="fl">3.1</span>)</span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>mysqrt(<span class="op">-</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_1345057/18181922.py:8: UserWarning:
-
-Input value is negative.
-</code></pre>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>mysqrt(<span class="fl">3.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.760681686165901</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>nan</code></pre>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mysqrt(<span class="op">-</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;string&gt;:7: UserWarning: Input value is negative.
+nan</code></pre>
 </div>
 </div>
-<div id="534ca40a" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mysqrt(<span class="st">'hat'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>mysqrt(<span class="st">'hat'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>TypeError: What is the square root of 'hat'?</code></pre>
 </div>
-<pre><code>Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-  File "&lt;stdin&gt;", line 3, in mysqrt
-TypeError: What is the square root of 'hat'?</code></pre>
+</div>
 </section>
 <section id="catch-run-time-errors-with-tryexcept-statements" class="level3">
 <h3 class="anchored" data-anchor-id="catch-run-time-errors-with-tryexcept-statements">Catch run-time errors with <code>try/except</code> statements</h3>
-<p>Also, sometimes a function you call will fail, but you want to continue execution. For example, consider the stratified analysis show previously in which you take subsets of your data based on some categorical variable and fit a statistical model for each value of the categorical variable. If some of the subsets have no or very few observations, the statistical model fitting might fail. To do this, you might be using a for loop or <code>apply</code>. You want your code to continue and fit the model for the rest of the cases even if one (or more) of the cases cannot be fit. You can wrap the function call that may fail within the <code>try</code> statement and then your code won’t stop, even when an error occurs. Here’s a toy example.</p>
-<div id="260a14df" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2</span>)</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>n_cats <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">80</span></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.normal(size<span class="op">=</span>n)</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>n)</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>cats <span class="op">=</span> [np.random.randint(<span class="dv">0</span>, n_cats<span class="op">-</span><span class="dv">1</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({<span class="st">'y'</span>: y, <span class="st">'x'</span>: x, <span class="st">'cats'</span>: cats})</span>
-<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> np.full((n_cats, <span class="dv">2</span>), np.nan)</span>
-<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_cats):</span>
-<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> data[data[<span class="st">'cats'</span>] <span class="op">==</span> i]</span>
-<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> statsmodels.api.OLS(sub[<span class="st">'y'</span>], statsmodels.api.add_constant(sub[<span class="st">'x'</span>]))</span>
-<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>        fit <span class="op">=</span> model.fit()</span>
-<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>        params[i, :] <span class="op">=</span> fit.params.values</span>
-<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
-<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Regression cannot be fit for stratum </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">."</span>)</span>
-<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Also, sometimes some code you execute might fail, but you want to continue execution. For example, consider the stratified analysis show previously in which you take subsets of your data based on some categorical variable and fit a statistical model for each value of the categorical variable. If some of the subsets have no or very few observations, the statistical model fitting might fail. To do this, you might be using a for loop or <code>map</code>. You want your code to continue and fit the model for the rest of the cases even if one (or more) of the cases cannot be fit. You can wrap the function call that may fail within the <code>try</code> statement and then your code won’t stop, even when an error occurs. In the <code>except</code> block you’ll have code that will handle the situation when the error occurs. Here’s a toy example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>n_cats <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">80</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.normal(size<span class="op">=</span>n)</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span>n)</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>cats <span class="op">=</span> [np.random.randint(<span class="dv">0</span>, n_cats<span class="op">-</span><span class="dv">1</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({<span class="st">'y'</span>: y, <span class="st">'x'</span>: x, <span class="st">'cats'</span>: cats})</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> np.full((n_cats, <span class="dv">2</span>), np.nan)</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_cats):</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> data[data[<span class="st">'cats'</span>] <span class="op">==</span> i]</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> statsmodels.api.OLS(sub[<span class="st">'y'</span>], statsmodels.api.add_constant(sub[<span class="st">'x'</span>]))</span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>        fit <span class="op">=</span> model.fit()</span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>        params[i, :] <span class="op">=</span> fit.params.values</span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Regression cannot be fit for stratum </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Regression cannot be fit for stratum 7.
 Regression cannot be fit for stratum 20.
 Regression cannot be fit for stratum 24.
-Regression cannot be fit for stratum 29.
-[[ 5.52897442e-01  2.61511154e-01]
+Regression cannot be fit for stratum 29.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 5.52897442e-01  2.61511154e-01]
  [ 5.72564369e-01  4.37210543e-02]
  [-9.91086764e-01  2.84116572e-01]
  [-6.50606465e-01  4.26310060e-01]
@@ -1144,21 +1181,25 @@ Regression cannot be fit for stratum 29.
 <section id="maintain-dimensionality" class="level3">
 <h3 class="anchored" data-anchor-id="maintain-dimensionality">Maintain dimensionality</h3>
 <p>Python (usually helpfully) drops array dimensions that are extraneous. This can sometimes confuse later code that expects an object of a certain dimension. Here’s a work-around:</p>
-<div id="3b5a022e" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(mat, axis<span class="op">=</span><span class="dv">0</span>)         <span class="co"># This sums columns, as desired</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>row_subset <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>mat2 <span class="op">=</span> mat[row_subset, :]</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(mat2, axis<span class="op">=</span><span class="dv">0</span>)        <span class="co"># This sums the elements, not the columns.</span></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(mat2.shape) <span class="op">!=</span> <span class="dv">2</span>:    <span class="co"># Fix dimensionality.</span></span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    mat2 <span class="op">=</span> mat2.reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(mat2, axis<span class="op">=</span><span class="dv">0</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(mat, axis<span class="op">=</span><span class="dv">0</span>)         <span class="co"># This sums columns, as desired</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([4, 6])</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>row_subset <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>mat2 <span class="op">=</span> mat[row_subset, :]</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(mat2, axis<span class="op">=</span><span class="dv">0</span>)        <span class="co"># This sums the elements, not the columns.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>np.int64(7)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(mat2.shape) <span class="op">!=</span> <span class="dv">2</span>:    <span class="co"># Fix dimensionality.</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    mat2 <span class="op">=</span> mat2.reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(mat2, axis<span class="op">=</span><span class="dv">0</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>array([3, 4])</code></pre>
 </div>
 </div>
@@ -1168,17 +1209,17 @@ Regression cannot be fit for stratum 29.
 <h3 class="anchored" data-anchor-id="find-and-avoid-global-variables">Find and avoid global variables</h3>
 <p>In general, using global variables (variables that are not created or passed into a function) results in code that is not robust. Results will change if you or a user modifies that global variable, usually without realizing/remembering that a function depends on it.</p>
 <p>One ad hoc strategy is to remove objects you don’t need from Python’s global scope, to avoid accidentally using values from an old object via Python’s scoping rules. You can also run your function in a fresh session to see if it’s unable to find variables.</p>
-<div id="28a793b8" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> x   <span class="co"># Mimic having a fresh sesson (knowing in this case `x` is global).</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(z):</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x <span class="op">+</span> y <span class="op">+</span> z)</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    f(<span class="dv">2</span>)</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> x   <span class="co"># Mimic having a fresh sesson (knowing in this case `x` is global).</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(z):</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x <span class="op">+</span> y <span class="op">+</span> z)</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    f(<span class="dv">2</span>)</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>name 'x' is not defined</code></pre>
 </div>
