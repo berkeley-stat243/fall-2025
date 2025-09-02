@@ -1,7 +1,7 @@
 ---
 title: "The bash shell and UNIX commands"
 author: "Chris Paciorek"
-date: "2025-08-12"
+date: "2025-09-01"
 
 format:
   pdf:
@@ -34,7 +34,7 @@ Wickham, and Greg Wilson. [Research Software Engineering with Python](https://th
 
 # 1. Shell basics
 
-The shell is the interface between you and the UNIX operating system.
+The shell is the interface between you and the (UNIX-style) operating system.
 
 I'll use 'UNIX' to refer to the family of operating systems that
 descend from the path-breaking UNIX operating system developed at AT&T's
@@ -58,14 +58,22 @@ UNIX commands.
 
 For your work on this unit, either bash on a Linux machine, the older
 version of bash on MacOS, or zsh on MacOS (or Linux) are fine. I'll
-probably demo everything using bash on a Linux machine, and there are
-some annoying differences from the older bash on MacOS that may be
+probably demo everything using bash on a Linux machine.
+
+::: {.callout-danger title="Commands on Linux vs. MacOS"}
+
+Note that the UNIX utilities on Linux have some annoying, but usually minor,
+differences from those on MacOS that may be
 occasionally confusing (in particular the options to various commands
 can differ on MacOS).
 
+For example, you can use `ls --all` in Linux but not MacOS.
+
+:::
+
 The Windows PowerShell and old cmd.exe/DOS command interpreter both provide
-a command-line interface on Windows, but not a UNIX-based one and
-not interfaces that will be considered here. 
+a command-line interface on Windows, but not a UNIX-based one. We won't consider
+them here.
 
 
 UNIX shell commands are designed to each do a specific task really well
@@ -309,6 +317,14 @@ ps -o pid,pcpu,pmem,user,command | grep python
 ps -o pid,command | grep python | cut -d' ' -f1 |  tail -n ${nJobs} | xargs kill
 ```
 
+Or, if you started the jobs all at once, then the process IDs are likely to be in sequential order,
+so you could use [brace expansion](https://computing.stat.berkeley.edu/tutorial-using-bash/using-commands.html#brace-expansion) in combination with `kill`:
+
+```{bash}
+#| eval: false
+kill {871841..871870}
+```
+
 # 4. bash shell challenges
 
 ## 4.1 First challenge
@@ -359,7 +375,7 @@ the number of fields.
 
 Let's return to the `RTADataSub.csv` file and the issue of missing values.
 
-1. Create a new file without any rows that have an 'x' (which indicate a missing value).
+1. Using the data from `RTADataSub.csv`, create a new file without any rows that have an 'x' (which indicate a missing value).
 2. Turn the code into a function that also prints out the number of rows that are being removed and that sends its output to stdout so that it can be used with piping.
 3. Now modify your function so that the user could provide the missing value string and the input
 filename.
