@@ -2,11 +2,13 @@
 title: Office hours
 ---
 
-  - Chris (Evans 495 or [Zoom (email in advance)](TBD))
-     - TBD
+  - Chris (Evans 495 or [Zoom (email in advance)])
+     - Tuesdays 9-10 am
+     - Thursdays 4:30-5:30 pm
      - By appoinment
      - Feel free to drop by if my door is open, though I won't always be able to help at the time.
   - João:
+     - Mondays, 4-5 pm (Evans 444)
      - Wednesdays, 3-4 pm (Evans 444)
      - Fridays during unused section time (Evans 334)
 
