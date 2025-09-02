@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris Paciorek">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-09-01">
 
 <title>The bash shell and UNIX commands</title>
 <style>
@@ -410,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 12, 2025</p>
+      <p class="date">September 1, 2025</p>
     </div>
   </div>
   
@@ -433,13 +433,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="shell-basics" class="level1">
 <h1>1. Shell basics</h1>
-<p>The shell is the interface between you and the UNIX operating system.</p>
+<p>The shell is the interface between you and the (UNIX-style) operating system.</p>
 <p>I’ll use ‘UNIX’ to refer to the family of operating systems that descend from the path-breaking UNIX operating system developed at AT&amp;T’s Bell Labs in the 1970s. These include MacOS and various flavors of Linux (e.g., Ubuntu, Debian, CentOS, Fedora).</p>
 <p>When you are working in a terminal window (i.e., a window providing the command line interface), you’re interacting with a shell. From the shell you can run UNIX commands such as <code>cp</code>, <code>ls</code>, <code>grep</code>, etc. (as well as start various applications).</p>
 <p>Here’s a <a href="https://technoinfo360.com/explain-what-is-kernel-and-shell-in-unix/">graphical representation</a> of how the shell relates to various programs, commands, and the operating system.</p>
 <p>There are multiple shells (<code>sh</code>, <code>bash</code>, <code>zsh</code>, <code>csh</code>, <code>tcsh</code>, <code>ksh</code>). We’ll assume usage of <code>bash</code>, as this is a very commonly-used shell in Linux, plus was the default for Mac OS X until Catalina (<code>zsh</code>, very similar to bash, is now the default), the SCF machines, and the UC Berkeley campus cluster (Savio). All of the various shells allow you to run UNIX commands.</p>
-<p>For your work on this unit, either bash on a Linux machine, the older version of bash on MacOS, or zsh on MacOS (or Linux) are fine. I’ll probably demo everything using bash on a Linux machine, and there are some annoying differences from the older bash on MacOS that may be occasionally confusing (in particular the options to various commands can differ on MacOS).</p>
-<p>The Windows PowerShell and old cmd.exe/DOS command interpreter both provide a command-line interface on Windows, but not a UNIX-based one and not interfaces that will be considered here.</p>
+<p>For your work on this unit, either bash on a Linux machine, the older version of bash on MacOS, or zsh on MacOS (or Linux) are fine. I’ll probably demo everything using bash on a Linux machine.</p>
+<div class="callout-danger" title="Commands on Linux vs. MacOS">
+<p>Note that the UNIX utilities on Linux have some annoying, but usually minor, differences from those on MacOS that may be occasionally confusing (in particular the options to various commands can differ on MacOS).</p>
+<p>For example, you can use <code>ls --all</code> in Linux but not MacOS.</p>
+</div>
+<p>The Windows PowerShell and old cmd.exe/DOS command interpreter both provide a command-line interface on Windows, but not a UNIX-based one. We won’t consider them here.</p>
 <p>UNIX shell commands are designed to each do a specific task really well and really fast. They are modular and composable, so you can build up complicated operations by combining the commands. These tools were designed decades ago, so using the shell might seem old-fashioned, but the shell still lies at the heart of modern scientific computing. By using the shell you can automate your work and make it reproducible. And once you know how to use it, you’ll find that enter commands quickly and without a lot of typing.</p>
 </section>
 <section id="using-the-bash-shell" class="level1">
@@ -597,6 +601,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># not clear how to sort by start time</span></span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-o</span> pid,command <span class="kw">|</span> <span class="fu">grep</span> python <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">' '</span> <span class="at">-f1</span> <span class="kw">|</span>  <span class="fu">tail</span> <span class="at">-n</span> <span class="va">${nJobs}</span> <span class="kw">|</span> <span class="fu">xargs</span> kill</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Or, if you started the jobs all at once, then the process IDs are likely to be in sequential order, so you could use <a href="https://computing.stat.berkeley.edu/tutorial-using-bash/using-commands.html#brace-expansion">brace expansion</a> in combination with <code>kill</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="dt">{</span><span class="dv">871841</span><span class="dt">..</span><span class="dv">871870</span><span class="dt">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="bash-shell-challenges" class="level1">
 <h1>4. bash shell challenges</h1>
@@ -628,7 +636,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="fourth-challenge">4.4 Fourth challenge</h2>
 <p>Let’s return to the <code>RTADataSub.csv</code> file and the issue of missing values.</p>
 <ol type="1">
-<li>Create a new file without any rows that have an ‘x’ (which indicate a missing value).</li>
+<li>Using the data from <code>RTADataSub.csv</code>, create a new file without any rows that have an ‘x’ (which indicate a missing value).</li>
 <li>Turn the code into a function that also prints out the number of rows that are being removed and that sends its output to stdout so that it can be used with piping.</li>
 <li>Now modify your function so that the user could provide the missing value string and the input filename.</li>
 </ol>
