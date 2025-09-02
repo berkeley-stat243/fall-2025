@@ -17,9 +17,14 @@ format:
     code-block-border-left: "#31BAE9"
 execute:
   freeze: auto
+engine: knitr
 from: markdown+tex_math_single_backslash
 ---
 
+```{r, setup-r}
+#| echo: false
+reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+```
 
 
 # Overview
@@ -195,14 +200,21 @@ Here we'll see how to use `ruff`. You might also consider `black`.
 
 We’ll practice with ruff with a small module we’ll use next also for debugging.
 
+::: {.callout-tip title="Installing ruff"}
+You can install `ruff` via pip (`pip install ruff`), either inside a Conda environment or outside (in which case it will likely be installed at `~/.local/bin/ruff`).
+:::
+
 First, we check for and fix syntax errors.
 
 ```{bash}
-ruff check test.py
+#| output: false
+#| echo: false
+cp test-unlinted.py test.py
+rm -f test-save.py
 ```
 
-```
-All checks passed!
+```{bash}
+ruff check test.py
 ```
 
 
@@ -213,29 +225,18 @@ cp test.py test-save.py   # Not required, just so we can see what `ruff` did.
 ruff format test.py
 ```
 
-```
-1 file reformatted
-```
 
 Let’s see what changed:
 
 ```{bash}
+#| error: true
 diff test-save.py test.py
 ```
 
-```
-1c1
-< x=  7
----
-> x = 7
-3,5d2
-< def myfun(x, y =0):
-< # This is a toy function.
-<       return x*y
-6a4,6
-> def myfun(x, y=0):
->     # This is a toy function.
->     return x * y
+```{bash}
+#| output: false
+#| echo: false
+cp test-unlinted.py test.py
 ```
 
 So we see that `ruff` fixed spacing and properly indented the comment line.
@@ -256,26 +257,6 @@ Exceptions can be a valuable tool for making your code handle different modes of
 
 The other side of the coin happens when you want to write a piece of code that handles failure in a specific way, instead of simply giving up. For example, if you are writing a script that reads and downloads hundreds of URLs, you don't want your program to stop when any of them fails to respond (or do you?). You might want to continue with the rest of the URLs, and write out the failed URLs in a secondary output file.
 
-#### Using `try-except` to continue execution
-
-If you want some code to continue running even when it encounters an error, you can use `try-except`.
-This would often be done in code where you were running some workflow, but can also be useful in functions
-that you write for general purpose use (e.g., code in a package you are writing).
-
-Suppose we have a loop and we want to run all the iterations even if the code for some iterations fail.
-We can embed the code that might fail in a `try` block and then in the `except` block, run code
-that will handle the situation when the error occurs.
-
-```{python}
-#| eval: false
-for i in range(n):
-    try:
-        <some code that might fail>
-        result[i] = <actual result>
-    except:
-        <what to do if the code fails>
-        result[i] = None   
-```
 
 #### Strategies for invoking and handling errors
 
@@ -304,7 +285,6 @@ myfun(-3)
 ```
 
 ```{python}
-#| eval: false
 #| error: true
 def myfun(val):
     if val <= 0:
@@ -313,12 +293,9 @@ def myfun(val):
 myfun(-3)
 ```
 
-```
-ValueError: `val` should be positive
-```
 
-Next let's consider cases where your function runs some code that might return an
-error.
+Next let's consider cases where your function runs some code that might result in an
+error (or might not).
 
 We'd often want to catch the error using `try-except`. In some cases we
 would want to notify the user and then continue (perhaps falling back to a
@@ -327,11 +304,12 @@ from our function) while in others we might want to provide a more informative
 error message than if we had just let the error occur, but still have the
 exception be raised.
 
+We can embed the code that might fail in a `try` block and then in the `except` block, run code that will handle the situation when the error occurs.
+
 First let's see the case of continuing execution.
 
 
 ```{python}
-#| eval: false
 #| error: true
 import os
 
@@ -350,17 +328,14 @@ def myfun(filename):
 myfun('missing_file.txt')
 ```
 
-```
-[Errno 2] No such file or directory: 'missing_file.txt'
-Check that the file `missing_file.txt` can be found in the current path: `/accounts/vis/paciorek/teaching/243/fall-2025/units`.
-```
 
 Finally let's see how we can intercept an error but then "re-raise" the error rather than
-continuing execution.
+continuing execution. This isn't printing out nicely in the rendered document if I actually
+run this code during rendering, so I'll just insert some of the output that should be produced.
 
 ```{python}
-#| eval: false
 #| error: true
+#| eval: false
 import requests
 
 def myfun(url):
@@ -371,15 +346,25 @@ def myfun(url):
               f"Perhaps it doesn't exist or the URL has a typo?")
         raise
 
-myfun("http://missingurl.com")
+myfun("http://missingurl_forsure.com")
 ```
 
 ```
-There was a problem accessing http://missingurl.com. Perhaps it doesn't exist or the URL has a typo?
+There was a problem accessing http://missingurl_forsure.com. Perhaps it doesn't exist or the URL has a typo?
+Traceback (most recent call last):
+  File "/usr/local/linux/miniforge-3.13/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
 
-ConnectionError: HTTPConnectionPool(host='missingurl.com', port=80): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f348db44590>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+<snip>
+
+  File "/usr/local/linux/miniforge-3.13/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='missingurl_forsure.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7ca7d8e13e00>: Failed to resolve 'missingurl_forsure.com' ([Errno -2] Name or service not known)"))
 ```
-
 
 ### Assertions
 
@@ -389,14 +374,9 @@ using the `assert` statement in Python, with a clear assertion message
 telling the developer what the problem is.
 
 ```{python}
-#| eval: false
+#| error: true
 number = -42
 assert number > 0, f"number greater than 0 expected, got: {number}"
-## Produces this error:
-## Traceback (most recent call last):
-##   File "<stdin>", line 1, in <module>
-## AssertionError: number greater than 0 expected, got: -42
-
 ```
 
 Various operators/functions are commonly used in assertions, including
@@ -458,39 +438,11 @@ def test_warning():
 We can then run the tests via `pytest` like this:
 
 ```{bash}
-pytest mytestfile.py
+#| error: true
+pytest test_dummy.py
 ```
 
-```
-====================================== test session starts ======================================
-platform linux -- Python 3.12.2, pytest-8.1.1, pluggy-1.4.0
-rootdir: /accounts/vis/paciorek/teaching/243/fall-2025/units
-plugins: anyio-4.3.0
-collected 4 items                                                                               
-
-test_dummy.py .F..                                                                        [100%]
-
-=========================================== FAILURES ============================================
-_______________________________________ test_numpy_array ________________________________________
-
-    def test_numpy_array():
->       assert np.all(np.equal(dummy.add_one(np.array([3,4])), np.array([4,5])))
-
-test_dummy.py:11: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-
-x = array([3, 4])
-
-    def add_one(x):
-        if not isinstance(x, (float, int, complex)):
->           raise TypeError(f"`{x}` should be numeric")
-E           TypeError: `[3 4]` should be numeric
-
-dummy.py:5: TypeError
-==================================== short test summary info ====================================
-FAILED test_dummy.py::test_numpy_array - TypeError: `[3 4]` should be numeric
-================================== 1 failed, 3 passed in 0.84s ==================================
-```
+You can run `pytest` on individual files or on directories or simply in the current working directory. In the latter cases, it will look for test files (those with the letters "test" in the file name) in the directory and all subdirectories.
 
 In lab, we'll go over assertions, exceptions, and testing in
 detail.
@@ -674,7 +626,10 @@ Now if I print `i`, I see that it has incremented to `1`.
 1
 ```
 
-We could keep hitting `n` or `c` until hitting the stratum where an error occurs, but that would be tedious.
+Note that all of these commands have graphical-based equivalents in VS Code.
+
+To debug the example, we could keep hitting `n` or `c` until hitting the stratum where an error occurs, but that would be tedious.
+So we'll exit out of the debugger and use post-mortem debugging.
 
 Let's hit `q` to quit out of the debugger.
 
@@ -682,8 +637,6 @@ Let's hit `q` to quit out of the debugger.
 (Pdb) q
 >>>
 ```
-
-Note that all of these commands have graphical-based equivalents in VS Code.
 
 Next let's see how we can enter debugging mode only at point an error occurs.
 
@@ -880,20 +833,14 @@ mysqrt(-3)
 ```
 
 ```{python}
-#| eval: false
+#| error: true
 mysqrt('hat')
 ```
 
-```
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "<stdin>", line 3, in mysqrt
-TypeError: What is the square root of 'hat'?
-```
 
 ### Catch run-time errors with  `try/except` statements
 
-Also, sometimes a function you call will fail, but you want to continue execution. For example, consider the stratified analysis show previously in which you take subsets of your data based on some categorical variable and fit a statistical model for each value of the categorical variable. If some of the subsets have no or very few observations, the statistical model fitting might fail. To do this, you might be using a for loop or `apply`. You want your code to continue and fit the model for the rest of the cases even if one (or more) of the cases cannot be fit.  You can wrap the function call that may fail within the `try` statement and then your code won't stop, even when an error occurs. Here's a toy example.
+Also, sometimes some code you execute might fail, but you want to continue execution. For example, consider the stratified analysis show previously in which you take subsets of your data based on some categorical variable and fit a statistical model for each value of the categorical variable. If some of the subsets have no or very few observations, the statistical model fitting might fail. To do this, you might be using a for loop or `map`. You want your code to continue and fit the model for the rest of the cases even if one (or more) of the cases cannot be fit.  You can wrap the function call that may fail within the `try` statement and then your code won't stop, even when an error occurs. In the `except` block you'll have code that will handle the situation when the error occurs. Here's a toy example.
 
 ```{python, try}
 import numpy as np
