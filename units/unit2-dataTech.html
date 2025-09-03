@@ -560,7 +560,7 @@ Quarto configuration details for this document
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_from_csv <span class="op">=</span> pd.read_csv(os.path.join(<span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'airline.csv'</span>))</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.time() <span class="op">-</span> t0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1.0136752128601074</code></pre>
+<pre><code>1.0036284923553467</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -573,7 +573,7 @@ Quarto configuration details for this document
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'..'</span>, <span class="st">'data'</span>, <span class="st">'airline.parquet'</span>))</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(time.time() <span class="op">-</span> t0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.19519829750061035</code></pre>
+<pre><code>0.19907593727111816</code></pre>
 </div>
 </div>
 <p>The CSV file is 51 MB while the Parquet file is 8 MB.</p>
@@ -582,7 +582,7 @@ Quarto configuration details for this document
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> ../data/airline.parquet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-rw-r--r-- 1 paciorek scfstaff 51480244 Aug 11 12:15 ../data/airline.csv
--rw-r--r-- 1 paciorek scfstaff 8132907 Aug 29 08:17 ../data/airline.parquet</code></pre>
+-rw-r--r-- 1 paciorek scfstaff 8132907 Sep  3 08:56 ../data/airline.parquet</code></pre>
 </div>
 </div>
 </section>
@@ -818,11 +818,11 @@ Using <code>with</code>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> time.time()</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Timing for Pandas: </span><span class="sc">{</span>t1<span class="op">-</span>t0<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Timing for Pandas: 1.0514764785766602.</code></pre>
+<pre><code>Timing for Pandas: 0.954007625579834.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Timing for Polars: </span><span class="sc">{</span>t2<span class="op">-</span>t1<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Timing for Polars: 0.7218351364135742.</code></pre>
+<pre><code>Timing for Polars: 0.26727819442749023.</code></pre>
 </div>
 </div>
 </section>
@@ -1381,6 +1381,7 @@ Using <code>with</code>
 <span id="cb99-28"><a href="#cb99-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Could not create Issue"</span>)</span>
 <span id="cb99-29"><a href="#cb99-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(response.status_code, response.text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Note that for security, I created a <a href="https://github.com/settings/personal-access-tokens">GitHub fine-grained personal access token</a> that is limited in <em>scope</em> to only be able to handle issues in my test repository. And I’ve put the token into a file that is not committed to the GitHub repository containing these materials. (When doing this sort of thing with GitHub Actions, one would generally <a href="https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets.">store the token as a “secret” in the repository</a></p>
 <p>I could also have done this from the command line with <code>curl</code>, along the following lines:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="dt">\</span></span>
@@ -1393,7 +1394,6 @@ Using <code>with</code>
 <span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">-d</span> <span class="st">'{"title":"New issue from API","body":"This issue was created using the GitHub API.","labels":["bug"]}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>where <code>${GH_PERSONAL_ACCESS_TOKEN}</code> is an environment variable containing the token.</p>
-<p>Note that for security, I created a <a href="https://github.com/settings/personal-access-tokens">GitHub fine-grained personal access token</a> that is limited in <em>scope</em> to only be able to handle issues in my test repository. And I’ve put the token into a file that is not committed to the GitHub repository containing these materials. (When doing this sort of thing with GitHub Actions, one would generally <a href="https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets">store the token as a “secret” in the repository</a>.</p>
 <p><code>requests</code> can handle other kinds of HTTP requests such as PUT and DELETE. Finally, some websites use cookies to keep track of users, and you may need to download a cookie in the first interaction with the HTTP server and then send that cookie with later interactions. More details are available in the Nolan and Temple Lang book.</p>
 </section>
 <section id="packaged-access-to-an-api" class="level3">
@@ -1424,11 +1424,11 @@ Using <code>with</code>
 <span id="cb101-20"><a href="#cb101-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the results.</span></span>
 <span id="cb101-21"><a href="#cb101-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Successfully created issue #</span><span class="sc">{</span>issue<span class="sc">.</span>number<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Successfully created issue #17</code></pre>
+<pre><code>Successfully created issue #19</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"URL: </span><span class="sc">{</span>issue<span class="sc">.</span>html_url<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>URL: https://github.com/paciorek/test/issues/17</code></pre>
+<pre><code>URL: https://github.com/paciorek/test/issues/19</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>g.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1461,7 +1461,7 @@ Using <code>with</code>
 </div>
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>subprocess.run([<span class="st">"ls"</span>, <span class="st">"-l"</span>, <span class="st">"tmp.txt"</span>], capture_output<span class="op">=</span><span class="va">True</span>).stdout</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>b'-rw-r--r-- 1 paciorek scfstaff 4 Aug 29 08:17 tmp.txt\n'</code></pre>
+<pre><code>b'-rw-r--r-- 1 paciorek scfstaff 4 Sep  3 08:56 tmp.txt\n'</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'tmp.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> textfile:</span>
 <span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>     line <span class="op">=</span> textfile.readlines()</span>
@@ -1520,7 +1520,7 @@ Using <code>with</code>
 <div class="sourceCode cell-code" id="cb127"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Here n-tilde and division symbol take up two bytes</span></span>
 <span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> tmp2.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-rw-r--r-- 1 paciorek scfstaff 10 Aug 29 08:17 tmp2.txt</code></pre>
+<pre><code>-rw-r--r-- 1 paciorek scfstaff 10 Sep  3 08:56 tmp2.txt</code></pre>
 </div>
 </div>
 <div class="cell">
