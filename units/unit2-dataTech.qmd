@@ -1158,6 +1158,10 @@ else:
     print(response.status_code, response.text)
 ```
 
+Note that for security, I created a [GitHub fine-grained personal access token](https://github.com/settings/personal-access-tokens) that is limited in *scope* to
+only be able to handle issues in my test repository. And I've put the token into a file that is not committed to the GitHub repository containing these materials. (When doing this sort of thing with GitHub Actions, one would generally [store the token as a "secret" in the repository](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets.)
+
+
 I could also have done this from the command line with `curl`, along the following lines:
 
 ```{bash}
@@ -1174,8 +1178,6 @@ curl -L \
 
 where `${GH_PERSONAL_ACCESS_TOKEN}` is an environment variable containing the token.
 
-Note that for security, I created a [GitHub fine-grained personal access token](https://github.com/settings/personal-access-tokens) that is limited in *scope* to
-only be able to handle issues in my test repository. And I've put the token into a file that is not committed to the GitHub repository containing these materials. (When doing this sort of thing with GitHub Actions, one would generally [store the token as a "secret" in the repository](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
 
 `requests` can handle other kinds of HTTP requests such as PUT
 and DELETE. Finally, some websites use cookies to keep track of users,
