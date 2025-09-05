@@ -1,6 +1,6 @@
 ---
 title: "Lab 1: Submitting problem set solutions"
-date: "2024-09-06"
+date: "2025-09-05"
 format:
   pdf:
     documentclass: article
@@ -15,7 +15,7 @@ format:
     code-block-background: true
 ---
 
-## Submitting problem set solutions (09/06/24)
+## Submitting problem set solutions (Sep 5)
 
 By now you should already have access to the following 5 basic tools:
 
@@ -62,7 +62,7 @@ Refer to [this guide](../howtos/submitPS.md) and please ask questions if somethi
 0. Clone your github repository to your development environment
 1. Create a subdirectory in your github repository with the name ps0
 2. In that subdirectory, create a quarto document (ps0.qmd) that has some simple code that creates a simple plot (you can follow this example/tutorial [here](https://quarto.org/docs/get-started/hello/text-editor.html))
-3. Use the quarto command line to render it into a pdf document (quarto render FILE ---to pdf)
+3. Use the quarto command line to render it into a pdf document (quarto render FILE --to pdf)
 4. Commit the changes to your repository (git add FILES; git commit -m MESSAGE; git push)
 5. Add another section to your quarto document (use your imagination), then preview and commit the changes
 6. Use the quarto command line to render the updated document into a pdf document
@@ -98,9 +98,9 @@ You can go to the settings in your IDE and point it to the specific python insta
 
 You can fix the quarto configuration by setting the environment variable `QUARTO_PYTHON` to the correct python path or by running `quarto check`. Restarting the IDE may also help if you had just installed something in the other environment.
 
-#### Quarto rendering fails to find a Python package
+#### Quarto rendering fails to find a python package
 
-It's a good idea to test that you can import packages such as `numpy` when a document is rendered. If that fails, either you haven't installed the package in Python or Quarto is using a different Python installation than the one in which you installed the package. See the items above.
+It's a good idea to test that you can import packages such as `numpy` when a document is rendered. If that fails, either you haven't installed the package in python or quarto is using a different python installation than the one in which you installed the package. See the items above.
 
 #### Pushing to git fails with message "Make sure you configure your 'user.email' and 'user.name' in git"
 
@@ -108,4 +108,4 @@ Follow the suggested course of action in the error message to configure your ema
 
 ## Acknowledgements
 
-This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.
+This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2025 semester.
