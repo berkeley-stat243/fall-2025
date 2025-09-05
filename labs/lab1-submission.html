@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-09-06">
+<meta name="dcterms.date" content="2025-09-05">
 
 <title>Lab 1: Submitting problem set solutions</title>
 <style>
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a9ac95982dfa497af26296eb1ce0c91d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2803d336d490ed95d10a15ff1babbfa3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -75,19 +75,269 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/lab0-setup.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/lab1-submission.html">Lab 1 (Quarto/Git/Submission)</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Stat 243</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/berkeley-stat243/fall-2025" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../office_hours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Office Hours</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Units</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit1-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 1 (UNIX intro)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit2-dataTech.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 2 (Data technologies)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit3-bash.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 3 (Bash shell)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit4-goodPractices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 4 (Good practices)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit5-programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 5 (Programming)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit6-parallel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 6 (Parallelization)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit7-bigData.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 7 (Databases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit8-numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 8 (Precision)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit9-sim.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 9 (Simulation)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit10-linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 10 (Linear Algebra)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit11-optim.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 11 (Optimization)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../units/unit12-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unit 12 (Graphics)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/lab0-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 0 (Optional setup)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/lab1-submission.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab 1 (Quarto/Git/Submission)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Problem Sets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ps/ps1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem Set 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project/project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">How tos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howtos/accessPython.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accessing Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howtos/accessUnixCommandLine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accessing the Unix Command Line</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howtos/installGit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing Git</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howtos/installQuarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing and Using Quarto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howtos/vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howtos/submitPS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem Set Submissions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howtos/windowsAndLinux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Windows 10 and the Ubuntu Subsystem</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#submitting-problem-set-solutions-090624" id="toc-submitting-problem-set-solutions-090624" class="nav-link active" data-scroll-target="#submitting-problem-set-solutions-090624">Submitting problem set solutions (09/06/24)</a></li>
+  <li><a href="#submitting-problem-set-solutions-sep-5" id="toc-submitting-problem-set-solutions-sep-5" class="nav-link active" data-scroll-target="#submitting-problem-set-solutions-sep-5">Submitting problem set solutions (Sep 5)</a></li>
   <li><a href="#quick-intro-to-git-and-github" id="toc-quick-intro-to-git-and-github" class="nav-link" data-scroll-target="#quick-intro-to-git-and-github">Quick Intro to git and GitHub</a></li>
   <li><a href="#lab-submission" id="toc-lab-submission" class="nav-link" data-scroll-target="#lab-submission">Lab Submission</a></li>
   <li><a href="#hands-on-lab-instructions---steps" id="toc-hands-on-lab-instructions---steps" class="nav-link" data-scroll-target="#hands-on-lab-instructions---steps">Hands-on Lab Instructions - Steps</a>
@@ -102,7 +352,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/lab0-setup.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/lab1-submission.html">Lab 1 (Quarto/Git/Submission)</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Lab 1: Submitting problem set solutions</h1>
 </div>
@@ -115,7 +365,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 6, 2024</p>
+      <p class="date">September 5, 2025</p>
     </div>
   </div>
   
@@ -127,8 +377,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="submitting-problem-set-solutions-090624" class="level2">
-<h2 class="anchored" data-anchor-id="submitting-problem-set-solutions-090624">Submitting problem set solutions (09/06/24)</h2>
+<section id="submitting-problem-set-solutions-sep-5" class="level2">
+<h2 class="anchored" data-anchor-id="submitting-problem-set-solutions-sep-5">Submitting problem set solutions (Sep 5)</h2>
 <p>By now you should already have access to the following 5 basic tools:</p>
 <ol type="1">
 <li><a href="../howtos/accessUnixCommandLine.html">Unix shell</a></li>
@@ -180,7 +430,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Clone your github repository to your development environment</li>
 <li>Create a subdirectory in your github repository with the name ps0</li>
 <li>In that subdirectory, create a quarto document (ps0.qmd) that has some simple code that creates a simple plot (you can follow this example/tutorial <a href="https://quarto.org/docs/get-started/hello/text-editor.html">here</a>)</li>
-<li>Use the quarto command line to render it into a pdf document (quarto render FILE —to pdf)</li>
+<li>Use the quarto command line to render it into a pdf document (quarto render FILE –to pdf)</li>
 <li>Commit the changes to your repository (git add FILES; git commit -m MESSAGE; git push)</li>
 <li>Add another section to your quarto document (use your imagination), then preview and commit the changes</li>
 <li>Use the quarto command line to render the updated document into a pdf document</li>
@@ -214,8 +464,8 @@ ul.task-list li input[type="checkbox"] {
 <p>You can fix the quarto configuration by setting the environment variable <code>QUARTO_PYTHON</code> to the correct python path or by running <code>quarto check</code>. Restarting the IDE may also help if you had just installed something in the other environment.</p>
 </section>
 <section id="quarto-rendering-fails-to-find-a-python-package" class="level4">
-<h4 class="anchored" data-anchor-id="quarto-rendering-fails-to-find-a-python-package">Quarto rendering fails to find a Python package</h4>
-<p>It’s a good idea to test that you can import packages such as <code>numpy</code> when a document is rendered. If that fails, either you haven’t installed the package in Python or Quarto is using a different Python installation than the one in which you installed the package. See the items above.</p>
+<h4 class="anchored" data-anchor-id="quarto-rendering-fails-to-find-a-python-package">Quarto rendering fails to find a python package</h4>
+<p>It’s a good idea to test that you can import packages such as <code>numpy</code> when a document is rendered. If that fails, either you haven’t installed the package in python or quarto is using a different python installation than the one in which you installed the package. See the items above.</p>
 </section>
 <section id="pushing-to-git-fails-with-message-make-sure-you-configure-your-user.email-and-user.name-in-git" class="level4">
 <h4 class="anchored" data-anchor-id="pushing-to-git-fails-with-message-make-sure-you-configure-your-user.email-and-user.name-in-git">Pushing to git fails with message “Make sure you configure your ‘user.email’ and ‘user.name’ in git”</h4>
@@ -225,7 +475,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.</p>
+<p>This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2025 semester.</p>
 
 
 </section>
