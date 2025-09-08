@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Assignment: regex problems</h1>
-<p class="subtitle lead">Due Friday Sep.&nbsp;13, 10 am</p>
+<p class="subtitle lead">Due Friday Sep.&nbsp;12, 10 am</p>
 </div>
 
 
@@ -108,17 +108,29 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>Read the <a href="https://computing.stat.berkeley.edu/tutorial-using-bash/regex">regular expression section of the bash shell tutorial</a> and provide regular expression syntax to match the strings in the following scenarios. Any reasonable syntax si fine, and even better, challenge yourself to figure out multiple ways to answer each question.</p>
-<p>This is an assignment, graded credit/no credit, and it does not need to follow the requirements for problem set submissions. Any format is fine (including hand-written and scanned).</p>
+<p>In the past, we’ve spent time learning how to create regular expressions. Regular expressions are something that AI tools seem to do quite well, so it’s not clear to me at the moment to what extent we’ll need to know the syntax of regular expressions in detail in the future.</p>
+<p>Given that, you have two options for this assignment. If you’d like to get some experience with regular expression syntax and writing them, choose Option 1. If you don’t think this seems useful to you and instead want to try using AI, choose Option 2.</p>
+<p>As with the bash problems due on Monday, this is an assignment, not a problem set, so submit to Gradescope in any format you like.</p>
 </section>
-<section id="problems" class="level1">
-<h1>Problems</h1>
+<section id="option-1-practicing-with-regular-expressions" class="level1">
+<h1>Option 1: Practicing with regular expressions</h1>
+<p>Read the <a href="https://computing.stat.berkeley.edu/tutorial-using-bash/regex">regular expression section of the bash shell tutorial</a> and provide regular expression syntax to match the strings in the following scenarios. Any reasonable syntax is fine, and even better, challenge yourself to figure out multiple ways to answer each question.</p>
 <ol type="1">
 <li>Match the strings “dog”, “Dog”, “dOg”, “doG”, “DOg”, etc. (The word ‘dog’ in any combination of lower and upper case.)</li>
 <li>Match the strings “cat”, “caat”, “caaat”, etc.</li>
 <li>Match the strings “cat”, “at”, and “t”.</li>
 <li>Match two words separated by any amount of whitespace.</li>
 </ol>
+</section>
+<section id="option-2-using-ai-for-regular-expressions-with-extensive-testing" class="level1">
+<h1>Option 2: Using AI for regular expressions, with extensive testing</h1>
+<p>Skim through the <a href="https://computing.stat.berkeley.edu/tutorial-using-bash/regex">regular expression section of the bash shell tutorial</a> to get a sense for the how they work without trying to absorb the syntax details.</p>
+<p>Choose <strong>one</strong> of the following pattern matching exercises. First write an an extensive set of tests, with examples that should be matched and examples that should not be matched. Then use an AI tool (ChatBot or AI coding assistant) to produce a regular expression and run the regular expression using <code>grep</code> on your test cases.</p>
+<ul>
+<li>Match valid email addresses</li>
+<li>Match English words, including hyphenated and possessive words</li>
+<li>Match US phone numbers (or phone numbers from some other country)</li>
+</ul>
 
 
 </section>
