@@ -12,14 +12,14 @@ listing:
 :::
 
 
-## Quizzes
+## Mini-exams
 
-Quizzes are in-person only. 
+These are in-person only. 
 
-- Quiz 1: TBD in class
-  - Review session TBD  in section.
-- Quiz 2: TBD in class.
-  - Review session TBD in section.
+- Mini-exam 1: October 22 in class
+  - Review session October 17 in section.
+- Mini-exam 2: November 24 in class.
+  - Review session November 21 in section.
 
 ## Project
 
