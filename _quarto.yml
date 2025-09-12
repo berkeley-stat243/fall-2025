@@ -53,8 +53,8 @@ website:
             text: "Lab 0 (Optional setup)"
           - href: labs/lab1-submission.html
             text: "Lab 1 (Quarto/Git/Submission)"
-          # - href: labs/lab2-testing.html
-          #   text: "Lab 2 (Exceptions/Testing)"
+          - href: labs/lab2-testing.html
+            text: "Lab 2 (Exceptions/Testing)"
           # - href: labs/lab3-debugging.html
           #   text: "Lab 3 (Debugging)"
           # - href: labs/lab4-reproducibility.html

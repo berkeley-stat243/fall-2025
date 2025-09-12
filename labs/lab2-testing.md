@@ -1,6 +1,6 @@
 ---
 title: "Lab 2: Exceptions and Testing"
-date: "2024-09-13"
+date: "2025-09-12"
 format:
   pdf:
     documentclass: article
@@ -21,7 +21,7 @@ Testing is what you do when you finish implementing a piece of code and want to 
 
 ## Lab Exercise
 
-1- Write a function in Python that finds a number in a string using regular expressions. The number can be positive or negative, integer-valued, or real, and numbers less than one can also be of the form 0.96 or .96. It can be assumed that no numbers appear in scientific notation. Refer to [Using regex in Python](http://berkeley-scf.github.io/tutorial-string-processing/regex#6-using-regex-in-python) for a quick overview of Python's `re` package.
+1- Write a function in Python that finds a number in a string using regular expressions. The number can be positive or negative, integer-valued, or real, and numbers less than one can also be of the form 0.96 or .96. It can be assumed that no numbers appear in scientific notation. Refer to [String processing and regular expressions in Python](https://stat243.berkeley.edu/fall-2025/units/unit5-programming.html#string-processing-and-regular-expressions-in-python) for a quick overview of Python's `re` package. You may use AI to generate the regex, but be sure you understand the output.
 
 2- Write an interface for that function (a function name and arguments), but do not implement the function yet (you can have it return an `None`, or an empty string for now). We will do this in a good old fashioned .py file (not a notebook or a quarto file).
 
@@ -31,7 +31,7 @@ Testing is what you do when you finish implementing a piece of code and want to 
 
 5- Implement the function. You can do this at one go, or case by case. As you implement a case, you can rerun the test suite and see some of the tests relevant to that cases stopping to fail. When all the tests pass, you are done. This is called test-driven development.
 
-6- If some cases are still failing, that's alright, we can use that failing code next week for demonstrating debugging functionality.
+6- If some cases are still failing, that's alright, for the purposes of this lab we don't need to ensure all edge cases are dealt with.
 
 7- Make sure you raise an exception to trap invalid input types.
 
@@ -39,4 +39,4 @@ Testing is what you do when you finish implementing a piece of code and want to 
 
 ## Acknowledgements
 
-This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2024 semester.
+This lab was originally authored by Ahmed Eldeeb and adapted for the Fall 2025 semester.
