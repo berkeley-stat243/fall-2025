@@ -1,7 +1,7 @@
 ---
 title: "Programming concepts"
 author: "Chris Paciorek"
-date: "2024-09-13"
+date: "2025-09-15"
 format:
   pdf:
     documentclass: article
@@ -460,6 +460,7 @@ Here are a variety of tools for interacting with the operating system:
     platform.system()
     os.uname()
     platform.python_version()
+    sys.version
     ```
 
 -   To retrieve environment variables:
@@ -568,7 +569,7 @@ EOF
 ```{python}
 import mymod
 print(mymod.x)
-mymod.myfun(7)
+mymod.myfun(99)
 ```
 
 ## The import statement
@@ -803,17 +804,19 @@ For reproducibility, it's important to know the versions of the packages you use
 pip freeze > requirements.txt
 pip install -r requirements.txt
 
-conda env export > environment.yml
+conda env export --no-builds > environment.yml
 conda env create -f environment.yml
 ```
 
+The `--no-builds` flag make sure not to include information about the dependencies that are system-specific (e.g., that would only work on MacOS and not on Windows).
+
 Conda is a general package manager. You can use it to manage Python packages but lots of other software as well, including R and Julia.
 
-Conda environments provide an additional layer of modularity/reproducibility, allowing you to set up a fully reproducible environment for your computation. Here (by explicitly giving `python=3.12`) the Python 3.12 executable and all packages you install in the environment are fully independent of whatever Python executables are installed on the system.
+Conda environments provide an additional layer of modularity/reproducibility, allowing you to set up a fully reproducible environment for your computation. Here (by explicitly giving `python=3.13`) the Python 3.13 executable and all packages you install in the environment are fully independent of whatever Python executables are installed on the system.
 
 ```{bash}
 #| eval: false
-conda create -n myenv python=3.12
+conda create -n myenv python=3.13
 source activate myenv
 conda install numpy
 ```
@@ -1104,6 +1107,8 @@ r = range(5)
 r
 list(r)
 ```
+
+Side note: `range` objects can be iterated over (they are iterable) but they are not actually iterators. E.g., looping over them does not "consume" their values, unlike an iterator. 
 
 # 5. Programming paradigms: object-oriented and functional programming
 
