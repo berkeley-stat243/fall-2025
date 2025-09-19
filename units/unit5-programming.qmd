@@ -1068,47 +1068,10 @@ aggregation.
 
 There are a number of broad categories of kinds of objects: `mapping`, `number`, `sequence`, `iterator`. These are called object protocols.
 
-All objects that fall in a given category share key characteristics. For example `sequence` objects have notions of length and accessing (ordered) elements by index, while
-`iterator` objects have notions of "next" and of "stopping".
+All objects that fall in a given category share key characteristics. For example `sequence` objects have notions of length and accessing (ordered) elements by index, while `iterator` objects have notions of "next" and of "stopping".
 
-If you implement your own class that falls into one of these categories, it should follow the relevant protocol
-by providing the required methods. For example a container class that supports iteration should provide the `__iter__` and `__next__` methods.
-
-Here we see that `tuple`s are iterable containers (though they are not iterators themselves):
-
-```{python}
-mytuple = ("apple", "banana", "cherry")
-
-for item in mytuple:
-    print(item)
-
-## We can manually create the iterator and iterate through it.
-myit = iter(mytuple)
-## myit = mytuple.__iter__()  ## This is equivalent to using `iter(mytuple)`.
-
-print(next(myit))
-print(next(myit))
-myit.__next__()   ## This is equivalent to using `next(myit)`.
-```
-
-We've actually gotten ahead of ourselves -- how is it that `iter` seems to do the same thing as `mytuple.__iter__()`
-and `next` seems to do the same thing as `myit.__next__()`? We'll discuss that in the next section when we discuss the [Python object model](#the-python-object-model-and-dunder-methods).
-
-```{python}
-x = zip(['clinton', 'bush', 'obama', 'trump'], ['Dem', 'Rep', 'Dem', 'Rep'])
-next(x)
-next(x)
-```
-
-We can also go from an iterable object to a standard list:
-
-```{python}
-r = range(5)
-r
-list(r)
-```
-
-Side note: `range` objects can be iterated over (they are iterable) but they are not actually iterators. E.g., looping over them does not "consume" their values, unlike an iterator. 
+Object protocols are implemented based on the [Python object model](#the-python-object-model-and-dunder-methods) using **dunder** methods.
+For a class (such as one you write) to implement an object protocol, it must define a particular set of class methods, discussed at the link above.
 
 # 5. Programming paradigms: object-oriented and functional programming
 
@@ -1561,7 +1524,53 @@ Let's check our understanding of the object model.
 How would you get Python to quit immediately, without asking for any more information, when you simply type `q` (no parentheses!) instead of `quit()`? (Hint: you can do this by understanding what happens when you type `q` and how to exploit the characteristics of Python classes.)
 :::
 
-### The `with` statement and context managers
+### Python object protocols: Example 1 -- iterators
+
+A container class that supports iteration should provide the `__iter__` and `__next__` methods to implement the iterator protocol.
+
+Here we see that `tuple`s are iterable containers (although they are not iterators themselves):
+
+```{python}
+mytuple = ("apple", "banana", "cherry")
+
+for item in mytuple:
+    print(item)
+
+## We can manually create the iterator and iterate through it.
+myit = iter(mytuple)
+## myit = mytuple.__iter__()  ## This is equivalent to using `iter(mytuple)`.
+
+type(myit)
+
+print(next(myit))
+print(next(myit))
+myit.__next__()   ## This is equivalent to using `next(myit)`.
+```
+
+I think it makes sense that tuples are iterable containers but they are not iterators themselves, because
+we wouldn't want to "consume" our tuple (leaving it empty) by iterating over it.
+
+Here's another iterator example. `zip` objects are iterators themselves (and we can see them being consumed).
+
+```{python}
+#| error: true
+x = zip(['clinton', 'bush', 'obama', 'trump'], ['Dem', 'Rep', 'Dem', 'Rep'])
+next(x)
+next(x)
+next(x)
+next(x)
+next(x)
+```
+
+We can also go from an iterable object to a standard list:
+
+```{python}
+x = zip(['clinton', 'bush', 'obama', 'trump'], ['Dem', 'Rep', 'Dem', 'Rep'])
+list(x)
+```
+
+
+### Python object protocols: Example 2 -- context managers using `with`
 
 We've seen that the standard way to read/write to a file in Python uses `with`, like this:
 
@@ -1582,11 +1591,11 @@ finally:
     file.close()
 ```
 
-With either approach, we get (1) exception handling in case something goes wrong with the read/write (in this case `readlines`) and (2) automatic closing of the file, regardless of what happens in the execution of the code.
+With either approach, we get (1) exception handling in case something goes wrong with the read/write (in this case `readlines`) and (2) automatic closing of the file, regardless of what happens in the execution of the code, based on the `finally` block that does any needed cleanup.
 
-What does this have to do with *dunder* methods?
+What does this have to do with *dunder* methods and object protocols?
 
-Well, one can use `with` with any class that provides `__enter__` and `__exit__` methods. These are invoked before and after the code in the scope of the `with` block is run.
+Well, one can use `with` with any class  that implements the context manager protocol by providing `__enter__` and `__exit__` methods. These are invoked before and after the code in the scope of the `with` block is run.
 
 
 Here's a basic example:
