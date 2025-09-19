@@ -720,7 +720,7 @@ EOF
 cat << EOF > mypkg/mysubpkg/values.py
 x = 999
 b = 7
-d = 9
+_my_internal_var = 9
 EOF
 ```
 
@@ -1068,13 +1068,13 @@ aggregation.
 
 There are a number of broad categories of kinds of objects: `mapping`, `number`, `sequence`, `iterator`. These are called object protocols.
 
-All objects that fall in a given category share key characteristics. For example `sequence` objects have a notion of "next", while
-`iterator` objects have a notion of "stopping".
+All objects that fall in a given category share key characteristics. For example `sequence` objects have notions of length and accessing (ordered) elements by index, while
+`iterator` objects have notions of "next" and of "stopping".
 
 If you implement your own class that falls into one of these categories, it should follow the relevant protocol
 by providing the required methods. For example a container class that supports iteration should provide the `__iter__` and `__next__` methods.
 
-Here we see that `tuple`s are iterable containers:
+Here we see that `tuple`s are iterable containers (though they are not iterators themselves):
 
 ```{python}
 mytuple = ("apple", "banana", "cherry")
@@ -1560,6 +1560,54 @@ Let's check our understanding of the object model.
 
 How would you get Python to quit immediately, without asking for any more information, when you simply type `q` (no parentheses!) instead of `quit()`? (Hint: you can do this by understanding what happens when you type `q` and how to exploit the characteristics of Python classes.)
 :::
+
+### The `with` statement and context managers
+
+We've seen that the standard way to read/write to a file in Python uses `with`, like this:
+
+```{python}
+#| eval: false
+with open('myfile.txt', 'r') as file:
+     lines = file.readlines()
+```
+
+This creates a "context manager" that is equivalent to:
+
+```{python}
+#| eval: false
+file = open('myfile.txt', 'r')
+try:
+    lines = file.readlines()
+finally:
+    file.close()
+```
+
+With either approach, we get (1) exception handling in case something goes wrong with the read/write (in this case `readlines`) and (2) automatic closing of the file, regardless of what happens in the execution of the code.
+
+What does this have to do with *dunder* methods?
+
+Well, one can use `with` with any class that provides `__enter__` and `__exit__` methods. These are invoked before and after the code in the scope of the `with` block is run.
+
+
+Here's a basic example:
+
+```{python}
+import time
+
+class MyTimer(object):
+    def __enter__(self):
+        print(f"Starting at {time.ctime()}.")
+
+    def __exit__(self, exception_type, exception_value, traceback):
+        print(f"Ending at {time.ctime()}.")
+
+with MyTimer():
+    x = np.random.normal(size=50000000)
+    del x
+```
+
+A more useful example would be setting up a context manager to handle database queries by connecting to the database via `__enter__` and disconnecting via `__exit__`.
+
 
 # 7. Functional programming
 
