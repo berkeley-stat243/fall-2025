@@ -58,11 +58,7 @@ import warnings
 def get_login(item):
     if not isinstance(item, dict):
         raise TypeError(f"`item` argument must be a dictionary")
-    if item['author'] is not None and 'login' in item['author'].keys():
-        return item['author']['login']
-    else:
-        warnings.warn(f'Login not found for {item['commit']['author']['name']}.')
-        return None
+    return item['author']['login']
 
 def process(data):
     if not isinstance(data, dict) or "commit" not in data.keys() or \
