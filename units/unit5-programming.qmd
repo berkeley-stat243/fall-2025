@@ -883,9 +883,13 @@ In compiled languages like C and C++, one has to define the type of each variabl
 Interpreted (or scripting) languages such as Python and R have *dynamic* types. One can associate different types of information with a given variable name at different times and without declaring the type of the variable:
 
 ```{python}
+#| error: true
 x = 'hello'
 print(x)
+x*3
 x = 7
+x*3
+x = {'mykey': 7}
 x*3
 ```
 
@@ -902,7 +906,7 @@ Dynamic typing can be quite helpful from the perspective of quick implementation
 But static typing has some critical advantages from the perspective of software development, including:
 
   - protecting against errors from mismatched values and unexpected user inputs, and
-  - generally much faster execution because the type of a variable does not need to be checked when the code is run.
+  - generally much faster execution because the type of a variable does not need to be checked (and the location of the value found) when the code is run.
 
 More complex types in Python (and in R) often use references (*pointers*, aka *addresses*) to the actual locations of the data. We'll see this in detail when we discuss [Memory](#memory-and-copies).
 
