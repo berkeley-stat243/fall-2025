@@ -1118,6 +1118,23 @@ Objects belong to classes. A class is made up of fields (the data) that store in
 
 By analogy, OOP focuses on the nouns, with the verbs being part of the nouns, while FP focuses on the verbs (the functions), which operate on the nouns (the arguments).
 
+Most of the things we work with in Python are objects.
+Functions are also objects, as are classes.
+
+```{python}
+type(len)
+
+def foo(x):
+    print(x)
+
+type(foo)
+
+import numpy as np
+x = np.array([1.2, 3.4])
+type(x)
+```
+
+
 ## Principles
 
 Some of the standard concepts in object-oriented programming include *encapsulation*, *inheritance*, *polymorphism*, and *abstraction*.
@@ -1278,7 +1295,7 @@ In a module, objects that start with `_` are a weak form of private attributes. 
 
 Inheritance can be a powerful way to reduce code duplication and keep your code organized in a logical (nested) fashion.
 Special cases can be simple extensions of more general classes. A good example of inheritance in Python and R is how regression models are handled.
-E.g., in Python's `statsmodels` package, the [`OLS` class inherits from the `WLS` class](https://www.statsmodels.org/stable/_modules/statsmodels/regression/linear_model.html#OLS).
+E.g., in Python's `statsmodels` package, the [`OLS` class inherits from the `WLS` class](https://www.statsmodels.org/stable/_modules/statsmodels/regression/linear_model.html#OLS). Or if we think back to the random time series example and generalize it, one might have a `StochasticProcess` class, with a `GaussianProcess` class that inherits from it, and a `ExpGaussianProcess` class (implementing a Gaussian process with an exponential covariance` inheriting from the `GaussianProcess` class. 
 
 ```{python}
 class Bear:
@@ -1420,36 +1437,6 @@ This has some disadvantages:
   2. Furthermore, all the code for the different cases all lives inside one potentially very long function, unless we create class-specific helper functions.
   3. Most importantly, `len` will only work for existing classes. And users can't easily extend it for new classes that they create because they don't control the `len` (built-in) function. So a user could not add the additional conditions/classes in a big if-else statement. The generic function approach makes the system *extensible* -- we can build our own new functionality on top of what is already in Python. 
 
-#### The print function
-
-Like `len`, `print` is a generic function, with various
-class-specific methods.
-
-We can write a print method for our own class by defining the `__str__`
-method as well as a `__repr__` method giving what to display when the name of an object is typed.
-
-```{python}
-class Bear:
-      def __init__(self, name, age):
-          self.name = name
-          self.age = age
-
-yog = Bear("Yogi the Bear", 23)
-print(yog)
-
-class Bear:
-      def __init__(self, name, age):
-          self.name = name
-          self.age = age
-      def __str__(self):
-          return f"A bear named {self.name} of age {self.age}."
-      def __repr__(self):
-          return f"Bear(name={self.name}, age={self.age})"
-
-yog = Bear("Yogi the Bear", 23)
-print(yog)   # Invokes __str__
-yog          # Invokes __repr__
-```
 
 
 ### Multiple dispatch OOP 
@@ -1486,37 +1473,47 @@ Here are some important dunder methods:
  - `__add__` is called by the `+` operator.
  - `__getitem__` is called by the `[` slicing operator.
 
-Let's see an example of defining a dunder method for the `Bear` class.
+
+### The print function
+
+Like `len`, `print` is a generic function, with various
+class-specific methods.
+
+We can write a print method for our own class by defining the `__str__`
+method. One generally also defines a `__repr__` method giving what to display when the name of an object is typed.
+
+### Dunder methods: example
 
 ```{python}
+## Basic class definition
+class Bear:
+      def __init__(self, name, age):
+          self.name = name
+          self.age = age
+
+yog = Bear("Yogi the Bear", 23)
+print(yog)
+
+## Class definition with various dunder methods
 class Bear:
       def __init__(self, name, age):
           self.name = name
           self.age = age
       def __str__(self):
           return f"A bear named {self.name} of age {self.age}."
+      def __repr__(self):
+          return f"Bear(name={self.name}, age={self.age})"
       def __add__(self, value):
           self.age += value
+          return None
 
-yog = Bear("Yogi the Bear", 23)
-yog + 12
-print(yog)
+yogi = Bear("Yogi the Bear", 23)
+print(yogi)   # Invokes __str__
+yogi          # Invokes __repr__
+yogi + 12
+print(yogi)
 ```
 
-
-Most of the things we work with in Python are objects.
-Functions are also objects, as are classes.
-
-```{python}
-type(len)
-
-def foo(x):
-    print(x)
-
-type(foo)
-
-type(Bear)
-```
 
 :::{.callout-tip title="Challenge"}
 Let's check our understanding of the object model.
@@ -1595,7 +1592,7 @@ With either approach, we get (1) exception handling in case something goes wrong
 
 What does this have to do with *dunder* methods and object protocols?
 
-Well, one can use `with` with any class  that implements the context manager protocol by providing `__enter__` and `__exit__` methods. These are invoked before and after the code in the scope of the `with` block is run.
+Well, one can use `with` with any class for which one wants to implements the context manager protocol by providing `__enter__` and `__exit__` methods. These are invoked before and after the code in the scope of the `with` block is run.
 
 
 Here's a basic example:
