@@ -1913,7 +1913,7 @@ If we run that in Python (not via rendering the qmd file directly, because the l
   File "<stdin>", line 2, in function_c
 ```
 
-If we run the code by putting it in a module, say `file.py` and running `python file.py`, we see this, with the line numbering relative to the overall file, but showing the same stack of function calls:
+If we run the code by putting it in a module, say `trace.py` and running `python trace.py`, we see this, with the line numbering relative to the overall file, but showing the same stack of function calls:
 
 ```
   File "file.py", line 15, in <module>
