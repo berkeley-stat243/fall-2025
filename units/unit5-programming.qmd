@@ -2077,7 +2077,8 @@ Let's see what operations cause arguments modified in a function to affect state
 
 ```{python}
 def myfun(f_scalar, f_x, f_x_new, f_x_newid, f_x_copy):
-
+    print(id(f_scalar))
+    print(id(f_x))
     # `scalar` in global unaffected, as `f_scalar` is redefined.
     f_scalar = 99              
 
@@ -2102,6 +2103,8 @@ x_new = [1,2,3]
 x_newid = [1,2,3]
 x_copy = [1,2,3]
 
+print(id(scalar))
+print(id(x))
 
 myfun(scalar, x, x_new, x_newid, x_copy)
 ```
@@ -2472,8 +2475,7 @@ the user.
 
 ```{python}
 x = np.random.normal(size = 5)
-def scaler_constructor(input):
-	data = input
+def scaler_constructor(data):
 	def g(param):
             return param * data
 	return g
@@ -2487,6 +2489,8 @@ scaler(6)
 So calling `scaler(3)` multiplies 3 by the value of `data` stored in the closure (the namespace of the enclosing scope) of the function `scaler`.
 
 Note that it can be hard to see the memory use involved in the closure.
+
+
 
 Here's a more realistic example. There are other ways you could do this, but this is slick:
 
@@ -2519,6 +2523,41 @@ for i in range(nboot):
 bootmeans()
 
 bootmeans.__closure__
+```
+
+Closures are also used as "function factories" (where the outer (generator) function is also called a "factory function") to easily generate a set of related functions. Here's an example:
+
+def number_formatter(notation='US'):
+    """
+    Creates a closure for formatting decimal numbers.
+    
+    Args:
+        notation (str): 'US' for US notation (commas for thousands, period for decimal)
+                       'EU' for European notation (periods for thousands, comma for decimal)
+    
+    Returns:
+        function: A closure that formats numbers according to the specified notation
+    """
+    def format_number(number):
+        ## GitHub Copilot suggested the `number:,` syntax and the string replace method.
+        result = f"{number:,}"
+        if notation == 'US':
+            # US notation: 1,234.56
+            return result
+        elif notation == 'EU':
+            # European notation: 1.234,56
+            # Swap commas and periods
+            return result.replace(',', 'TEMP').replace('.', ',').replace('TEMP', '.')
+        else:
+            raise ValueError("Notation must be 'US' or 'EU'")
+    
+    return format_number
+
+us_printer = number_formatter('US')
+eu_printer = number_formatter('EU')
+
+us_printer(1234.56)
+eu_printer(1234.56)
 ```
 
 ## Decorators
