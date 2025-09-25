@@ -2527,6 +2527,7 @@ bootmeans.__closure__
 
 Closures are also used as "function factories" (where the outer (generator) function is also called a "factory function") to easily generate a set of related functions. Here's an example:
 
+```{python}
 def number_formatter(notation='US'):
     """
     Creates a closure for formatting decimal numbers.
