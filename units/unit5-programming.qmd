@@ -2298,7 +2298,7 @@ rather than the scope of the module?
 Consider a case where instead of using the `test_scope.py` module we were using
 code from a package and that code has a variable called `magic_number` or  function called `transform`.
 
-### Lexical scoping (enclosing scopes)
+### Lexical scoping and enclosing scopes
 
 In this section, we seek to understand what happens in the following
 circumstance. Namely, where does Python get the value for the object `x`?
@@ -2311,19 +2311,21 @@ def f(y):
 f(3)
 ```
 
+The answer depends on where `f` is defined. If it is defined in a nested fashion within another function (or functions),
+then the lookup occurs in the (enclosing) scope(s) of those functions.
 
-Variables in the enclosing scope are available within a function. 
  **The enclosing scope is the
 scope in which a function is defined, not the scope from
 which a function is called.**
+
+Once the enclosing scopes are searched, if the object name is not found, then Python looks in the global/module scope where the function is defined. This is not considered part of the enclosing scope, but it does still follow the rule of looking where the function is defined, not where it is called from.
 
 This approach is called *lexical scoping*. R and many other languages
 also use lexical scoping.
 
 The behavior of looking up object names based on where functions are defined rather than where they are called from extends the local-global scoping discussed in the previous section, with similar motivation.
 
-
-Let's dig deeper to understand where Python looks for non-local variables, illustrating lexical scoping:
+Let's dig deeper to understand where Python looks for non-local variables, illustrating lexical scoping and the LEGB rule:
 
 ```{python}
 #| eval: false
