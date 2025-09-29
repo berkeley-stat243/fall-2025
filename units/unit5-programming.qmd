@@ -2380,10 +2380,10 @@ Here's a tricky example:
 #| eval: false
 y = 100
 def fun_constructor():
-	y = 10
-	def g(x):
-            return x + y     
-	return g
+    y = 10
+    def g(x):
+        return x + y
+    return g
 
 ## fun_constructor() creates functions
 myfun = fun_constructor()
@@ -2396,7 +2396,7 @@ Let's work through this:
 2.  Which `y` does `g()` use?
 3.  Where is `myfun` defined (this is tricky -- how does `myfun` relate to `g`)?
 4.  What is the enclosing scope for `myfun()`?
-5.  When `fun_constructor()` finishes, does its namespace disappear?
+5.  When `fun_constructor()` finishes, does its scope (and namespace) disappear?
     What would happen if it did?
 6.  What does `myfun` use for `y`?
 
@@ -2478,9 +2478,9 @@ the user.
 ```{python}
 x = np.random.normal(size = 5)
 def scaler_constructor(data):
-	def g(param):
-            return param * data
-	return g
+    def g(param):
+        return param * data
+    return g
 
 scaler = scaler_constructor(x)
 del x # to demonstrate we no longer need x
@@ -2490,7 +2490,7 @@ scaler(6)
 
 So calling `scaler(3)` multiplies 3 by the value of `data` stored in the closure (the namespace of the enclosing scope) of the function `scaler`.
 
-Note that it can be hard to see the memory use involved in the closure.
+Note that it can be hard to inspect the memory use involved in the closure.
 
 
 
@@ -2536,13 +2536,13 @@ def number_formatter(notation='US'):
     
     Args:
         notation (str): 'US' for US notation (commas for thousands, period for decimal)
-                       'EU' for European notation (periods for thousands, comma for decimal)
+                        'EU' for European notation (periods for thousands, comma for decimal)
     
     Returns:
         function: A closure that formats numbers according to the specified notation
     """
     def format_number(number):
-        ## GitHub Copilot suggested the `number:,` syntax and the string replace method.
+        ## GitHub Copilot suggested the `number:,` syntax and the string replace approach.
         result = f"{number:,}"
         if notation == 'US':
             # US notation: 1,234.56
@@ -2611,7 +2611,12 @@ One real-world example of using decorators is in setting up functions to run in 
 The main things to remember when thinking about memory use are: (1)
 numeric arrays take 8 bytes per element and (2) we need to keep track
 of when large objects are created, including local variables in the
-frames of functions.
+frames of functions. To do (2) we need to know when a copy of an
+actual object is created versus when we simply copy the name/label/reference
+to an existing object.
+
+
+
 
 ```{python}
 x = np.random.normal(size = 5)
@@ -2672,8 +2677,10 @@ read the information from disk. While the cached information is using
 memory, that same memory is immediately available to other processes, so
 the memory is available even though it is "in use".
 
-We can see this via `free -h` (the `-h` is for 'human-readable', i.e.
-show in GB (G)) on Linux machine.
+We can see this via `free -h --si`.
+
+The `-h` is for 'human-readable' for nicer numerical printout and
+the `--si` uses gigabytes (base 10) instead of gibibytes (base 2).
 
 ```
           total used free shared buff/cache available 
@@ -2737,11 +2744,11 @@ import psutil
 memory_info = psutil.Process().memory_info()
 
 # Print the memory usage
-print("Memory usage:", memory_info.rss/10**6, " Mb.")
+print("Memory usage:", memory_info.rss/10**6, " MB.")
 
 # Let's turn that into a function for later use:
 def mem_used():
-    print("Memory usage:", psutil.Process().memory_info().rss/10**6, " Mb.")
+    print("Memory usage:", psutil.Process().memory_info().rss/10**6, " MB.")
 ```
 
 We can see the size of an object (in bytes) with `sys.getsizeof()`.
@@ -2750,7 +2757,7 @@ We can see the size of an object (in bytes) with `sys.getsizeof()`.
 my_list = [1, 2, 3, 4, 5]
 sys.getsizeof(my_list)
 
-x = np.random.normal(size = 10**7) # should use about 80 Mb
+x = np.random.normal(size = 10**7) # should use about 80 MB
 sys.getsizeof(x)
 ```
 
