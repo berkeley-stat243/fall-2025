@@ -1,7 +1,7 @@
 ---
 title: "Programming concepts"
 author: "Chris Paciorek"
-date: "2025-09-15"
+date: "2025-10-01"
 format:
   pdf:
     documentclass: article
@@ -2878,7 +2878,39 @@ x[2] = 3.5
 id(x)
 ```
 
-It makes some sense that modifying elements of an object here doesn't cause a copy -- if it did, working with large objects would be very difficult. 
+It makes some sense that modifying elements of an object here doesn't cause a copy -- if it did, working with large objects would be very difficult.
+
+#### Shallow copying
+
+A *shallow* copy only makes a new top-level object. The elements within the object are still shared with the original object.
+
+```{python}
+x = [3, [1,2,3]]
+y = x.copy()
+id(x)
+id(y)
+x[0] = 9
+y[0]
+
+id(x[1])
+id(y[1])
+y[1][2] = 99
+x
+```
+
+We can force a *deep* copy such that nothing is shared between the objects.
+
+```{python}
+import copy
+x = [3, [1,2,3]]
+y = copy.deepcopy(x)
+
+id(x[1])
+id(y[1])
+y[1][2] = 99
+x
+```
+
 
 ### When are copies made?
 
@@ -3037,7 +3069,7 @@ Let's consider writing a loop with some ridiculous code:
 
 ```{python}
 #| eval: false
-x = np.random.normal(10)
+x = np.random.normal(size = 10)
 for i in range(10):
     if np.random.normal(size = 1) > 0:
         x = 'hi'
