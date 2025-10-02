@@ -3027,16 +3027,6 @@ fastcount(x, y) # Assume x, y are existing large numpy arrays.
 In the code above, note all the places where new memory must be allocated.
 :::
 
-:::{.callout-tip title="Solution" collapse="true"}
-
- - Line 1: `xvar` and `yvar` are local variables that are references to `x` and `y`.
- - Line 2: `naline` is a new object
- - Line 3: `np.isnan(yvar)` creates a temporary boolean array that should be garbage-collected (its memory freed) very quickly once that line of code is finished executing. It increases memory use only temporarily. `naline` is modified in place.
- - Lines 4-5: `localx` and `localy` are new objects.
- - Lines 6-7: `localx` and `localy` are modified in place without a new object being created.
- - Line 8: `useline` is a new object.
-:::
-
 # 9. Efficiency
 
 ## Interpreters and compilation
@@ -3261,10 +3251,16 @@ That reports the **total** time for the 100 replications.
 We can run it from the command line. 
 
 ```{bash}
+python -m timeit -n 1000 'x = 3.73 * 5.12'
 python -m timeit -s 'import numpy' -n 1000 'x = numpy.exp(3.)'
+python -m timeit -s 'from scipy.special import gammaln' -n 1000 'x = gammaln(3.)'
 ```
 
 `timeit` ran the code 1000 times for 5 different repetitions, giving the **average** time for the 1000 samples for the best of the 5 repetitions.
+
+We can see that there can be large relative differences for different fundamental mathematical operations, although each one is individually fast on an absolute basis.
+
+
 
 
 ### Profiling
