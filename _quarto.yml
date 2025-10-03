@@ -59,8 +59,8 @@ website:
             text: "Lab 3 (Debugging)"
           - href: labs/lab4-reproducibility.html
             text: "Lab 4 (Reproducibility)"
-          # - href: labs/lab5-codereview.html
-          #   text: "Lab 5 (Code review)"
+          - href: labs/lab5-codereview.html
+            text: "Lab 5 (Code review)"
           # - href: labs/lab6-scfparallel.html
           #   text: "Lab 6 (SCF and parallelization)"
           # - href: labs/lab7-pythonvsr.html
