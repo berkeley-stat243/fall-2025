@@ -20,3 +20,24 @@ For Python chunks when using the default `jupyter` engine, if you want all outpu
 ipynb-shell-interactivity: all
 ```
 
+## Controlling which Python is used
+
+One common source of confusion is understanding which Python executable (and associated installed Python packages) Quarto will use to execute Python code chunks and how to tell Quarto to use a specific Python. A common problem is having Quarto use a different Python version that is not what you want and (particularly) may not have the Python packages installed that you need. 
+
+I don't fully understand all the details, but here are some suggestions.
+
+- You can set the environment variable `QUARTO_PYTHON` to be the path to a particular Python executable. You'll need probably need to export this variable to ensure it is available at the point that Quarto checks it.
+- You can create a Jupyter kernel associated with a Conda environment and then add `jupyter: name_of_kernel` to the metadata of your document.
+- In VS Code, you can invoke `Python: Select interpreter` in the command palette.
+- If you are using the `knitr` engine, you can include a chunk like this at the start of your Quarto document to force use of a particular Python:
+
+   ````{verbatim}
+   ```{r, setup-r}
+   #| echo: false
+   reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+   ```
+   ````
+
+   Otherwise `knitr` will try to create and use a Conda environment for use with the `reticulate` package.
+
+This may be particularly troublesome in Windows.

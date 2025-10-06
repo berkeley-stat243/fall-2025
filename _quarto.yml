@@ -86,7 +86,7 @@ website:
           - howtos/accessPython.md
           - howtos/accessUnixCommandLine.md
           - howtos/installGit.md
-          - howtos/installQuarto.md
+          - howtos/installQuarto.qmd
           - howtos/vscode.md
           - howtos/submitPS.md
           - howtos/windowsAndLinux.md
