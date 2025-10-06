@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -259,6 +294,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Lab 4 (Reproducibility)</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/lab5-codereview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 5 (Code review)</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -366,8 +407,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#controlling-which-python-is-used" id="toc-controlling-which-python-is-used" class="nav-link active" data-scroll-target="#controlling-which-python-is-used">Controlling which Python is used</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -399,8 +446,25 @@ ul.task-list li input[type="checkbox"] {
 <p>By default, quarto uses Jupyter to process code chunks. This works well generally, but you can’t have different chunks that use different languages in the same document (e.g., some chunks in Python and some in bash or R). In that case, you can use the R-based <code>knitr</code> package to do the processing. To do so, add <code>engine: knitr</code> to the YAML metadata at the top of the file (if you happen to have an <code>execute</code> stanza, you’ll need to have <code>engine: knitr</code> nested within that stanza). For the <code>knitr</code> engine, you’ll need to have R installed on your computer, with the <code>rmarkdown</code> R package installed. And if you have Python chunks, you’ll also need the <code>reticulate</code> R package.</p>
 <p>For Python chunks when using the default <code>jupyter</code> engine, if you want all output from multiple commands in a chunk to be printed (without explicitly using <code>print()</code>), you can add the following syntax to the YAML metadata at the top of the file. (Note that, unfortunately, the output will be printed out below the code chunk rather than interspersed with the code, as that is how Jupyter notebooks chunks work.)</p>
 <pre><code>ipynb-shell-interactivity: all</code></pre>
+<section id="controlling-which-python-is-used" class="level2">
+<h2 class="anchored" data-anchor-id="controlling-which-python-is-used">Controlling which Python is used</h2>
+<p>One common source of confusion is understanding which Python executable (and associated installed Python packages) Quarto will use to execute Python code chunks and how to tell Quarto to use a specific Python. A common problem is having Quarto use a different Python version that is not what you want and (particularly) may not have the Python packages installed that you need.</p>
+<p>I don’t fully understand all the details, but here are some suggestions.</p>
+<ul>
+<li><p>You can set the environment variable <code>QUARTO_PYTHON</code> to be the path to a particular Python executable. You’ll need probably need to export this variable to ensure it is available at the point that Quarto checks it.</p></li>
+<li><p>You can create a Jupyter kernel associated with a Conda environment and then add <code>jupyter: name_of_kernel</code> to the metadata of your document.</p></li>
+<li><p>In VS Code, you can invoke <code>Python: Select interpreter</code> in the command palette.</p></li>
+<li><p>If you are using the <code>knitr</code> engine, you can include a chunk like this at the start of your Quarto document to force use of a particular Python:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>```{r, setup-r}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>#| echo: false</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Otherwise <code>knitr</code> will try to create and use a Conda environment for use with the <code>reticulate</code> package.</p></li>
+</ul>
+<p>This may be particularly troublesome in Windows.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
