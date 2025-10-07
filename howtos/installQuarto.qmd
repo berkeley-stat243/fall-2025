@@ -29,12 +29,17 @@ I don't fully understand all the details, but here are some suggestions.
 - You can set the environment variable `QUARTO_PYTHON` to be the path to a particular Python executable. You'll need probably need to export this variable to ensure it is available at the point that Quarto checks it.
 - You can create a Jupyter kernel associated with a Conda environment and then add `jupyter: name_of_kernel` to the metadata of your document.
 - In VS Code, you can invoke `Python: Select interpreter` in the command palette.
-- If you are using the `knitr` engine, you can include a chunk like this at the start of your Quarto document to force use of a particular Python:
+- If you are using the `knitr` engine, you can include a chunk like this at the start of your Quarto document to force use of a particular Python executable or the Python in a particular Conda environment:
 
    ````{verbatim}
    ```{r, setup-r}
    #| echo: false
    reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')
+   ```
+   
+   ```{r, setup-r-alternative}
+   #| echo: false
+   reticulate::use_condaenv('my_conda_env", required = TRUE)
    ```
    ````
 
