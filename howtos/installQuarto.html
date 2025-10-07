@@ -454,11 +454,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>You can set the environment variable <code>QUARTO_PYTHON</code> to be the path to a particular Python executable. You’ll need probably need to export this variable to ensure it is available at the point that Quarto checks it.</p></li>
 <li><p>You can create a Jupyter kernel associated with a Conda environment and then add <code>jupyter: name_of_kernel</code> to the metadata of your document.</p></li>
 <li><p>In VS Code, you can invoke <code>Python: Select interpreter</code> in the command palette.</p></li>
-<li><p>If you are using the <code>knitr</code> engine, you can include a chunk like this at the start of your Quarto document to force use of a particular Python:</p>
+<li><p>If you are using the <code>knitr</code> engine, you can include a chunk like this at the start of your Quarto document to force use of a particular Python executable or the Python in a particular Conda environment:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>```{r, setup-r}</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>#| echo: false</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>reticulate::use_python('/usr/local/linux/miniforge-3.13/bin/python')</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>```{r, setup-r-alternative}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>#| echo: false</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>reticulate::use_condaenv('my_conda_env", required = TRUE)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Otherwise <code>knitr</code> will try to create and use a Conda environment for use with the <code>reticulate</code> package.</p></li>
 </ul>
 <p>This may be particularly troublesome in Windows.</p>
