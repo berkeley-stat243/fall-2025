@@ -3920,14 +3920,14 @@ Combining loops is called 'fusing' and is an [important optimization that Julia 
 
 ### JIT compilation (with JAX)
 
-You can think of JAX as a version of numpy enabled to use the GPU (or automatically parallelize on CPU threads) and provide automatic differentiation. 
+You can think of JAX as a version of numpy enabled to use the GPU (or automatically parallelize on CPU threads) and provide automatic differentiation. For its core operations, JAX defines versions of the operations (as compiled code) for the CPU and for the GPU.
 
 We can also JIT compile JAX code. Behind the scenes, the instructions are compiled to machine code for different backends (e.g., CPU and GPU) using the XLA compiler.
 
 Let's first consider running a vectorized calculation using JAX on the CPU, which will use multiple threads (discussed in Unit 6), each thread running on a separate CPU core on our computer. For now all we need to know is that the calculation will run in parallel, so we expect it to be faster than when using numpy, which won't run the calculation in parallel.
 
 :::{.callout-warning}
-This demo uses 4 GB of memory just for `x`. Run on your own machine with caution.
+This demo uses 4 GB of memory just in the process of creating `x`. Run on your own machine with caution.
 :::
 
 ```{python}
@@ -4007,6 +4007,15 @@ jitted jax time: 3.218
 
 So that gives a nice two-fold additional speedup.
 
+We could also have used the `jax.jit` decorator rather than directly calling `jax.jit`:
+
+```{python}
+#| eval: false
+@jax.jit
+def myfun_jnp(x):
+    y = jnp.exp(x) + 3 * jnp.sin(x)
+    return y
+```
 
 ### Lazy evaluation 
 
