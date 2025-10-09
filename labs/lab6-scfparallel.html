@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-10-11">
+<meta name="dcterms.date" content="2025-10-10">
 
 <title>Lab 6: SCF and Parallel Computing</title>
 <style>
@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a9ac95982dfa497af26296eb1ce0c91d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2803d336d490ed95d10a15ff1babbfa3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Stat 243</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/berkeley-stat243/fall-2024" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/berkeley-stat243/fall-2025" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -308,24 +308,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Lab 6 (SCF and parallelization)</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab7-pythonvsr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 7 (Python vs.&nbsp;R)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab8-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 8 (Simulation)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab9-git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 9 (Collaboration with Git)</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -359,30 +341,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../ps/ps4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set 4</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 5</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 6</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 7</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 8</span></a>
   </div>
 </li>
       </ul>
@@ -424,6 +382,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../howtos/installQuarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing and Using Quarto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howtos/vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using VS Code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -502,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 11, 2024</p>
+      <p class="date">October 10, 2025</p>
     </div>
   </div>
   
@@ -534,7 +498,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Clusters, partitions, and nodes! Oh my!
+Clusters, partitions, and nodes! Oh, my!
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -546,12 +510,12 @@ Clusters, partitions, and nodes! Oh my!
 </div>
 </div>
 </div>
-<p>The SCF cluster has 1064 cores, across 7 partitions with more than 26 nodes, but for this class we’ll use the <code>low</code> partition. It’s the default, so you won’t need to do anything special to use it for your jobs (we’ll explain how to submit jobs later on).</p>
+<p>The SCF cluster has 1064 cores, across 7 partitions with more than 26 nodes, but for this class we’ll use only the <code>low</code> partition. It’s the default, so you won’t need to do anything special to use it for your jobs (we’ll explain how to submit jobs later on).</p>
 <p>The <code>low</code> partition has the following resources:</p>
 <ul>
 <li>8 nodes</li>
 <li>32 cores per node</li>
-<li>256 GB RAM per node</li>
+<li>256 GB of RAM per node</li>
 </ul>
 <p>The SCF Linux cluster uses a batch job scheduler called <a href="https://en.wikipedia.org/wiki/Slurm_Workload_Manager">Slurm</a>, commonly used by large computer centers in both academia and industry. Although the SCF cluster has much greater computational capacity than our personal computers, it is a shared resource with many users. With Slurm, the cluster is able to schedule jobs asynchronously, balancing resource allocations so that everyone gets a turn. This also means that when you submit a job, it may not run until many minutes or hours later. Be sure to give yourself enough time!</p>
 <!--
@@ -639,13 +603,13 @@ Important
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">FILESYSTEM</span>  USE         QUOTA       %</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">accounts</span>  5.29 G      20 G        26.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>accounts</code> filesystem is accessible from all the nodes on the SCF cluster. This means that regardless of which login or compute node you use, you will have access to the files in your home directory. Moreover, your home directory is backed up regularly, so you are protected from accidental data loss.</p>
-<p>If you’re running out of space, you should try to selectively delete large files that you no longer need. See <a href="https://statistics.berkeley.edu/computing/faqs/how-do-i-manage-my-data">here</a> for some tips on finding large files. If all else fails, you can request additional space or request access the <code>/scratch</code> filesystem. The latter is a good place for large datasets, but note that <code>/scratch</code> is not backed up, unlike your home directory. See the previous link for more info. Note though that disk space should not be a concern for Stat 243, but being aware of <code>/scratch</code> can be relevant for Stat graduate students (MA and PhD) working on projects in the future.</p>
+<p>If you’re running out of space, you should try to selectively delete large files that you no longer need. See <a href="https://statistics.berkeley.edu/computing/faqs/how-do-i-manage-my-data">here</a> for some tips on finding large files. If all else fails, you can request additional space or request access to the <code>/scratch</code> filesystem. The latter is a good place for large datasets, but note that <code>/scratch</code> is not backed up, unlike your home directory. See the previous link for more info. Note though that disk space should not be a concern for Stat 243, but being aware of <code>/scratch</code> can be relevant for Stat graduate students (MA and PhD) working on projects in the future.</p>
 <p>For temporary files (e.g., intermediate results of a computation that you don’t need to store for later), every machine has a <code>/tmp</code> filesystem. However, <code>/tmp</code> is <em>always linked to the specific machine</em> you are on, meaning that if you put something in <code>/tmp</code> on <code>gandalf</code> and then later go to <code>aragorn</code>, you won’t find your files in the <code>/tmp</code> directory there. If you go back to <code>gandalf</code>, you will likely find them again, but <code>/tmp</code> is automatically wiped when a machine reboots, so only use it for files you don’t care about preserving!</p>
 </section>
 <section id="data-transfer-scp-sftp" class="level2">
 <h2 class="anchored" data-anchor-id="data-transfer-scp-sftp">Data transfer: SCP / SFTP</h2>
 <p>We can use the <code>scp</code> and <code>sftp</code> protocols to transfer files to and from any login node on the SCF cluster. <code>scp</code> is a shell program that should be available by default on macOS and Linux, while on Windows you can use <a href="https://winscp.net/eng/index.php">WinSCP</a>. WinSCP can also do <code>sftp</code> transfers, or you can use <a href="https://filezilla-project.org/">FileZilla</a> on any platform for <code>sftp</code>. Both WinSCP and FileZilla have a GUI that allows you to drag and drop files between your local machine and a remote host.</p>
-<p>The syntax for <code>scp</code> is <code>scp &lt;from-place&gt; &lt;to-place&gt;</code>, and you’ll typically use <code>scp</code> on your local machine. For example, we’ll show how to transfer the file <code>data.csv</code> (you can find it <a href="https://github.com/berkeley-stat243/fall-2024/tree/main/labs/lab6-scfparallel">here</a>) :</p>
+<p>The syntax for <code>scp</code> is <code>scp &lt;from-place&gt; &lt;to-place&gt;</code>, and you’ll typically use <code>scp</code> on your local machine. For example, we’ll show how to transfer the file <code>data.csv</code> (you can find it <a href="https://github.com/berkeley-stat243/fall-2025/tree/main/labs/lab6-scfparallel">here</a>) :</p>
 <section id="to-scf-while-on-your-local-machine" class="level3">
 <h3 class="anchored" data-anchor-id="to-scf-while-on-your-local-machine">To SCF while on your local machine</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transfer to my home directory without renaming the file </span></span>
@@ -677,17 +641,17 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For this section, you’ll need to have some of <a href="https://github.com/berkeley-stat243/fall-2024/tree/main/labs/lab6-scfparallel">this week’s materials</a> in your home directory on the SCF cluster.</p>
+<p>For this section, you’ll need to have some of <a href="https://github.com/berkeley-stat243/fall-2025/tree/main/labs/lab6-scfparallel">this week’s materials</a> in your home directory on the SCF cluster.</p>
 <p>To get them, you can (and probably should) clone the course repo to your home directory on the SCF cluster:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first ssh to an SCF login node: ssh &lt;scf-username&gt;@&lt;host-name&gt;.berkeley.edu</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/ <span class="co"># or a subdirectory if you prefer</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/berkeley-stat243/fall-2024.git</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or git@github.com:berkeley-stat243/fall-2024.git if you use SSH with git</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/berkeley-stat243/fall-2025.git</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or git@github.com:berkeley-stat243/fall-2025.git if you use SSH with git</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># the files you need are here</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fall-2024/labs/lab6-scfparallel/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fall-2025/labs/lab6-scfparallel/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>As mentioned before, the SCF cluster uses Slurm to schedule jobs. We’ll learn some Slurm commands now.</p>
@@ -703,7 +667,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This is the best option when you have a long-running job where no</p>
+<p>This is the best option when you have a long-running job that does not require any interaction to complete.</p>
 </div>
 </div>
 <p>The first command is <code>sbatch</code>. To use <code>sbatch</code>, you will first create a bash script (you can do this on the SCF cluster if you know how to use a shell text editor like <code>nano</code>, or just do it locally and transfer the file to the SCF via one of the methods discussed before).</p>
@@ -731,7 +695,7 @@ Tip
 <p>The <code>example.sh</code> script creates a file called <code>testFile.txt</code> and appends some output to that file. Note that since <code>submit.sh</code> is itself a bash script, you could have just put the contents of <code>example.sh</code> directly in <code>submit.sh</code>, but it is good practice to keep your computational code separate from your Slurm batch submission scripts.</p>
 <p>Now we can submit the job using the Slurm command <code>sbatch</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> submit.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Once you run that, your job will be queued. To check it’s status, you can use <code>squeue</code>:</p>
+<p>Once you run that, your job will be queued. To check its status, you can use <code>squeue</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>scf-username<span class="op">&gt;</span> <span class="co"># use your username, not mine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And now you wait. Go get a cup of coffee or get some rest! Then check back later.</p>
 </section>
@@ -762,7 +726,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This is the best option when you want to work at the Linux command line and don’t need a GUI, e.g.&nbsp;when debugging components of larger non-interactive job.</p>
+<p>This is the best option when you want to work at the Linux command line and don’t need a GUI, e.g.&nbsp;when debugging components of a larger non-interactive job.</p>
 </div>
 </div>
 <p>To run an interactive job via Slurm, you can use the <code>srun</code> command:</p>
@@ -831,22 +795,22 @@ Tip
 <h1>Exercise</h1>
 <p>You can either do 1. on your local machine and transfer the file to the SCF cluster, or you can do it remotely. 2 - 4 should be done on the SCF.</p>
 <ol type="1">
-<li>Create a submission <code>submitBoot.sh</code> that will execute the code in <code>boot_proc.py</code>. To do this I suggest copying the text from <code>submit_py.sh</code> and updating a couple lines:</li>
+<li>Create a submission <code>submit_boot.sh</code> that will execute the code in <code>boot_proc.py</code>. To do this I suggest copying the text from <code>submit_py.sh</code> and updating a couple lines:</li>
 </ol>
 <ul>
 <li>Change <code>job-name</code> to whatever you want to call this job.</li>
 <li>Change time to <code>00:10:00</code> just in case your code runs longer than one minute.</li>
 <li>Change the <code>--cpus-per-task</code> to 3. This is where you are telling Slurm to execute in parallel on 3 CPUs.</li>
-<li>Change the last line <code>python boot_serial.py</code>.</li>
+<li>Change the last line from <code>python boot_serial.py</code> to <code>python boot_proc.py</code>.</li>
 </ul>
 <ol start="2" type="1">
-<li><p>Call <code>sbatch submitBoot.sh</code> to execute the python script <code>boot_proc.py</code>.</p></li>
-<li><p>Check that the execution worked by examining the <code>py.out</code> file.</p></li>
+<li><p>Call <code>sbatch submit_boot.sh</code> to execute the python script <code>boot_proc.py</code>.</p></li>
+<li><p>Use <code>squeue</code> to verify the job is complete and check that the execution worked by examining the <code>ex.out</code> file.</p></li>
 <li><p>Note that the number of Dask workers in <code>boot_proc.py</code> and <code>boot_dist.py</code> is hard-coded. In many cases, it would be better for this value to be set dynamically based on an appropriate Slurm environment variable. Make this small adjustment to those files and verify it works as intended.</p></li>
 </ol>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>This lab was developed by Andrew Vaughn and James Duncan for R, adapted to python by Ahmed Eldeeb and slightly adjusted for the Fall 2024 semester.</p>
+<p>This lab was developed by Andrew Vaughn and James Duncan for R, adapted to python by Ahmed Eldeeb and slightly adjusted for the Fall 2025 semester.</p>
 
 
 </section>
@@ -925,7 +889,7 @@ Tip
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/stat243\.berkeley\.edu\/fall-2024");
+        var filterRegex = new RegExp("https:\/\/stat243\.berkeley\.edu\/fall-2025");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
