@@ -20,7 +20,7 @@ You will need to set up (or make sure you have access to) the following:
 
 1. [Unix shell](../howtos/accessUnixCommandLine.md);
 2. [Git](../howtos/installGit.md);
-3. [Quarto](../howtos/installQuarto.md);
+3. [Quarto](../howtos/installQuarto.qmd);
 4. [Python](../howtos/accessPython.md);
 5. A text editor or IDE of your choice.
 

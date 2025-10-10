@@ -21,7 +21,7 @@ By now you should already have access to the following 5 basic tools:
 
 1. [Unix shell](../howtos/accessUnixCommandLine.md)
 2. [Git](../howtos/installGit.md)
-3. [Quarto](../howtos/installQuarto.md)
+3. [Quarto](../howtos/installQuarto.qmd)
 4. [Python](../howtos/accessPython.md)
 5. A text editor of your choice
 
