@@ -810,7 +810,7 @@ This avoids the extra overhead (~1 millisecond per task) of scheduling many task
 
 With Dask's `distributed` scheduler, Dask starts up each delayed evaluation separately (i.e., dynamic allocation).
 
-We’ll set up an artificial example with four slow tasks and 12 fast tasks and see the speed of running with the default of dynamic allocation under Dask's distributed scheduler. Then in the next section, we’ll compare to the worst-case scenario with all four slow tasks in a single batch.
+We’ll set up an artificial example with four slow tasks and 12 fast tasks and see the speed of running with the default of dynamic allocation under Dask's distributed scheduler. Then in the next section, we’ll compare to a situation in which more than one slow task may end up in a single batch/chunk.
 
 ```{python}
 import scipy.special
@@ -821,11 +821,14 @@ cluster = LocalCluster(n_workers = n_cores)
 c = Client(cluster)
 
 ## 4 slow tasks and 12 fast ones.
-n = np.repeat([10**7, 10**5, 10**5, 10**5], 4)
+n = np.repeat([5*10**7, 10**6, 10**6, 10**6], 4)
+print(n)
 
 def fun(i):
     print(f"Working on {i}.")
-    return np.mean(scipy.special.gammaln(np.exp(np.random.normal(size = n[i]))))
+    out = np.mean(scipy.special.gammaln(np.exp(np.random.normal(size = n[i]))))
+    print(f"Finishing {i}.")
+    return out
     
 
 t0 = time.time()
@@ -839,18 +842,19 @@ print(time.time() - t0)
 t0 = time.time()
 tasks = c.map(fun, range(len(n)))
 results = c.gather(tasks)  
-print(time.time() - t0)  # 0.8 sec. 
+print(time.time() - t0)  
 
 cluster.close()
 ```
 
-Note that with relatively few tasks per core here, we could have gotten unlucky
-if the tasks were in a random order and multiple slow tasks happen to be done
-by a single worker.
+For some reason the logging messages show up in the Quarto rendering output and not here in the document.
+
+Note that (even with dynamic allocation) with relatively few tasks per core here, we could have gotten unlucky
+if the tasks were in a random order and multiple slow tasks happen to be done by a single worker.
 
 ### Static allocation 
 
-Next, note that by default the ‘processes’ scheduler sets up tasks in batches, with a default chunksize of 6. In this case that means that the first 4 (slow) tasks are all allocated to a single worker.
+Next, note that by default the ‘processes’ scheduler sets up tasks in batches, with a default chunksize of 6. However, it's difficult to understand out how Dask chooses to assign tasks to chunks (based on running this repeatedly there seems to be some randomness). 
 
 
 ```{python}
@@ -882,9 +886,11 @@ results = dask.compute(tasks)  # compute all in parallel
 print(time.time() - t0)   
 ```
 
-In principle that should be faster than with static allocation, but for some reason we are not seeing that to be the case here...
+In some cases when this has run, the times above are pretty similar.
 
-We haven't illustrated it here, but if each task is quick and we have a lot of tasks, we likely want static allocation to avoid the extra overhead of starting each task individually.
+In principle, with variability in execution time for the tasks, dynamic allocation should be faster than with static allocation, unless the static assignment of tasks to chunks is carefully done to achieve good load-balancing (or the assignment just happens to work out that way). It's also complicated by the fact that with dynamic allocation, one is essentially relying on the dynamics of the allocation resulting in achieving good load-balancing, which may not always happen.
+
+We haven't illustrated it here, but if each task is quick and we have a lot of tasks, we likely want static allocation to avoid the extra overhead of starting each task individually. In fact, that is a main  motivation for static allocation.
 
 ### Choosing static vs. dynamic allocation in Dask
 
