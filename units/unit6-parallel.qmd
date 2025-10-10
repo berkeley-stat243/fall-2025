@@ -680,12 +680,14 @@ def gen_and_mean(func, n, par1, par2):
 
 dask.config.set(scheduler='processes', num_workers = 3, chunksize = 1)  
 
-n = 100000000
-t0 = time.time()
+n = 250000000
+
 tasks = []
 tasks.append(dask.delayed(gen_and_mean)(np.random.normal, n, 0, 1))
 tasks.append(dask.delayed(gen_and_mean)(np.random.gamma, n, 1, 1))
 tasks.append(dask.delayed(gen_and_mean)(np.random.uniform, n, 0, 1))
+
+t0 = time.time()
 results = dask.compute(tasks)
 print(time.time() - t0) 
 
@@ -879,6 +881,8 @@ t0 = time.time()
 results = dask.compute(tasks)  # compute all in parallel
 print(time.time() - t0)   
 ```
+
+In principle that should be faster than with static allocation, but for some reason we are not seeing that to be the case here...
 
 We haven't illustrated it here, but if each task is quick and we have a lot of tasks, we likely want static allocation to avoid the extra overhead of starting each task individually.
 
