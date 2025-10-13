@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris Paciorek">
-<meta name="dcterms.date" content="2024-10-10">
+<meta name="dcterms.date" content="2025-10-13">
 
 <title>Big data and databases</title>
 <style>
@@ -524,7 +524,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 10, 2024</p>
+      <p class="date">October 13, 2025</p>
     </div>
   </div>
   
@@ -895,12 +895,11 @@ Memory use for results objects
 <li>…</li>
 <li>teacher age n</li>
 </ul>
-<p>There are a lot of problems with this:</p>
+<p>There are a lot of problems with this (to be filled out in class):</p>
 <ol type="1">
-<li>A lot of information is repeated across rows (e.g., teacher age for students who have the same teacher) - this is a waste of space - it is hard/error-prone to update values in the database (e.g., after a teacher’s birthday), because a given value needs to be updated in multiple places</li>
-<li>There are potentially a lot of empty cells (e.g., for a student who takes fewer than ‘n’ classes). This will generally result in a waste of space.</li>
-<li>It’s hard to see the information that is not organized uniquely by row – i.e., it’s much easier to understand the information at the student level than the teacher level</li>
-<li>We have to know in advance how big ‘n’ is. Then if a single student takes more than ‘n’ classes, the whole database needs to be restructured.</li>
+<li>???</li>
+<li>???</li>
+<li>???</li>
 </ol>
 <p>It would get even worse if there was a field related to teachers for which a given teacher could have multiple values (e.g., teachers could be in multiple departments). This would lead to even more redundancy - each student-class-teacher combination would be crossed with all of the departments for the teacher (so-called multivalued dependency in database theory).</p>
 <p>An alternative organization of the data would be to have each row represent the enrollment of a student in a class.</p>
@@ -1047,7 +1046,7 @@ Challenge
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> con.cursor()</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions limit 3"</span>)  <span class="co"># simple query </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;sqlite3.Cursor object at 0x76360a24f540&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor object at 0x73696dfbf540&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>db.fetchall() <span class="co"># retrieve results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1086,7 +1085,7 @@ Challenge
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;sqlite3.Cursor object at 0x76360a24f540&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor object at 0x73696dfbf540&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>[item[<span class="dv">0</span>] <span class="cf">for</span> item <span class="kw">in</span> db.description]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1370,7 +1369,7 @@ Challenge
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="st">                from questions join users </span><span class="op">\</span></span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="st">                on questions.ownerid = users.userid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;sqlite3.Cursor object at 0x76360a24f540&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor object at 0x70bec7e57540&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">## you'll see the return value is '0'</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>               </span>
