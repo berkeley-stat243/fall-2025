@@ -456,7 +456,7 @@ window.Quarto = {
   <li><a href="#logistics-and-data-size" id="toc-logistics-and-data-size" class="nav-link" data-scroll-target="#logistics-and-data-size">Logistics and data size</a></li>
   <li><a href="#what-we-already-know-about-handling-big-data" id="toc-what-we-already-know-about-handling-big-data" class="nav-link" data-scroll-target="#what-we-already-know-about-handling-big-data">What we already know about handling big data!</a></li>
   </ul></li>
-  <li><a href="#mapreduce-dask-hadoop-and-spark" id="toc-mapreduce-dask-hadoop-and-spark" class="nav-link" data-scroll-target="#mapreduce-dask-hadoop-and-spark">2. MapReduce, Dask, Hadoop, and Spark</a>
+  <li><a href="#mapreduce-and-dask" id="toc-mapreduce-and-dask" class="nav-link" data-scroll-target="#mapreduce-and-dask">2. MapReduce and Dask</a>
   <ul class="collapse">
   <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">Overview</a></li>
   <li><a href="#using-dask-for-big-data-processing" id="toc-using-dask-for-big-data-processing" class="nav-link" data-scroll-target="#using-dask-for-big-data-processing">Using Dask for big data processing</a>
@@ -572,7 +572,7 @@ Note
 <section id="logistics-and-data-size" class="level2">
 <h2 class="anchored" data-anchor-id="logistics-and-data-size">Logistics and data size</h2>
 <p>One of the main drawbacks with Python (and R) in working with big data is that all objects are stored in memory, so you can’t directly work with datasets that are more than 1-20 Gb or so, depending on the memory on your machine.</p>
-<p>The techniques and tools discussed in this Unit (apart from the section on MapReduce/Spark) are designed for datasets in the range of gigabytes to tens of gigabytes, though they may scale to larger if you have a machine with a lot of memory or simply have enough disk space and are willing to wait. If you have 10s of gigabytes of data, you’ll be better off if your machine has 10s of GBs of memory, as discussed in this Unit.</p>
+<p>The techniques and tools discussed in this Unit are designed for datasets in the range of gigabytes to tens of gigabytes, though they may scale to larger if you have a machine with a lot of memory or simply have enough disk space and are willing to wait. Also note that if you have 10s of gigabytes of data, you’ll be better off if your machine has 10s of GBs of memory, as discussed in this Unit.</p>
 <p>If you’re scaling to 100s of GBs, terabytes or petabytes, tools such as carefully-administered databases, cloud-based tools such as provided by AWS and Google Cloud Platform, and Spark or other such tools are probably your best bet.</p>
 <p>Note: in handling big data files, it’s best to have the data on the local disk of the machine you are using to reduce traffic and delays from moving data over the network.</p>
 </section>
@@ -585,8 +585,8 @@ Note
 <p>Finally, for many applications, storing large datasets in a standard database will work well.</p>
 </section>
 </section>
-<section id="mapreduce-dask-hadoop-and-spark" class="level1">
-<h1>2. MapReduce, Dask, Hadoop, and Spark</h1>
+<section id="mapreduce-and-dask" class="level1">
+<h1>2. MapReduce and Dask</h1>
 <p>Traditionally, high-performance computing (HPC) has concentrated on techniques and tools for message passing such as MPI and on developing efficient algorithms to use these techniques. In the last 20 years, focus has shifted to technologies for processing large datasets that are distributed across multiple machines but can be manipulated as if they are one dataset.</p>
 <p>Two commonly-used tools for doing this are Spark and Python’s Dask package. We’ll cover Dask. Spark was popular for a while, but I’m not sure how much it is used now.</p>
 <section id="overview-1" class="level2">
@@ -1046,7 +1046,7 @@ Challenge
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> con.cursor()</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions limit 3"</span>)  <span class="co"># simple query </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;sqlite3.Cursor object at 0x73696dfbf540&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor object at 0x75d06cfbf540&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>db.fetchall() <span class="co"># retrieve results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1085,7 +1085,7 @@ Challenge
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>db.execute(<span class="st">"select * from questions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;sqlite3.Cursor object at 0x73696dfbf540&gt;</code></pre>
+<pre><code>&lt;sqlite3.Cursor object at 0x75d06cfbf540&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>[item[<span class="dv">0</span>] <span class="cf">for</span> item <span class="kw">in</span> db.description]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
