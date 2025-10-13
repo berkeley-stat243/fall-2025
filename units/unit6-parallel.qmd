@@ -1014,7 +1014,7 @@ and want to avoid unnecessary copies.
 
 In many parallelization tools, if you try to parallelize this case on a single node, you end up making copies of the original dataset, which both takes up time and eats up memory. That is because the separate processes do not have access to objects used in the main (or other) processes, even though they are sharing the same physical memory. So the data needs to be sent to each process (or task) individually and then stored as distinct objects in memory. 
 
-Here when we use the `processes` scheduler, we make copies. Whether there is a copy per task or a copy per process seems to depend on exactly what the parallelized code is doing (perhaps based on whether there is random number generation in the code).
+Here when we use the `processes` scheduler, we make copies. Whether there is a copy per task or a copy per process seems to depend on exactly what the parallelized code is doing, and I don't have additional information about this. In this case we see one copy per task, the worst case situation.
 
 ```{python}
 import os
@@ -1044,14 +1044,14 @@ t_elapsed = time.time() - t0
 ```
 
 ```
-Object id: 140528840440112, process id: 1148556
-Object id: 140619687115056, process id: 1148559
-Object id: 140509694916912, process id: 1148561
-Object id: 140539164195120, process id: 1148560
-Object id: 140528840440112, process id: 1148556
-Object id: 140619687115056, process id: 1148559
-Object id: 140509694916912, process id: 1148561
-Object id: 140539164195120, process id: 1148560
+Object id: 128054524603408, process id: 257843
+Object id: 126667880147984, process id: 257847
+Object id: 123521035054096, process id: 257849
+Object id: 125675309853712, process id: 257848
+Object id: 128054526286832, process id: 257843
+Object id: 126667881831408, process id: 257847
+Object id: 123521036737520, process id: 257849
+Object id: 125675311537136, process id: 257848
 ```
 
 ```{python}
