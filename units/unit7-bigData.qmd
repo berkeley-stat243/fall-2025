@@ -109,11 +109,10 @@ objects are stored in memory, so you can't directly work with datasets
 that are more than 1-20 Gb or so, depending on the memory on your
 machine.
 
-The techniques and tools discussed in this Unit (apart from the section
-on MapReduce/Spark) are designed for datasets in the range of gigabytes
+The techniques and tools discussed in this Unit  are designed for datasets in the range of gigabytes
 to tens of gigabytes, though they may scale to larger if you have a
 machine with a lot of memory or simply have enough disk space and are
-willing to wait. If you have 10s of gigabytes of data, you'll be better
+willing to wait. Also note that if you have 10s of gigabytes of data, you'll be better
 off if your machine has 10s of GBs of memory, as discussed in this Unit.
 
 If you're scaling to 100s of GBs, terabytes or petabytes, tools such as
@@ -151,7 +150,7 @@ formats than in flat text (e.g., csv) files.
 Finally, for many applications, storing large datasets in a standard
 database will work well. 
 
-# 2. MapReduce, Dask, Hadoop, and Spark
+# 2. MapReduce and Dask
 
 Traditionally, high-performance computing (HPC) has concentrated on
 techniques and tools for message passing such as MPI and on developing
