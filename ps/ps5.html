@@ -103,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Stat 243</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/berkeley-stat243/fall-2024" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/berkeley-stat243/fall-2025" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -272,24 +272,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Lab 6 (SCF and parallelization)</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab7-pythonvsr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 7 (Python vs.&nbsp;R)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab8-simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 8 (Simulation)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../labs/lab9-git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab 9 (Collaboration with Git)</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -329,24 +311,6 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../ps/ps5.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem Set 5</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 6</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 7</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 8</span></a>
   </div>
 </li>
       </ul>
@@ -392,6 +356,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../howtos/vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../howtos/submitPS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set Submissions</span></a>
   </div>
@@ -423,7 +393,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps5.html">Problem Set 5</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Problem Set 5</h1>
-<p class="subtitle lead">Due Monday Oct.&nbsp;28, 10 am</p>
+<p class="subtitle lead">Due Wednesday Oct.&nbsp;29, 10 am</p>
 </div>
 
 
@@ -444,9 +414,9 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="comments">Comments</h2>
 <ul>
 <li>This covers material in Units 6 and 7.</li>
-<li>It’s due at 10 am (Pacific) on October 28, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
+<li>It’s due at 10 am (Pacific) on October 29, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
 <li>Please see PS1 for formatting and attribution requirements.</li>
-<li>Running parallel code, working with large datasets, and using shared computers can result in delays and unexpected problems. Don’t wait until the last minute. The lengthy time period to complete this problem set is simply a logistical result of when the quiz is scheduled – you should start on the problem set before the quiz. We are happy to help troubleshoot problems you may have with accessing the SCF, running parallel Python code, submitting jobs to the SCF cluster, etc. We will not be happy to do so if it is clear that you started at the last minute.</li>
+<li>Running parallel code, working with large datasets, and using shared computers can result in delays and unexpected problems. Don’t wait until the last minute. We are happy to help troubleshoot problems you may have with accessing the SCF, running parallel Python code, submitting jobs to the SCF cluster, etc. We will not be happy to do so if it is clear that you started at the last minute.</li>
 <li>Given that you’ll be running batch jobs and operating on remote servers, for problems 1 and 2 you’ll need to provide your code in chunks with <code>#| eval: false</code>. You can paste in any output you need to demonstrate your work. Remember that you can use “```” to delineate blocks of text you want printed verbatim.</li>
 <li>To monitor an <code>sbatch</code> job, see <a href="https://statistics.berkeley.edu/computing/servers/cluster/monitoring">this SCF doc</a>.</li>
 </ul>
@@ -454,7 +424,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="problems" class="level2">
 <h2 class="anchored" data-anchor-id="problems">Problems</h2>
 <ol type="1">
-<li><p>This problem asks you to use Dask to process some Wikipedia traffic data and makes use of tools discussed in Section on October 11. The files in <code>/scratch/users/paciorek/wikistats/dated_2017_small/dated</code> (on the SCF) contain data on the number of visits to different Wikipedia pages on November 4, 2008 (which was the date of the US election in 2008 in which Barack Obama was elected). The columns are: date, time, language, webpage, number of hits, and page size. (Note that the Unit 7 Dask bag example and Question 2 below use a larger set of the same data.)</p>
+<li><p>This problem asks you to use Dask to process some Wikipedia traffic data and makes use of tools discussed in Section on October 10. The files in <code>/scratch/users/paciorek/wikistats/dated_2017_small/dated</code> (on the SCF) contain data on the number of visits to different Wikipedia pages on November 4, 2008 (which was the date of the US election in 2008 in which Barack Obama was elected). The columns are: date, time, language, webpage, number of hits, and page size. (Note that the Unit 7 Dask bag example and Question 2 below use a larger set of the same data.)</p>
 <ol type="a">
 <li><p>In an interactive session on the SCF Linux cluster (ideally on the <code>low</code> partition, but if necessary on the <code>high</code> partition), start an interactive session on one of the cluster nodes using <code>srun</code> (as discussed in section). Request four cores. Then follow these steps:</p>
 <ol type="i">
@@ -485,8 +455,8 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li><p>SQL practice using the Stack Overflow database.</p>
 <ol type="a">
-<li><p>Find all the users (including their <code>displayname</code>) who have asked but never answered a question. You’re welcome to set up your solution using views, but you should not need to. In your solution, provide as many separate queries as needed to illustrate <strong>all</strong> of the following SQL functionality: a subquery in the WHERE statement, a subquery in the FROM statement, a set operation using INTERSECT, UNION or EXCEPT), and an outer join (note that SQLite does not have a right outer join). Check the count of the number of results from the different queries to make sure they are the same.</p>
-<p>Note that for reasons I haven’t looked into, both the questions and answers tables contain rows where the <code>ownerid</code> is <code>NULL</code>. These can mess up certain versions of the queries I’m asking you to create. So first create views that omit those cases from those two tables. (One could do the omitting within the main query, but this is a good situation for using views to make the main query easier to understand.)</p></li>
+<li><p>Find all the users (including their <code>displayname</code>) who have asked but never answered a question. You’re welcome to set up your solution using views, but you should not need to. In your solution, provide as many separate queries as needed to illustrate <strong>all</strong> of the following SQL functionality: (i) a subquery in the WHERE statement, (ii) a subquery in the FROM statement, (iii) a set operation using INTERSECT, UNION or EXCEPT), and (iv) an outer join (note that SQLite does not have a right outer join). Check the count of the number of results from the different queries to make sure they are the same.</p>
+<p>Note that for reasons I haven’t looked into, both the questions and answers tables contain rows where the <code>ownerid</code> is <code>NULL</code>. These can mess up certain versions of the queries I’m asking you to create. So first create views that omit those cases from those two tables. (One could do the omitting within the main queries, but this is a good situation for using views to make the main queries easier to understand.)</p></li>
 <li><p>Do the different approaches vary much in terms of how much time they take? What about using SQLite versus DuckDB?</p></li>
 </ol></li>
 </ol>
@@ -567,7 +537,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/stat243\.berkeley\.edu\/fall-2024");
+        var filterRegex = new RegExp("https:\/\/stat243\.berkeley\.edu\/fall-2025");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
