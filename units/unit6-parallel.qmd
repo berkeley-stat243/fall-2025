@@ -1,7 +1,7 @@
 ---
 title: "Parallel processing"
 author: "Chris Paciorek"
-date: "2025-08-12"
+date: "2025-10-13"
 format:
   pdf:
     documentclass: article

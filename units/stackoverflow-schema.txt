@@ -1,0 +1,26 @@
+questions table:
+- questionidd
+- ownerid
+- creationdate
+- viewcount
+- title
+
+answers table:
+- answerid
+- questionid
+- creationdate
+- ownerid
+- score
+
+users table:
+- userid
+- creationdate
+- location
+- reputation
+- displayname
+- upvotes
+- downvotes
+
+Questions_tags table:
+- questionid
+- tag

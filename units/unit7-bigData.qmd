@@ -1,7 +1,7 @@
 ---
 title: "Big data and databases"
 author: "Chris Paciorek"
-date: "2025-10-13"
+date: "2025-10-15"
 format:
   pdf:
     documentclass: article
@@ -322,11 +322,11 @@ However, recall that Dask uses delayed (lazy) evaluation. In this case, the read
 import time
 
 t0 = time.time()
-air.DepDelay.max().compute()   # This takes a while.
+max_delay = air.DepDelay.max().compute()   # This takes a while.
 print(time.time() - t0)
 
 t0 = time.time()
-air.DepDelay.mean().compute()   # This takes a while.
+mean_delay = air.DepDelay.mean().compute()   # This takes a while.
 print(time.time() - t0)
 
 air.DepDelay.median().compute() 
@@ -403,7 +403,7 @@ Here we'll just count the number of records.
 #| eval: false
 import time
 t0 = time.time()
-wiki.count().compute()
+n = wiki.count().compute()
 time.time() - t0   # 136 sec. for full data
 ```
 
@@ -627,12 +627,14 @@ There are often multiple ways to interact with a DBMS, including
 directly using command line tools provided by the DBMS or via Python or
 R, among others.
 
-We'll concentrate on SQLite (because it is simple to use on a single
-machine). SQLite is quite nice in terms of being self-contained - there
+We'll concentrate on DuckDB and SQLite (because they are simple to use on a single
+machine). They are quite nice in terms of being self-contained - there
 is no server-client model, just a single file on your hard drive that
 stores the database and to which you can connect to using the SQLite
-shell, R, Python, etc. However, it does not have some useful
-functionality that other DBMS have. For example, you can't use `ALTER
+shell, R, Python, etc.
+
+However, they may not have all the  useful
+functionality that other DBMS have. For example, with SQLite you can't use `ALTER
 TABLE` to modify column types or drop columns.
 
 A good alternative to SQLite that I encourage you to consider is DuckDB. DuckDB stores data column-wise, which can lead to big speedups when doing queries operating on large portions of tables (so-called “online analytical processing” (OLAP)). Another nice feature of DuckDB is that it can interact
