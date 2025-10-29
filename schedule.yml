@@ -102,7 +102,7 @@
       items:
         - type: "Activity"
           id: "6"
-          name: "Read Sections 1, 2.1, and 4 of the Cao et al. paper before lab
+          name: "Read Sections 1, 2.1, and 4 of the Cao et al. paper before lab"
           href: "https://github.com/berkeley-stat243/stat243-fall-2023/blob/main/ps/cao_etal_2015.pdf"          
 - week: 10
   days:
