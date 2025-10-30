@@ -1215,12 +1215,13 @@ Here’s an example with Dask dataframe on some air traffic delay data, where we
 import dask
 dask.config.set(scheduler='processes', num_workers = 6)  
 import dask.dataframe as ddf
-air = ddf.read_csv('/scratch/users/paciorek/243/AirlineData/csvs/*.csv.bz2',
+air = ddf.read_csv(path + '*.csv.bz2',
       compression = 'bz2',
-      encoding = 'latin1',   # (unexpected) latin1 value(s) 2001 file TailNum field
+      encoding = 'latin1', # (unexpected) latin1 value(s) in TailNum field in 2001
       dtype = {'Distance': 'float64', 'CRSElapsedTime': 'float64',
-      'TailNum': 'object', 'CancellationCode': 'object'})
-# specify dtypes so Pandas doesn't complain about column type heterogeneity
+      'TailNum': 'object', 'CancellationCode': 'object', 'DepDelay': 'float64',
+      'ActualElapsedTime': 'float64', 'ArrDelay': 'float64', 'ArrTime': 'float64',
+       'DepTime': 'float64'})
 
 import time
 t0 = time.time()
