@@ -613,21 +613,23 @@ mimic the Wichmann-Hill manually:
 ```{r}
 RNGkind("Wichmann-Hill")
 set.seed(1)
-saveSeed <- .Random.seed
-uFromR <- runif(10)
+saveSeed <- .Random.seed               # Seed determines initial state
+uFromR <- runif(10)                    # Use built-in RNG
+
+## Set up manual RNG.
 a <- c(171, 172, 170)
 m <- c(30269, 30307, 30323)
 u <- rep(0, 10)
-xyz <- matrix(NA, nr = 10, nc = 3)
-xyz[1, ] <- (a * saveSeed[2:4]) %% m
-u[1] <- sum(xyz[1, ]/m) %% 1
+xyz <- matrix(NA, nr = 10, nc = 3)     # State of RNG
+xyz[1, ] <- (a * saveSeed[2:4]) %% m  
+u[1] <- sum(xyz[1, ]/m) %% 1           # Emit pseudo-random value
 for(i in 2:10) {
-   xyz[i, ] <- (a * xyz[i-1, ]) %% m
-   u[i] <- sum(xyz[i, ]/m) %% 1
+   xyz[i, ] <- (a * xyz[i-1, ]) %% m   # Update state
+   u[i] <- sum(xyz[i, ]/m) %% 1        # Emit pseudo-random value
 }
 for(i in 1:10)
    print(c(uFromR[i], u[i]))
-## we should be able to recover the current value of the seed
+## We should be able to recover the current value of the state.
 xyz[10, ]
 .Random.seed[2:4]
 ```
@@ -763,7 +765,7 @@ to use methods accessed via the `Generator` object (`rng` here):
 
 ```{python}
 #| eval: false
-rng.random.normal(size = 3)     # Now generate based on chosen generator.
+rng.normal(size = 3)     # Now generate based on chosen generator.
 ## np.random.normal(size = 3)   # This will NOT use the chosen generator.
 ```
 
