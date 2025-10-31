@@ -787,20 +787,22 @@ Simulation (Monte Carlo) uncertainty is not statistical uncertainty
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">RNGkind</span>(<span class="st">"Wichmann-Hill"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>saveSeed <span class="ot">&lt;-</span> .Random.seed</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>uFromR <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">171</span>, <span class="dv">172</span>, <span class="dv">170</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30269</span>, <span class="dv">30307</span>, <span class="dv">30323</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>xyz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nr =</span> <span class="dv">10</span>, <span class="at">nc =</span> <span class="dv">3</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>xyz[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> (a <span class="sc">*</span> saveSeed[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]) <span class="sc">%%</span> m</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>u[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>(xyz[<span class="dv">1</span>, ]<span class="sc">/</span>m) <span class="sc">%%</span> <span class="dv">1</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>   xyz[i, ] <span class="ot">&lt;-</span> (a <span class="sc">*</span> xyz[i<span class="dv">-1</span>, ]) <span class="sc">%%</span> m</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>   u[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(xyz[i, ]<span class="sc">/</span>m) <span class="sc">%%</span> <span class="dv">1</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(<span class="fu">c</span>(uFromR[i], u[i]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>saveSeed <span class="ot">&lt;-</span> .Random.seed               <span class="co"># Seed determines initial state</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>uFromR <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>)                    <span class="co"># Use built-in RNG</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Set up manual RNG.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">171</span>, <span class="dv">172</span>, <span class="dv">170</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30269</span>, <span class="dv">30307</span>, <span class="dv">30323</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>xyz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nr =</span> <span class="dv">10</span>, <span class="at">nc =</span> <span class="dv">3</span>)     <span class="co"># State of RNG</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>xyz[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> (a <span class="sc">*</span> saveSeed[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]) <span class="sc">%%</span> m  </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>u[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>(xyz[<span class="dv">1</span>, ]<span class="sc">/</span>m) <span class="sc">%%</span> <span class="dv">1</span>           <span class="co"># Emit pseudo-random value</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>   xyz[i, ] <span class="ot">&lt;-</span> (a <span class="sc">*</span> xyz[i<span class="dv">-1</span>, ]) <span class="sc">%%</span> m   <span class="co"># Update state</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>   u[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(xyz[i, ]<span class="sc">/</span>m) <span class="sc">%%</span> <span class="dv">1</span>        <span class="co"># Emit pseudo-random value</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(<span class="fu">c</span>(uFromR[i], u[i]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1297134 0.1297134
 [1] 0.9822407 0.9822407
@@ -813,7 +815,7 @@ Simulation (Monte Carlo) uncertainty is not statistical uncertainty
 [1] 0.6212432 0.6212432
 [1] 0.6537663 0.6537663</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## we should be able to recover the current value of the seed</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## We should be able to recover the current value of the state.</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>xyz[<span class="dv">10</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 24279 14851 10966</code></pre>
@@ -880,7 +882,7 @@ Simulation (Monte Carlo) uncertainty is not statistical uncertainty
 <p>but below note that there is a simpler way to change to the PCG-64.</p>
 <p>Then to use that generator when doing operations that generate random numbers, we need to use methods accessed via the <code>Generator</code> object (<code>rng</code> here):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rng.random.normal(size <span class="op">=</span> <span class="dv">3</span>)     <span class="co"># Now generate based on chosen generator.</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rng.normal(size <span class="op">=</span> <span class="dv">3</span>)     <span class="co"># Now generate based on chosen generator.</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">## np.random.normal(size = 3)   # This will NOT use the chosen generator.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In R, the default RNG is the Mersenne twister (<code>?RNGkind</code>).</p>
