@@ -57,7 +57,7 @@ Formatting requirements and additional information
 
 1. Your solution to the problem should have two parts: 
 
-   a. A Python package named `GA`, following the placeholder package in [my template repository](https://github.com/paciorek/GA-dev). Your work should be done in a private repository named `GA-dev` within the Berkeley GitHub account or github.com account of one of the project members. **Make sure to share the repository with me if you use github.com** (this will be automatic if using github.berkeley.edu). Note that if you use `github.berkeley.edu`, you won't be able to automate your testing via GitHub Actions.
+   a. A Python package named `GA`, following the placeholder package in [my template repository](https://github.com/paciorek/GA-dev). Your work should be done in a private repository named `GA-dev` within the Berkeley GitHub account or github.com account of one of the project members. **Make sure to share the repository with me.** Note that if you use `github.berkeley.edu`, you won't be able to automate your testing via GitHub Actions.
 
        The package should include:
 
