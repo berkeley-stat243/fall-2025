@@ -85,7 +85,7 @@ population-representative sample. Finally, having a big dataset also
 allows you to do a large number of statistical analyses and tests, so
 multiple testing is a big issue. With enough analyses, something will
 look interesting just by chance in the noise of the data, even if there
-is no underlying reality to it.
+is no underlying reality to it. Here are some examples ([1](https://doi.org/10.1093/jrsssa/qnae039), [2](https://doi.org/10.1093/jrsssa/qnae005)) of bias in analyzing electronic health records (EHR), a common data source for health research.
 
 Different people define the 'big' in big data differently. One
 definition involves the actual size of the data, and in some cases the
@@ -95,11 +95,6 @@ not be thought of as large in some contexts such as Google or the US
 National Security Agency (NSA). Another definition of 'big data' has
 more to do with how pervasive data and empirical analyses backed by data
 are in society and not necessarily how large the actual dataset size is.
-
-TODO: link to these papers on bias in EHR analyses:
-https://doi.org/10.1093/jrsssa/qnae039
-https://doi.org/10.1093/jrsssa/qnae005
-
 
 
 ## Logistics and data size
