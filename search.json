@@ -2254,7 +2254,7 @@
     "href": "units/unit10-linalg.html#goals",
     "title": "Numerical linear algebra",
     "section": "Goals",
-    "text": "Goals\nHere’s what I’d like you to get out of this unit:\n\nHow to think about the computational order (number of computations involved) of a problem\nHow to choose a computational approach to a given linear algebra calculation you need to do.\nAn understanding of how issues with computer numbers (Unit 8) affect linear algebra calculations.",
+    "text": "Goals\nHere’s what I’d like you to get out of this unit:\n\nHow to think about the computational order (number of computations involved) of a problem\nHow to choose a computational approach to a given linear algebra calculation you need to do.\nAn understanding of how issues with computer numbers (Unit 8) affect linear algebra calculations.\nSome intuition about various linear algebra representations.",
     "crumbs": [
       "Units",
       "Unit 10 (Linear Algebra)"
