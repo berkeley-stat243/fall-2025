@@ -1,7 +1,7 @@
 ---
 title: "Numerical linear algebra"
 author: "Chris Paciorek"
-date: "2025-08-13"
+date: "2025-11-03"
 format:
   pdf:
     documentclass: article
@@ -78,6 +78,7 @@ Here's what I'd like you to get out of this unit:
     calculation you need to do.
 3.  An understanding of how issues with computer numbers (Unit 8) affect
     linear algebra calculations.
+4.  Some intuition about various linear algebra representations.
 
 ## Key principle
 
