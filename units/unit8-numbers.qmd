@@ -741,12 +741,12 @@ def approx_equal(a,b):
     print ("not equal")
 
 
-approx_equal(a,b)
+approx_equal(x,y)
 
 x = 1234567812345678
 y = 1234567812345677
 
-approx_equal(a,b)   
+approx_equal(x,y)   
 ```
 
 Actually, we probably want to use a number slightly larger than
