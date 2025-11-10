@@ -132,7 +132,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Stat 243</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/berkeley-stat243/fall-2024" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/berkeley-stat243/fall-2025" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -372,12 +372,6 @@ window.Quarto = {
  <span class="menu-text">Problem Set 7</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ps/ps8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem Set 8</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -421,6 +415,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../howtos/vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../howtos/submitPS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set Submissions</span></a>
   </div>
@@ -452,7 +452,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps7.html">Problem Set 7</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Problem Set 7</h1>
-<p class="subtitle lead">Due Mon. November 18, 10 am</p>
+<p class="subtitle lead">Due Wednesday Nov.&nbsp;19, 10 am</p>
 </div>
 
 
@@ -473,7 +473,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="comments">Comments</h2>
 <ul>
 <li>This covers material in Unit 10.</li>
-<li>It’s due at 10 am (Pacific) on November 18, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
+<li>It’s due at 10 am (Pacific) on November 19, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
 <li>Please see PS1 for formatting and attribution requirements.</li>
 <li>Note that is is fine to hand-write solutions to the the non-coding questions, but make sure your writing is neat and insert any hand-written parts <strong>in order</strong> into your final submission.</li>
 </ul>
@@ -481,38 +481,18 @@ window.Quarto = {
 <section id="problems" class="level2">
 <h2 class="anchored" data-anchor-id="problems">Problems</h2>
 <ol type="1">
-<li><p>We’ve seen how to use Gaussian elimination (i.e., the LU decomposition) to solve <span class="math inline">\(Ax=b\)</span> and that we can do the solution in <span class="math inline">\(n^{3}/3\)</span> operations (plus lower-order terms). Suppose I want to know how inefficient it is to explicitly invert the matrix <span class="math inline">\(A\)</span> and then multiply, thereby finding <span class="math inline">\(x=A^{-1}b\)</span> via matrix-vector multiplication. If we look into the C++ code behind <code>numpy.linalg</code> at the <code>inv</code> function, we see it solves the system <span class="math inline">\(AZ=I\)</span> to find <span class="math inline">\(Z=A^{-1}\)</span>, using a Lapack routine <a href="http://www.netlib.org/lapack/explore-html/d7/d3b/group__double_g_esolve_ga5ee879032a8365897c3ba91e3dc8d512.html">DGESV</a>, which uses the LU decomposition. Count the number of computations for</p>
+<li><p>Details of the Cholesky decomposition presented in Unit 10. Work out the operation count (total number of multiplications plus divisions) for the Cholesky decomposition, including the constant c, not just the order, for terms involving <span class="math inline">\(n^{3}\)</span> or <span class="math inline">\(n^{2}\)</span> (e.g., <span class="math inline">\(5n^{3}/2+8n^{2}\)</span>, not <span class="math inline">\(O(n^{3})\)</span>). You can ignore the square roots and any additions/subtractions. You can ignore pivoting for the purpose of this problem. Remember not to count any steps that involve multiplying by 0 or 1. Compare your result to that given in the notes.</p></li>
+<li><p>Compare the speed of <span class="math inline">\(x=A^{-1}b\)</span> using: (i) <code>np.linalg.inv(A) @ b</code>, (ii) <code>np.linalg.solve(A, b)</code>, and (iii) Cholesky decomposition followed by solving triangular systems. To ensure that <span class="math inline">\(A\)</span> is positive definite (needed of course for the Cholesky and helpful as a stricter condition than invertibility for the other two), you can construct a test matrix <span class="math inline">\(A\)</span> as <span class="math inline">\(A=W^{\top}W\)</span>, with the elements of the <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(W\)</span> generated randomly.</p>
 <ol type="a">
-<li>transforming <span class="math inline">\(AZ=I\)</span> to <span class="math inline">\(UZ=I^{*}\)</span> (where <span class="math inline">\(I^{*}\)</span> is no longer a diagonal matrix),</li>
-<li>for solving for <span class="math inline">\(Z\)</span> given <span class="math inline">\(UZ=I^{*}\)</span>, and</li>
-<li>for calculating <span class="math inline">\(x=Zb\)</span>.</li>
-</ol>
-<p>Then compare the total cost to the <span class="math inline">\(n^{3}/3\)</span> cost of what we saw in class.</p>
-<p>Notes:</p>
-<ul>
-<li>In counting the computations you should be able to make use of various results we derived in class concerning the Gaussian elimination computations and computations involved in a backsolve, so your answer should be able to simply combine together results we’ve already discussed without any detailed new derivation.</li>
-<li>Given that numpy’s call to <code>dgesv</code> doesn’t take account of the special (diagonal) structure of <span class="math inline">\(I\)</span> on the right-hand side, you do not need to take account of the fact that because <span class="math inline">\(I\)</span> has zeroes and ones, one can actually save some computation. You can simply count the calculations as if <span class="math inline">\(I\)</span> were filled with arbitrary values. (Note: if we did actually try to be careful about making use of the structure of <span class="math inline">\(I\)</span>, it turns out we could save <span class="math inline">\(n^{3}/3\)</span> calculations.)</li>
-</ul></li>
-<li><p>Suppose I need to compute the generalized least squares estimator, <span class="math inline">\(\hat{\beta}=(X^{\top}\Sigma^{-1}X)^{-1}X^{\top}\Sigma^{-1}Y\)</span>, where <span class="math inline">\(X\)</span> is <span class="math inline">\(n\times p\)</span> and <span class="math inline">\(\Sigma\)</span> is a positive definite <span class="math inline">\(n\times n\)</span> matrix. Assume that <span class="math inline">\(n&gt;p\)</span> and <span class="math inline">\(n\)</span> could be of order several thousand and <span class="math inline">\(p\)</span> of order in the hundreds.</p>
-<ol type="a">
-<li><p>First write out in pseudo-code how you would do this in an efficient way - i.e., the particular linear algebra steps and the order of operations. Then write efficient Python code in the form of a function, <code>gls()</code>, to do this - you can rely on the various high-level functions for matrix decompositions and solving systems of equations, but you should not use any code that already exists for doing generalized least squares. Warning: the Cholesky functions in numpy and scipy don’t return the result in the same form.</p></li>
-<li><p>Now compare your approach to directly using the inverse in Python (but make sure to only calculate the inverse once and to use an efficicient order of operations). Is the timing consistent with the results of Question 1 and the computational efficiency results from Unit 10? For simplicity, you can construct a positive definite matrix <span class="math inline">\(\Sigma\)</span> as <span class="math inline">\(\Sigma=W^{\top}W\)</span>, with the elements of the <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(W\)</span> generated randomly. (In a real problem, <span class="math inline">\(\Sigma\)</span> would be set up based on the context of course.) You can also generate <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> randomly</p></li>
-<li><p>Are the results for the solution, <span class="math inline">\(\hat{\beta}\)</span>, the same numerically for the two approaches (up to machine precision)? Comment on how many digits in the elements of <span class="math inline">\(\hat{\beta}\)</span> agree, and relate this to the condition number of the calculation.</p></li>
+<li><p>Using a single thread, how do the timing and relative ordering amongst methods compare to the order of computations we discussed in class and the notes using <span class="math inline">\(n=5000\)</span>? Note that if one works out the complexity of the full matrix inversion using the LU decomposition, it is <span class="math inline">\(4n^{3}/3\)</span>.</p></li>
+<li><p>How does the timing scale with the number of cores (i.e., threads, using a parallelized BLAS) for each of the three approaches? You may need to use the SCF for this to ensure you are using a parallel BLAS. See Section 6.1 of Unit 10 and/or Section 5 of Unit 6.</p></li>
+<li><p>Are the results for the solution <code>x</code> the same numerically for methods (ii) and (iii) (up to machine precision)? Comment on how many digits in the elements of <code>x</code> agree, and relate this to the condition number of the calculation. You can do this for a value of <span class="math inline">\(n\)</span> rather smaller than 5000 to reduce the time to estimate the condition number.</p></li>
 </ol></li>
-<li><p>Two-stage least squares (2SLS) is a way of implementing a causal inference method called instrumental variables that is commonly used in economics. Consider the following set of regression equations: <span class="math display">\[\begin{aligned}
-\hat{X} &amp; = &amp; Z(Z^{\top}Z)^{-1}Z^{\top}X\\
-\hat{\beta} &amp; = &amp; (\hat{X}^{\top}\hat{X})^{-1}\hat{X}^{\top}Y\end{aligned}\]</span> which can be interpreted as regressing <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> after filtering such that we only retain variation in <span class="math inline">\(X\)</span> that is correlated with the instrumental variable <span class="math inline">\(Z\)</span>. An economics graduate student asked me how he could compute <span class="math inline">\(\hat{\beta}\)</span> if <span class="math inline">\(Z\)</span> is 60 million by 630, <span class="math inline">\(X\)</span> is 60 million by 600, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(60\)</span> million by 1, but both <span class="math inline">\(Z\)</span> and <span class="math inline">\(X\)</span> are sparse matrices.</p>
+<li><p>The following calculation arises in solving a least squares regression problem where the coefficients are subject to an equality constraint, in particular, we want to minimize <span class="math inline">\((Y-X\beta)^{\top}(Y-X\beta)\)</span> with respect to <span class="math inline">\(\beta\)</span> subject to the <span class="math inline">\(m\)</span> constraints <span class="math inline">\(A\beta=b\)</span> for an <span class="math inline">\(m \times p\)</span> matrix <span class="math inline">\(A\)</span>. (Each row of <span class="math inline">\(A\)</span> represents a constraint that a linear combination of <span class="math inline">\(\beta\)</span> equals the corresponding element of <span class="math inline">\(b\)</span>.) Solving this problem is a form of optimization called <em>quadratic programming</em>. Some derivation using the Lagrange multiplier approach (we’ll see this in Unit 11) gives the following solution: <span class="math display">\[\hat{\beta}=C^{-1}d+C^{-1}A^{\top}(AC^{-1}A^{\top})^{-1}(-AC^{-1}d+b),\]</span> where <span class="math inline">\(C=X^{\top}X\)</span> and <span class="math inline">\(d=X^{\top}Y\)</span>. <span class="math inline">\(X\)</span> is <span class="math inline">\(n \times p\)</span>.</p>
 <ol type="a">
-<li><p>Describe briefly why I can’t do this calculation in two steps as given in the equations, even if I use the techniques for OLS discussed in class for each stage.</p></li>
-<li><p>Figure out how to rewrite the equations such that you can actually calculate <span class="math inline">\(\hat{\beta}\)</span> on a computer without using a huge amount of memory. You can assume that any matrix multiplications involving sparse matrices can be done on the computer (e.g., using <code>scipy.sparse</code>). Describe the specific steps of how you would do this and/or write out in pseudo-code.</p></li>
-</ol>
-<p>Notes:</p>
-<ul>
-<li>The product of two sparse matrices is not (in general) sparse and would not be sparse in this case.</li>
-<li>As discussed in Section 6 of Unit 10, there are approaches in Python (and software packages more generally) for efficiently storing (to save memory) and efficiently doing matrix manipulations (to save computation time) with sparse matrices.</li>
-</ul></li>
-<li><p>(Extra credit) In class we saw that the condition number when solving a system of equations, <span class="math inline">\(Ax=b\)</span>, is the ratio of the absolute values of the largest and smallest magnitude eigenvalues of <span class="math inline">\(A\)</span>. Show that <span class="math inline">\(\|A\|_{2}\)</span> (i.e., the matrix norm induced by the usual L2 vector norm; see Section 1 of Unit 10) is the largest of the absolute values of the eigenvalues of <span class="math inline">\(A\)</span> for symmetric <span class="math inline">\(A\)</span>. To do so, find the following quantity, <span class="math display">\[\|A\|_{2}=\sup_{z:\|z\|_{2}=1}\sqrt{(Az)^{\top}Az}.\]</span> If you’re not familiar with the notion of the supremum (the <em>sup</em> here), just think of it as the maximum. It accounts for situations such as trying to find the maximum of the numbers in the open interval (0,1). The max is undefined in this case since there is always a number closer to 1 than any number you choose, but the <em>sup</em> in this case is 1.</p>
-<p>Hints: when you get to having the quantity <span class="math inline">\(\Gamma^{\top}z\)</span> for orthogonal <span class="math inline">\(\Gamma\)</span>, set <span class="math inline">\(y=\Gamma^{\top}z\)</span> and show that if <span class="math inline">\(\|z\|_{2}=1\)</span> then <span class="math inline">\(\|y\|_{2}=1\)</span>. Finally, if you have the quantity <span class="math inline">\(y^{\top}Dy\)</span>, think about how this can be rewritten given the form of <span class="math inline">\(D\)</span> and think intuitively about how to maximize it if <span class="math inline">\(\|y\|_{2}=1\)</span>.</p></li>
+<li><p>Describe how you would implement this in pseudo-code, taking account of the principles discussed in class in terms of matrix inverses and factorizations</p></li>
+<li><p>Write a Python function to efficiently compute <span class="math inline">\(\hat{\beta}\)</span>, using numpy or scipy’s matrix manipulation/factorization functions. Note: in reality a very efficient solution is only important when the number of regression coefficients, <span class="math inline">\(p\)</span>, is large.</p></li>
+</ol></li>
 </ol>
 
 
@@ -591,7 +571,7 @@ window.Quarto = {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/stat243\.berkeley\.edu\/fall-2024");
+        var filterRegex = new RegExp("https:\/\/stat243\.berkeley\.edu\/fall-2025");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
