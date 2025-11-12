@@ -1820,8 +1820,8 @@ in the Scipy `sparse` module:
 
 Consider the matrix to be row-major and store
 the non-zero elements in order in an array called `data`. Then create a
-array called *indptr* that stores the position of the first element of
-each row. Finally, have a array, *indices* that tells the column
+array called `indptr` that stores the position of the first element of
+each row. Finally, have a array, `indices`, that tells the column
 identity of each element. 
 
 ```{python}
