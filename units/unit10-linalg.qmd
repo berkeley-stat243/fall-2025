@@ -1,7 +1,7 @@
 ---
 title: "Numerical linear algebra"
 author: "Chris Paciorek"
-date: "2025-11-03"
+date: "2025-11-12"
 format:
   pdf:
     documentclass: article
@@ -1828,7 +1828,7 @@ identity of each element.
 import scipy.sparse as sparse
 mat = np.array([[0,0,1,0,10],[0,0,0,100,0],[0,0,0,0,0],[1000,0,0,0,0]])
 mat = sparse.csr_array(mat)
-mat.data
+mat.data     # non-zero entries
 mat.indices  # column indices
 mat.indptr   # row pointers
 
