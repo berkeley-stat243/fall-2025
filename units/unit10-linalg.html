@@ -408,6 +408,12 @@ window.Quarto = {
  <span class="menu-text">Problem Set 7</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ps/ps8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem Set 8</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -1460,7 +1466,7 @@ A^{(j+1)} &amp; = &amp; R_{m-2}^{\top} R_{m-3}^{\top} \cdots R_{0}^{\top} A^{(j)
 <section id="sparse-matrix-formats" class="level3">
 <h3 class="anchored" data-anchor-id="sparse-matrix-formats">Sparse matrix formats</h3>
 <p>As an example of exploiting sparsity, we can use a standard format (CSR = compressed sparse row) in the Scipy <code>sparse</code> module:</p>
-<p>Consider the matrix to be row-major and store the non-zero elements in order in an array called <code>data</code>. Then create a array called <em>indptr</em> that stores the position of the first element of each row. Finally, have a array, <em>indices</em> that tells the column identity of each element.</p>
+<p>Consider the matrix to be row-major and store the non-zero elements in order in an array called <code>data</code>. Then create a array called <code>indptr</code> that stores the position of the first element of each row. Finally, have a array, <code>indices</code>, that tells the column identity of each element.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.sparse <span class="im">as</span> sparse</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>mat <span class="op">=</span> np.array([[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">10</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">1000</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>]])</span>

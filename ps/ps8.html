@@ -132,7 +132,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Stat 243</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/berkeley-stat243/fall-2024" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/berkeley-stat243/fall-2025" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -421,6 +421,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../howtos/vscode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../howtos/submitPS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem Set Submissions</span></a>
   </div>
@@ -452,7 +458,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ps/ps1.html">Problem Sets</a></li><li class="breadcrumb-item"><a href="../ps/ps8.html">Problem Set 8</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Problem Set 8</h1>
-<p class="subtitle lead">Due Friday Dec.&nbsp;6, 5 pm</p>
+<p class="subtitle lead">Due Friday Dec.&nbsp;5, 10 am</p>
 </div>
 
 
@@ -473,35 +479,42 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="comments">Comments</h2>
 <ul>
 <li>This covers material in Unit 11.</li>
-<li>It’s due at 5 pm (Pacific) (yes, 5 pm) on December 6, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
+<li>It’s due at 10 am (Pacific) on December 5, both submitted as a PDF to Gradescope as well as committed to your GitHub repository.</li>
 <li>Please see PS1 for formatting and attribution requirements.</li>
 <li>Note that is is fine to hand-write solutions to the the non-coding questions, but make sure your writing is neat and insert any hand-written parts in order into your final submission.</li>
 </ul>
+</section>
+<section id="problems" class="level2">
+<h2 class="anchored" data-anchor-id="problems">Problems</h2>
 <ol type="1">
-<li><p>Consider probit regression, which is an alternative to logistic regression for binary outcomes. The probit model is <span class="math inline">\(Y_{i}\sim\mbox{Ber}(p_{i})\)</span> for <span class="math inline">\(p_{i}=P(Y_{i}=1)=\Phi(X_{i}^{\top}\beta)\)</span> where <span class="math inline">\(\Phi\)</span> is the standard normal CDF, and <span class="math inline">\(\mbox{Ber}\)</span> is the Bernoulli distribution. We can rewrite this model with latent variables, one latent variable, <span class="math inline">\(z_{i}\)</span>, for each observation: <span class="math display">\[\begin{aligned}
-y_{i} &amp; = &amp; I(z_{i}&gt;0)\\
-z_{i} &amp; \sim &amp; \mathcal{N}(X_{i}^{\top}\beta,1)\end{aligned}\]</span></p>
+<li><p>Consider a censored regression problem. We assume a simple linear regression model, <span class="math inline">\(Y_{i}\sim\mathcal{N}(\beta_{0}+\beta_{1}b_{i},\sigma^{2})\)</span>. Suppose we have an IID sample, but that for any observation such that <span class="math inline">\(Y_i&gt;\tau\)</span>, all we are told is that <span class="math inline">\(Y_i\)</span> exceeded the threshold and not its actual value. In a given sample, <span class="math inline">\(n_{c}\)</span> of the <span class="math inline">\(n\)</span> observations will (in a stochastic fashion) be censored, depending on how many exceed the fixed <span class="math inline">\(\tau\)</span>. A real world example (but with censoring in the left tail) is in measuring pollutants, for which values below a threshold are reported as below the limit of detection. Another real world example is US tax revenue data that are released to certain researchers, where the incomes of wealthy taxpayers may be reported as simply exceeding, say, 1 million dollars.</p>
 <ol type="a">
-<li><p>Design an EM algorithm to estimate <span class="math inline">\(\beta\)</span>, taking the complete data to be <span class="math inline">\({Y,Z}\)</span>. You’ll need to make use of the mean and variance of truncated normal distributions (see hint below). Be careful that you carefully distinguish <span class="math inline">\(\beta\)</span> from the current value at iteration <span class="math inline">\(t\)</span>, <span class="math inline">\(\beta^{t}\)</span>, in writing out the expected log-likelihood and computing the expectation and that your maximization be with respect to <span class="math inline">\(\beta\)</span> (not <span class="math inline">\(\beta^{t}\)</span>). Also be careful that your calculations respect the fact that for each <span class="math inline">\(z_{i}\)</span> you know that it is either bigger or smaller than <span class="math inline">\(0\)</span> based on its <span class="math inline">\(y_{i}\)</span>. You should be able to analytically maximize the expected log likelihood. A couple hints:</p>
+<li><p>Design an EM algorithm to estimate the three parameters, <span class="math inline">\(\theta=(\beta_{0},\beta_{1},\sigma^{2})\)</span>, taking the complete data to be the available fully-reported data plus the actual (but unobserved) values of the censored observations. You’ll need to make use of <span class="math inline">\(E(W|W&gt;\tau)\)</span> and <span class="math inline">\(\mbox{Var}(W|W&gt;\tau)\)</span> where <span class="math inline">\(W\)</span> is normally distributed. Be careful that you carefully distinguish <span class="math inline">\(\theta\)</span> from the current value at iteration <span class="math inline">\(t\)</span>, <span class="math inline">\(\theta^t\)</span>, in writing out the expected log-likelihood and computing the expectation and that your maximization be with respect to <span class="math inline">\(\theta\)</span>.</p>
+<p>A few hints:</p>
 <ol type="i">
-<li><p>From the Johnson and Kotz ‘bibles’ on distributions, the mean and variance of the truncated normal distribution, <span class="math inline">\(f(w)\propto\mathcal{N}(w;\mu,\sigma^{2})I(w&gt;\tau)\)</span>, are: <span class="math display">\[\begin{aligned}
-E(W|W&gt;\tau) &amp; = &amp; \mu+\sigma\rho(\tau^{*})\\
-V(W|W&gt;\tau) &amp; = &amp; \sigma^{2}\left(1+\tau^{*}\rho(\tau^{*})-\rho(\tau^{*})^{2}\right)\\
-\rho(\tau^{*}) &amp; = &amp; \frac{\phi(\tau^{*})}{1-\Phi(\tau^{*})}\\
-\tau^{*} &amp; = &amp; (\tau-\mu)/\sigma,\end{aligned}\]</span> where <span class="math inline">\(\phi(\cdot)\)</span> is the standard normal density and <span class="math inline">\(\Phi(\cdot)\)</span> is the standard normal CDF. Or see the Wikipedia page on the truncated normal distribution for more general formulae.</p></li>
-<li><p>You should recognize that your expected log-likelihood can be expressed as a regression of some new quantities (which you might denote as <span class="math inline">\(m_{i}\)</span>, <span class="math inline">\(i=1,\ldots,n\)</span>, where the <span class="math inline">\(m_{i}\)</span> are functions of <span class="math inline">\(\beta^{t}\)</span> and <span class="math inline">\(y_{i}\)</span>) on <span class="math inline">\(X\)</span>.</p></li>
+<li><p>Considering the notation we used in class when discussing EM, it’s natural to think of <span class="math inline">\(Z\)</span> as the (unobserved) values of the censored observations. You can think of <span class="math inline">\(Z_{i}&gt;\tau\)</span> for the censored observations as being part of <span class="math inline">\(X\)</span> (using <span class="math inline">\(X\)</span> in the way that is is used in the class notes on EM), along with the uncensored observations.</p></li>
+<li><p>When you write out the complete data log-likelihood, it’s helpful to set it up so there is a term involving the observed values and a term involving the censored values. When you condition on the latter term, you’ll be conditioning on the censored values being bigger than threshold.</p></li>
+<li><p>The mean and variance of the truncated normal distribution, <span class="math inline">\(f(W)\propto\mathcal{N}(\mu,\sigma^{2})I(W&gt;\tau)\)</span>, are: <span class="math display">\[\begin{aligned}
+E(W|W&gt;\tau) &amp; =   &amp; \mu+\sigma\rho(\tau^{*}) \\
+V(W|W&gt;\tau) &amp;   =   &amp; \sigma^{2}\left(1+\tau^{*}\rho(\tau^{*})-\rho(\tau^{*})^{2}\right) \\
+\rho(\tau^{*}) &amp;    =   &amp; \frac{\phi(\tau^{*})}{1-\Phi(\tau^{*})} \\
+\tau^{*} &amp;  =   &amp; (\tau-\mu)/\sigma,
+\end{aligned}\]</span> where <span class="math inline">\(\phi(\cdot)\)</span> is the standard normal density and <span class="math inline">\(\Phi(\cdot)\)</span> is the standard normal CDF.</p></li>
+<li><p>You should recognize that your expected log-likelihood can be expressed as a regression of <span class="math inline">\(\{Y_{obs},m^{t}\}\)</span> on <span class="math inline">\(\{b\}\)</span> where <span class="math inline">\(Y_{obs}\)</span> are the non-censored data and <span class="math inline">\(\{m_i^t\},\,i=1,\ldots,n_{c}\)</span> are used in place of the censored observations. Note that <span class="math inline">\(\{m_i^t\}\)</span> will be functions of <span class="math inline">\(\theta^t\)</span> and thus constant in terms of the maximization step. Your estimator for <span class="math inline">\(\sigma^{2}\)</span> should involve a ratio where the numerator involves the usual sum of squares for the non-censored data plus an additional term that you should interpret statistically.</p></li>
+<li><p>You should be able to analytically maximize the expected log likelihood.</p></li>
 </ol></li>
-<li><p>Propose how to get reasonable starting values for <span class="math inline">\(\beta\)</span>.</p></li>
-<li><p>Write a Python function to estimate the parameters. Make use of the initialization from part (b). You may use existing regression functions for the update steps. You’ll need to include criteria for deciding when to stop the optimization.</p></li>
-<li><p>Try out your function using data simulated from the model. Take <span class="math inline">\(n=100\)</span> and the parameters such that <span class="math inline">\(\hat{\beta}_{1}/se(\hat{\beta}_{1})\approx2\)</span> and <span class="math inline">\(\beta_{2}=\beta_{3}=0\)</span>. In other words, I want you to choose <span class="math inline">\(\beta_{1}\)</span> such that the signal to noise ratio in the relationship between <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(y\)</span> is moderately large. You can do this via trial and error simply by simulating data for a given <span class="math inline">\(\beta_{1}\)</span> and fitting a logistic regression to get the estimate and standard error. Then adjust <span class="math inline">\(\beta_{1}\)</span> as needed.</p></li>
+<li><p>Propose reasonable starting values for the three parameters as functions of the observations.</p></li>
+<li><p>Write an Python function, with auxiliary functions as needed, to estimate the parameters. Make use of the initialization from part (b). You may use <code>statsmodels</code> for computing <span class="math inline">\(\beta^{t+1}\)</span>. You’ll need to include criteria for deciding when to stop the optimization. Test your function using data simulated based on the code in <a href="./ps8.py">ps8.py</a> with (a) a modest proportion of exceedances expected, say 20%, and (b) a high proportion, say 80%.</p></li>
 </ol></li>
-<li><p>A different approach to this problem just directly maximizes the log-likelihood of the observed data under the original probit model (i.e., without the <code>z</code>s).</p>
+<li><p>A different approach to this problem just directly maximizes the log-likelihood of the observed data, which for the censored observations just involves the likelihood terms, <span class="math inline">\(P(Y_{i}&gt;\tau;b_{i},\beta_{0},\beta_{1},\sigma^{2})\)</span>.</p>
 <ol type="a">
 <li><p>Write an objective function that calculates the negative log-likelihood of the observed data using JAX or PyTorch syntax (for use in part (d)).</p></li>
-<li><p>Estimate the parameters for your test cases using <code>scipy.optimize.minimize()</code> with the BFGS option. Compare how many iterations EM and BFGS take. Note that this provide a nice test of your EM derivation and code, since you should get the same results from the two optimization approaches. Calculate the estimated standard errors based on the inverse of the Hessian. Note that the <code>hess_inv</code> returned by <code>minimize</code> is probably NOT a good estimate of the Hessian as it seems to just be the approximation built up during the course of the BFGS iterations and not a good numerical derivative estimate at the optimum. Try using <code>numdifftools</code> and compare to what is seen in <code>hess_inv</code>. If you get warnings about loss of precision, you may need to tell JAX or PyTorch to use 64-bit rather than 32-bit floating point numbers.</p></li>
-<li><p>As part of this, try a variety of starting values and see if you can find ones that cause the optimization <strong>not</strong> to converge using BFGS. Also try them with Nelder-Mead.</p></li>
-<li><p>Now use JAX or PyTorch automatic differentiation (AD) functionality to create a gradient function. Set up your objective and gradient functions to use just-in-time compilation (you can use <code>jit()</code> or <code>@jit</code> for JAX and <code>torch.compile</code> or <code>@torch.compile</code> for PyTorch). Use these functions to find the parameters using BFGS. Check that you get the same results as in (b) and compare the number of iterations and timing to using BFGS without providing the gradient function (and thereby relying on scipy using numerical differentiation). Finally, use JAX or PyTorch functionality to create a Hessian function and use it to calculate the Hessian at the optimum. Compare the inverse of the Hessian and the estimated standard errors to what you got in part (b).</p></li>
+<li><p>Estimate the parameters for your test cases using <code>scipy.optimize.minimize()</code> with the BFGS option. You will want to consider reparameterization. Compare how many iterations EM and BFGS take. Note that this provide a nice test of your EM derivation and code, since you should get the same results from the two optimization approaches.</p></li>
+<li><p>As part of this, try a variety of starting values and see if you can find ones that cause the optimization <strong>not</strong> to converge using BFGS. Does Nelder-Mead converge with those starting values?</p></li>
+<li><p>Now use JAX or PyTorch automatic differentiation (AD) functionality to create a gradient function. Set up your objective and gradient functions to use just-in-time compilation (you can use <code>jit()</code> or <code>@jit</code> for JAX and <code>torch.compile</code> or <code>@torch.compile</code> for PyTorch). Use these functions to find the parameters using BFGS. Check that you get the same results as in (b) and compare the number of iterations and timing to using BFGS without providing the gradient function (and thereby relying on scipy using numerical differentiation).</p></li>
+<li><p>Finally, use JAX or PyTorch functionality to create a Hessian function and use it to calculate the Hessian at the optimum. Use the inverse of the Hessian to get the estimated standard errors. Compare the results to those using the “Hessian” returned by <code>minimize</code>, noting that the <code>hess_inv</code> returned by <code>minimize</code> is probably NOT a good estimate of the Hessian as it seems to just be the approximation built up during the course of the BFGS iterations and not a good numerical derivative estimate at the optimum.</p></li>
 </ol></li>
+<li><p>(Extra credit) Consider using a basic one- or two-layer neural network for a non-linear regression/prediction problem with a single predictor (probably most easily specified in PyTorch). Explore sensitivity to starting values, choice of optimizer, and the learning rate. See if there seems to be overfitting, given that deep neural networks are often surprisingly robust to overfitting despite the large number of parameters involved.</p></li>
 </ol>
 
 
@@ -580,7 +593,7 @@ V(W|W&gt;\tau) &amp; = &amp; \sigma^{2}\left(1+\tau^{*}\rho(\tau^{*})-\rho(\tau^
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/stat243\.berkeley\.edu\/fall-2024");
+        var filterRegex = new RegExp("https:\/\/stat243\.berkeley\.edu\/fall-2025");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
