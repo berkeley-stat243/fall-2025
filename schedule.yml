@@ -121,3 +121,11 @@
           id: "7"
           name: "Problem Set 7"
           href: "ps/ps7.html"
+- week: 14
+  days:
+    - date: "Fri Dec 5"
+      items:
+        - type: "Problem_Set"
+          id: "7"
+          name: "Problem Set 8"
+          href: "ps/ps8.html"
