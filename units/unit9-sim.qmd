@@ -529,7 +529,7 @@ for some function, $f$, and some positive integer $m$ . Often $j=1$.
 *mod* just means to take the remainder after dividing by $m$. One then
 generates the random standard uniform value as $u_k = x_{k}/m$, which by
 construction is in $[0,1]$. For our discussion below, it is important
-to distinguish the *state* ($u$) from the output of the RNG.
+to distinguish the *state* ($x$) from the output of the RNG.
 
 Given the construction, such sequences are periodic if the subsequence
 ever reappears, which is of course guaranteed because there is a finite
