@@ -2106,19 +2106,19 @@ recipe that makes the optimization straightforward for many problems.
 
 The algorithm is as follows. Let $\theta^{t}$ be the current value of
 $\theta$. Then define
-$$Q(\theta|\theta^{t})=E(\log L(\theta|Y)|x;\theta^{t})$$.
+$$Q(\theta;\theta^{t})=E(\log L(\theta|Y)|x;\theta^{t})$$.
 
 That expectation is an expectation with respect to the conditional distribution,
 $f(z|x; \theta = \theta^t)$.
 
  The algorithm is
 
-1.  E step: Compute $Q(\theta|\theta^{t})$, ideally calculating the
+1.  E step: Compute $Q(\theta;\theta^{t})$, ideally calculating the
     expectation over the missing data in closed form. Note that
     $\log L(\theta|Y)$ is a function of $\theta$ so
-    $Q(\theta|\theta^{t})$ will involve both $\theta$ and $\theta^{t}$.
+    $Q(\theta;\theta^{t})$ will involve both $\theta$ and $\theta^{t}$.
 
-2.  M step: Maximize $Q(\theta|\theta^{t})$ with respect to $\theta$,
+2.  M step: Maximize $Q(\theta;\theta^{t})$ with respect to $\theta$,
     finding $\theta^{t+1}$.
 
 3.  Continue until convergence.
