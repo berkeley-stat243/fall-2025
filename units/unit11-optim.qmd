@@ -1,7 +1,7 @@
 ---
 title: "Optimization"
 author: "Chris Paciorek"
-date: "2025-08-13"
+date: "2025-11-21"
 format:
   pdf:
     documentclass: article
@@ -2101,7 +2101,7 @@ than using the EM algorithm.)
 
 In general, $\log L(\theta|x)$ may be hard to optimize because it
 involves an integral over the missing data, $Z$:
-$$f(x;\theta)=\int f(x,z;\theta)dz,$$ but the EM algorithm provides a
+$$L(\theta|x) = f(x;\theta)=\int f(x,z;\theta)dz,$$ but the EM algorithm provides a
 recipe that makes the optimization straightforward for many problems.
 
 The algorithm is as follows. Let $\theta^{t}$ be the current value of
