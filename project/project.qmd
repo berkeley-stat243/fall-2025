@@ -1,6 +1,6 @@
 ---
 title: "Final Project"
-subtitle: "Due Exam Week (day TBD)"
+subtitle: "Due Exam Week (Friday Dec. 19 at noon)"
 format:
   pdf:
     documentclass: article
