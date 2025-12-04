@@ -1,7 +1,7 @@
 ---
 title: "Graphics"
 author: "Chris Paciorek"
-date: "2025-08-13"
+date: "2025-12-04"
 format:
   pdf:
     documentclass: article
@@ -118,7 +118,7 @@ the ones above. There is also a list of guidelines in [this article](https://www
     from [this article](https://academic.oup.com/ije/article/40/6/1703/801755) on variation in lifespan in European countries in the International Journal of Epidemiology. What
     are you able to learn from this presentation of the data. What other
     ways could you plot the data to better illustrate patterns in the data? The data are in [this CSV](graphics_files/life_exp.csv) with
-    [some initial exploration of plotting approaches using `ggplot` in R](graphics_files/liffe_exp.R).
+    [some initial exploration of plotting approaches using `ggplot` in R](graphics_files/life_exp.R).
 
 4.  Here's [another online graphic](graphics_files/exampleGraphic.png). What
     aspects of the graph could be improved? What aspects do you like?
